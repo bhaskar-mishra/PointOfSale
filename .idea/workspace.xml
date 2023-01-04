@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8f38d5da-046b-46f0-90f5-09d274d64e0e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../SpringClone/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/BrandServiceController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/InventoryServiceController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/OrderController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/OrderItemController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ProductServiceController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ReportsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/BrandDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/InventoryDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/OrderDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/OrderItemDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/ProductDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/OrderDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/BrandData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/BrandForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InventoryForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/OrderData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/OrderItemForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/ProductData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/ProductForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/BrandPojo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/InventoryPojo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/OrderItemPojo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/OrderPojo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/ProductPojo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/Status.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/BrandService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/InventoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/OrderItemService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/OrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ProductService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/util/MyKey.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../training_proj/.idea/libraries/Maven__javax_servlet_javax_servlet_api_4_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../training_proj/src/main/java/HelloWorldServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee.properties" beforeDir="false" afterPath="$PROJECT_DIR$/employee.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/AboutApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/AboutApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/spring/ControllerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/spring/ControllerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/spring/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/spring/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/employee.log" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/employee.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/src/main/java/EmployeeJdbcApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/src/main/java/EmployeeJdbcApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/target/classes/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/target/classes/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/target/classes/EmployeeHibernateApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/target/classes/EmployeeHibernateApi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/target/classes/EmployeeJdbcApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/target/classes/EmployeeJdbcApi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/target/classes/EmployeePojo.class" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/target/classes/EmployeePojo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/target/classes/HibernateUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/target/classes/HibernateUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/target/surefire-reports/Employee_Test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/target/surefire-reports/Employee_Test.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/target/surefire-reports/TEST-Employee_Test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/target/surefire-reports/TEST-Employee_Test.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/target/test-classes/Employee_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/target/test-classes/Employee_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/target/training_proj-1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training_proj/training_proj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/training_proj.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2JRcZMyraP5dGQJ84yD7kglRhUC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  }
+}</component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean insta" />
+      <command value="mvn clean install" />
+      <command value="mvn jetty:run" />
+    </option>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8f38d5da-046b-46f0-90f5-09d274d64e0e" name="Changes" comment="" />
+      <created>1672044395630</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1672044395630</updated>
+    </task>
+    <servers />
+  </component>
+</project>
