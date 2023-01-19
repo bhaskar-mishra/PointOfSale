@@ -1,0 +1,73 @@
+<!doctype html>
+
+<html lang="en">
+
+<head th:replace="snippets.html :: name_head"></head>
+
+<body>
+
+<nav th:replace="snippets.html :: name_site_navbar"></nav>
+
+<div class="container">
+
+    <h3>SALES REPORT</h3>
+
+    <!-- Top row with form-->
+    <div class="row">
+        <div class="col-12">
+            <form class="form-inline" id="brand-category-form">
+                <div class="form-group">
+                    <label for="inputBrand" class="col-sm-2 col-form-label">Brand</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="brand" id="inputBrand" placeholder="Enter Brand">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="category" id="inputCategory" placeholder="Enter Category">
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary" id="add-brand-category">Add</button>
+                &nbsp;
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Blank Row -->
+    <div class="row">
+        &nbsp;
+    </div>
+    <div class="row">
+
+        <!-- Table -->
+        <div class="col-12">
+            <table class="table table-striped" id="brand-category-table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">BRAND</th>
+                    <th scope="col">CATEGORY</th>
+                    <th scope="col">ACTION</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+</div> <!-- Container end-->
+
+<footer th:replace="snippets.html :: name_footer"></footer>
+
+<!--<script th:src="@{/static/brands.js}"/></script>-->
+
+</body>
+
+</html>

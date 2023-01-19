@@ -45,4 +45,14 @@ public class SiteUiController extends AbstractUiController {
 	@RequestMapping(value = "/site/orderItem/{randomKey}")
 	public ModelAndView orderItem(@PathVariable String randomKey){return mav("orderItem.html",randomKey);}
 
+	@RequestMapping(value = "/site/reports")
+	public ModelAndView reports(){return mav("reports.html");}
+
+	@RequestMapping(value = "/site/salesReport")
+	public ModelAndView salesReport(){return mav("salesReport.html");}
+
+	@RequestMapping(value = "/site/brandsReport")
+	public ModelAndView brandsReport(){return mav("brandsReport.html");}
+	@RequestMapping(value = "/site/inventoryReport")
+	public ModelAndView inventoryReport(){return mav("inventoryReport.html");}
 }
