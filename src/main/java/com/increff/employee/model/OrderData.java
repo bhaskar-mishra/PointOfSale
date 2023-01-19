@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter @Setter
 public class OrderData {
 
-    private int orderId;
-    private Status status;
+    private Integer orderId;
+    private String randomKey;
+    private String status;
     private String time;
 }

@@ -9,11 +9,9 @@ import com.increff.employee.service.ApiException;
 import com.increff.employee.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,18 +23,28 @@ public class OrderController {
  private OrderService service;
 
  @ApiOperation(value = "creates an order")
- @RequestMapping(path = "/api/orderController",method = RequestMethod.POST)
- public void createOrder() throws ApiException{
+ @RequestMapping(path = "/api/order",method = RequestMethod.POST)
+ public OrderData createOrder() throws ApiException{
      OrderPojo orderPojo = new OrderPojo();
-     service.createOrder(orderPojo);
+     return service.createOrder(orderPojo);
  }
 
  @ApiOperation(value = "gets all the orders placed")
- @RequestMapping(path = "/api/orderController",method = RequestMethod.GET)
+ @RequestMapping(path = "/api/order",method = RequestMethod.GET)
  public List<OrderData> getAll() throws ApiException{
      return service.getAll();
  }
 
+@ApiOperation(value = "gets an order with given id")
+@RequestMapping(path = "/api/order/{id}",method = RequestMethod.GET)
+public OrderData getOrderWithGivenId(@PathVariable int id) throws ApiException{
+     return service.getOrder(id);
+}
 
+@ApiOperation(value = "gets an order with given random key")
+@RequestMapping(path = "/api/order/useRandomKey/{randomKey}",method = RequestMethod.GET)
+public OrderData getOrderWithGivenRandomKey(@PathVariable String randomKey) throws ApiException{
+     return service.getOrder(randomKey);
+}
 
 }

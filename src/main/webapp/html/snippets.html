@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="baseUrl" th:attr="content=${baseUrl}">
-
+<meta name="randomKey" th:attr="content=${randomKey}">
 <script src="https://kit.fontawesome.com/c30beb553f.js" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -27,6 +27,18 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" th:href="@{/site/pricing}">Pricing</a>
+      </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/site/brands}">Brands</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/site/products}">Products</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/site/inventory}">Inventory</a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/site/orders}">Order</a>
       </li>
     </ul>
     
@@ -81,6 +93,12 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script th:src="@{/static/app.js}"/></script>
 	<script th:src="@{/static/papaparse.min.js}"/></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+    <script src = "https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js">
+    </script>
+    <link rel = "stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
 	
 </footer>
 

@@ -5,6 +5,7 @@ import com.increff.employee.dao.OrderDao;;
 import com.increff.employee.dto.OrderDto;
 import com.increff.employee.model.OrderData;
 import com.increff.employee.pojo.OrderPojo;
+import org.apache.commons.lang.RandomStringUtils;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,13 +20,20 @@ public class OrderService {
     @Autowired
     private OrderDao orderDao;
 
-
-    private int orderId;
-
     @Transactional
-    public void createOrder(OrderPojo p) throws ApiException{
-        orderDao.insert(p);
-        orderId = p.getId();
+    public OrderData createOrder(OrderPojo orderPojo) throws ApiException{
+        orderDao.insert(orderPojo);
+        String randomKeyForId = createRandomString();
+        orderPojo.setRandomKeyForId(randomKeyForId);
+        return OrderDto.convert(orderPojo);
+    }
+
+    protected String createRandomString(){
+        int len = 10;
+        boolean useLetters = true;
+        boolean useNumbers = true;
+        String generatedString = RandomStringUtils.random(len,useLetters,useNumbers);
+        return generatedString;
     }
 
     public List<OrderData> getAll() throws ApiException{
@@ -40,4 +48,11 @@ public class OrderService {
         return list2;
     }
 
+    public OrderData getOrder(int id) throws ApiException{
+        return OrderDto.convert(orderDao.selectById(id));
+    }
+
+    public OrderData getOrder(String randomKey) throws ApiException{
+        return OrderDto.convert(orderDao.selectByRandomKey(randomKey));
+    }
 }

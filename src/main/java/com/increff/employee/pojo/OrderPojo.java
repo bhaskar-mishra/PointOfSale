@@ -1,6 +1,7 @@
 package com.increff.employee.pojo;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,13 +15,16 @@ public class OrderPojo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    private int id;
+    private Integer orderId;
 
     @Getter
 
-    private Status status = Status.PENDING;
+    private String status = (Status.PENDING).name();
     @Getter
     private String time;
+
+    @Getter @Setter
+    private String randomKeyForId;
 
     public OrderPojo(){
          SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -29,7 +33,10 @@ public class OrderPojo {
     }
 
     public void setStatus(){
-        status = Status.COMPLETE;
+        status = (Status.COMPLETE).name();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        time = formatter.format(date);
     }
 
 }

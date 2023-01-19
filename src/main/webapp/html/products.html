@@ -1,0 +1,105 @@
+<!doctype html>
+
+<html lang="en">
+
+<head th:replace="snippets.html :: name_head"></head>
+
+<body>
+
+<nav th:replace="snippets.html :: name_site_navbar"></nav>
+
+<div class="container">
+
+    <h3>Products table</h3>
+
+    <!-- Top row with form-->
+    <div class="row">
+        <div class="col-12">
+            <form class="form-inline" id="product-form">
+                <div class="form-group">
+                    <label for="inputBarcode" class="col-sm-2 col-form-label">Barcode</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="barcode" id="inputBarcode" placeholder="enter barcode">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputBrand" class="col-sm-2 col-form-label">Brand</label>
+                    <div class="col-sm-10">
+<!--                        <input type="text" class="form-control" name="password" id="inputPassword" placeholder="enter password">-->
+                        <select name="brand" id="inputBrand" onchange="brandDropDownHandler()">
+                            <option value="" disabled selected hidden>Select Brand</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
+                    <div class="col-sm-10">
+<!--                        <input type="text" class="form-control" name="role" id="inputRole" placeholder="enter role">-->
+                        <select name="category" id="inputCategory" onchange="setBrandCategoryId()">
+                            <option value=""  selected  id="selectCategory">Select Category</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputProduct" class="col-sm-2 col-form-label">Product</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="product" id="inputProduct" placeholder="product">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputBrandCategoryId" class="col-sm-2 col-form-label">BrandCategoryId</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="brandCategoryId" id="inputBrandCategoryId" placeholder="brandCategoryId" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputMRP" class="col-sm-2 col-form-label">MRP</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="mrp" id="inputMRP" placeholder="MRP">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" id="add-product">Add Product</button>
+                &nbsp;
+<!--                <button type="button" class="btn btn-primary" id="refresh-data">Refresh</button>-->
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Blank Row -->
+    <div class="row">
+        &nbsp;
+    </div>
+    <div class="row">
+
+        <!-- Table -->
+        <div class="col-12">
+            <table class="table table-striped" id="product-table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Barcode</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">BrandCategoryId</th>
+                    <th scope="col">MRP</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+</div> <!-- Container end-->
+
+<footer th:replace="snippets.html :: name_footer"></footer>
+
+<script th:src="@{/static/products.js}"/></script>
+
+</body>
+
+</html>

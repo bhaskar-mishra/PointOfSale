@@ -6,11 +6,11 @@ import lombok.Setter;
 public class OrderItemForm {
 
     @Getter @Setter
-    private int orderId;
+    private String randomKey;
     @Getter @Setter
     private String barcode;
     @Getter @Setter
-    private int quantity;
+    private Integer quantity;
     @Getter @Setter
-    private double mrp;
+    private Double price;
 }

@@ -1,0 +1,109 @@
+<!doctype html>
+
+<html lang="en">
+
+<head th:replace="snippets.html :: name_head"></head>
+
+<body>
+
+<div class="container">
+
+    <h3>Order Items</h3>
+
+    <!-- Blank Row -->
+    <div class="row">
+        &nbsp;
+    </div>
+
+    <!-- Top row with form-->
+    <div class="row">
+        <div class="col-12">
+            <form class="form-inline" id="orderItem-form">
+                <div class="form-group">
+                    <label for="inputOrderId" class="col-sm-2 col-form-label">OrderId</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="randomKey" id="inputOrderId" placeholder="OrderId" required minlength="1" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputBarcode" class="col-sm-2 col-form-label">Barcode</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="barcode" id="inputBarcode" placeholder="Enter Barcode" required minlength="1"><span class="errors" id="barcodeError"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputQuantity" class="col-sm-2 col-form-label">Quantity</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="quantity" id="inputQuantity" placeholder="Enter Quantity" required><span class="errors" id="quantityError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputQuantity" class="col-sm-2 col-form-label">Price</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="price" id="inputSellingPrice" placeholder="Enter Selling Price" required><span class="errors" id="priceError"></span>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary" id="add-orderItem">Add</button>
+                &nbsp;
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Blank Row -->
+    <div class="row">
+        &nbsp;
+    </div>
+    <div class="row">
+
+        <!-- Table -->
+        <div class="col-12">
+            <table class="table table-striped" id="orderItem-table">
+                <thead>
+                <tr>
+                    <th scope="col">BARCODE</th>
+                    <th scope="col">PRODUCT</th>
+                    <th scope="col">QUANTITY</th>
+                    <th scope="col">ACTION</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<!-- Blank Row -->
+<div class="row">
+    &nbsp;
+</div>
+
+<div class="row" >
+    &nbsp;<button type="button" class="btn btn-primary" id="place-order" style="display:block; margin: 0 auto;">Place Order</button>
+    <br>
+</div>
+
+<div class="row">
+    &nbsp;<span class = "errors" id="place-order-error" style="text-align: center; margin: 0 auto;"></span>
+
+</div>
+
+
+<!-- Container end-->
+
+<footer th:replace="snippets.html :: name_footer"></footer>
+
+<script th:src="@{/static/orderItem.js}"/></script>
+
+</body>
+
+</html>

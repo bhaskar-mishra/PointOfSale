@@ -1,6 +1,7 @@
 package com.increff.employee.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,5 +33,16 @@ public class SiteUiController extends AbstractUiController {
 	public ModelAndView features() {
 		return mav("features.html");
 	}
+
+	@RequestMapping(value = "/site/brands")
+	public ModelAndView brands(){return mav("brands.html");}
+	@RequestMapping(value = "/site/products")
+	public ModelAndView products(){return mav("products.html");}
+	@RequestMapping(value = "/site/inventory")
+	public ModelAndView inventory(){return mav("inventory.html");}
+	@RequestMapping(value = "/site/orders")
+	public ModelAndView order(){return mav("orders.html");}
+	@RequestMapping(value = "/site/orderItem/{randomKey}")
+	public ModelAndView orderItem(@PathVariable String randomKey){return mav("orderItem.html",randomKey);}
 
 }

@@ -1,13 +1,11 @@
 package com.increff.employee.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class ProductData extends ProductForm{
-    private int id;
 
-    public int getId() {
-        return id;
-    }
+    @Getter @Setter
+    private Integer id;
 
-    public void setId(int id) {
-        this.id = id;
-    }
 }

@@ -3,7 +3,6 @@ package com.increff.employee.pojo;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,14 +14,18 @@ public class OrderItemPojo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    private int orderItemId;
+    private Integer orderItemId;
 
     @Getter @Setter
-    private int orderId;
+    private String barcode;
     @Getter @Setter
-    private int productId;
+    private Integer orderId;
     @Getter @Setter
-    private int quantity;
+    private String product;
     @Getter @Setter
-    private double mrp;
+    private Integer quantity;
+    @Getter @Setter
+    private Double price;
+    @Getter @Setter
+    private String randomKey;
 }
