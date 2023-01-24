@@ -27,14 +27,14 @@ public class OrderPojo {
     private String randomKeyForId;
 
     public OrderPojo(){
-         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
          Date date = new Date();
          time = formatter.format(date);
     }
 
     public void setStatus(){
         status = (Status.COMPLETE).name();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
         time = formatter.format(date);
     }

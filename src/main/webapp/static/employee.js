@@ -108,6 +108,8 @@ function uploadRows(){
 	processCount++;
 	
 	var json = JSON.stringify(row);
+
+	console.log(json);
 	var url = getEmployeeUrl();
 
 	//Make ajax call

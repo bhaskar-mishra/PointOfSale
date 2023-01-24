@@ -8,14 +8,57 @@
 
 <nav th:replace="snippets.html :: name_site_navbar"></nav>
 
+<div th:replace="snippets.html :: success_pop_up"></div>
+
+<!-- Product Edit Modal -->
+<div class="modal fade" id="editProductsModal" tabindex="-1" role="dialog" aria-labelledby="editProductsModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProductsLongTitle">Edit Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <form class="form" id="product-edit-form">
+                            <div class="form-group">
+                                <label for="inputProductEdit" class="col-sm-2 col-form-label">Product</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="product" id="inputProductEdit" placeholder="Enter Product">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputMRPEdit" class="col-sm-2 col-form-label">MRP</label>
+                                <div class="col-sm-10">
+                                    <input type="number" min=0 oninput="validity.valid||(value='');" class="form-control" name="mrp" id="inputMRPEdit" placeholder="Enter MRP">
+                                </div>
+                            </div>
+                            &nbsp;
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="update-product">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
 
     <h3>Products table</h3>
 
+
+
     <!-- Top row with form-->
     <div class="row">
         <div class="col-12">
-            <form class="form-inline" id="product-form">
+            <form class="form" id="product-form">
                 <div class="form-group">
                     <label for="inputBarcode" class="col-sm-2 col-form-label">Barcode</label>
                     <div class="col-sm-10">
@@ -35,7 +78,7 @@
                     <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
                     <div class="col-sm-10">
 <!--                        <input type="text" class="form-control" name="role" id="inputRole" placeholder="enter role">-->
-                        <select name="category" id="inputCategory" onchange="setBrandCategoryId()">
+                        <select name="category" id="inputCategory" >
                             <option value=""  selected  id="selectCategory">Select Category</option>
                         </select>
                     </div>
@@ -46,19 +89,25 @@
                         <input type="text" class="form-control" name="product" id="inputProduct" placeholder="product">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="inputBrandCategoryId" class="col-sm-2 col-form-label">BrandCategoryId</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="brandCategoryId" id="inputBrandCategoryId" placeholder="brandCategoryId" readonly>
-                    </div>
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="inputBrandCategoryId" class="col-sm-2 col-form-label">BrandCategoryId</label>-->
+<!--                    <div class="col-sm-10">-->
+<!--                        <input type="text" class="form-control" name="brandCategoryId" id="inputBrandCategoryId" placeholder="brandCategoryId" readonly>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <div class="form-group">
                     <label for="inputMRP" class="col-sm-2 col-form-label">MRP</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="mrp" id="inputMRP" placeholder="MRP">
+                        <input type="number" min=0 oninput="validity.valid||(value='');" class="form-control" name="mrp" id="inputMRP" placeholder="MRP">
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary" id="add-product">Add Product</button>
+
+                <div class="form-inline">
+                    <button type="button" class="btn btn-primary" id="add-product">Add Product</button>
+                    &nbsp;
+                    <button type="button" class="btn btn-primary" id="upload-data">Upload</button>
+                </div>
+
                 &nbsp;
 <!--                <button type="button" class="btn btn-primary" id="refresh-data">Refresh</button>-->
             </form>
@@ -77,19 +126,53 @@
             <table class="table table-striped" id="product-table">
                 <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">S.NO</th>
                     <th scope="col">Barcode</th>
                     <th scope="col">Brand</th>
                     <th scope="col">Category</th>
                     <th scope="col">Product</th>
-                    <th scope="col">BrandCategoryId</th>
                     <th scope="col">MRP</th>
+                    <th scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 </tbody>
             </table>
 
+        </div>
+    </div>
+
+
+    <!-- Product Upload Modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="upload-product-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Upload Products</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="products-file">
+                        <input type="file" class="custom-file-input" id="productsFile">
+                        <label class="custom-file-label" for="productsFile" id="productsFileName">Choose file</label>
+                    </div>
+                    <a th:href="@{/sample/employee.tsv}" target="_blank">Download Sample</a>
+                    <br>
+                    Rows: <span id="rowCount">0</span>,
+                    Processed: <span id="processCount">0</span>,
+                    Errors: <span id="errorCount">0</span>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="process-data">Upload</button>
+                    <button type="button" class="btn btn-warning" id="download-errors">Download Errors</button>
+                </div>
+            </div>
         </div>
     </div>
 

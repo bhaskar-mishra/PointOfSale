@@ -1,7 +1,5 @@
 package com.increff.employee.controller;
 
-import com.increff.employee.dto.OrderDto;
-import com.increff.employee.model.OrderData;
 import com.increff.employee.model.OrderItemData;
 import com.increff.employee.model.OrderItemForm;
 import com.increff.employee.pojo.OrderItemPojo;
@@ -18,28 +16,28 @@ import java.util.List;
 @RestController
 public class OrderItemController {
     @Autowired
-    private OrderItemService service;
+    private OrderItemService orderItemService;
 
     @ApiOperation(value = "adds an orderItem")
     @RequestMapping(path="/api/orderItem",method = RequestMethod.POST)
     public void addItem(@RequestBody OrderItemForm orderItemForm) throws ApiException
     {
-        OrderItemPojo orderItemPojo = service.check(orderItemForm);
+        OrderItemPojo orderItemPojo = orderItemService.check(orderItemForm);
         System.out.println("Form converted successfully");
-        service.addItem(orderItemPojo);
+        orderItemService.addItem(orderItemPojo);
     }
 
     @ApiOperation(value = "places an order")
     @RequestMapping(path = "/api/orderItem/{randomKey}",method = RequestMethod.PUT)
     public void placeOrder(@PathVariable String randomKey) throws ApiException
     {
-        service.placeOrder(randomKey);
+        orderItemService.placeOrder(randomKey);
     }
 
     @ApiOperation(value = "gets the list of all orderItems for a given order Id")
     @RequestMapping(path = "/api/orderItem/{randomKey}",method = RequestMethod.GET)
     public List<OrderItemData> getOrderItems(@PathVariable String randomKey) throws ApiException{
-        return service.getAllItems(randomKey);
+        return orderItemService.getAllItems(randomKey);
     }
 
 

@@ -5,7 +5,6 @@ import com.increff.employee.dao.OrderDao;
 import com.increff.employee.dao.OrderItemDao;
 import com.increff.employee.dao.ProductDao;
 import com.increff.employee.dto.OrderDto;
-import com.increff.employee.model.OrderData;
 import com.increff.employee.model.OrderItemData;
 import com.increff.employee.model.OrderItemForm;
 import com.increff.employee.pojo.InventoryPojo;
@@ -45,13 +44,13 @@ public class OrderItemService {
     }
 
     public OrderItemPojo check(OrderItemForm orderItemForm) throws ApiException{
-        ProductPojo productByBarcode = productDao.select(orderItemForm.getBarcode());
+        ProductPojo productByBarcode = productDao.selectByBarcode(orderItemForm.getBarcode());
         if(productByBarcode==null)
         {
             throw new ApiException("This product does not exist");
         }
 
-        InventoryPojo inventoryDetails = inventoryDao.select(productByBarcode.getBarcode());
+        InventoryPojo inventoryDetails = inventoryDao.selectByBarcode(productByBarcode.getBarcode());
         if(orderItemForm.getQuantity()>inventoryDetails.getQuantity())
         {
             throw new ApiException("These many samples of the given product are not there");

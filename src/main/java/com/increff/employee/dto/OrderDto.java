@@ -5,7 +5,10 @@ import com.increff.employee.model.OrderItemData;
 import com.increff.employee.model.OrderItemForm;
 import com.increff.employee.pojo.*;
 import com.increff.employee.service.ApiException;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class OrderDto {
 
     public static OrderItemPojo convert(OrderItemForm orderItemForm,String product,Integer orderId) throws ApiException

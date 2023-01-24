@@ -1,6 +1,6 @@
 package com.increff.employee.model;
 
-public class BrandData extends BrandForm{
+public class BrandCategoryData extends BrandForm{
     private int id;
 
     public int getId() {

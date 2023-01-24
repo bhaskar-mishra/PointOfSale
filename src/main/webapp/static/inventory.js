@@ -1,4 +1,5 @@
 
+var product_barcode ;
 function getInventoryUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/inventory";
@@ -39,18 +40,43 @@ function getInventoryList(){
 	});
 }
 
-function deleteBrandCategory(id){
-	var url = getBrandCategoryUrl() + "/" + id;
 
-	$.ajax({
-	   url: url,
-	   type: 'DELETE',
-	   success: function(data) {
-	   		getBrandCategoryList();
-	   },
-	   error: handleAjaxError
-	});
+function updateInventory(){
+ var url = getInventoryUrl();
+ url = url + "/updateInventory";
+ url = url + "/" + product_barcode;
+
+ var $form = $("#inventory-edit-form");
+ 	var json = toJson($form);
+
+ 	$.ajax({
+ 	   url: url,
+ 	   type: 'PUT',
+ 	   data: json,
+ 	   headers: {
+        	'Content-Type': 'application/json'
+        },
+ 	   success: function(response) {
+              var element = document.getElementById('success-alert');
+              console.log(element)
+              element.style.display = "inline";
+              },
+ 	   error: handleAjaxError
+ 	});
+
 }
+
+function displayEditInventory(){
+$('#editInventoryModal').modal();
+}
+
+$(function(){
+    $("[data-hide]").on("click", function(){
+        $("." + $(this).attr("data-hide")).hide();
+        // -or-, see below
+        // $(this).closest("." + $(this).attr("data-hide")).hide();
+    });
+});
 
 //UI DISPLAY METHODS
 
@@ -60,8 +86,9 @@ function displayInventoryList(data){
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
+		product_barcode = e.barcode;
 		var buttonHtml = ''
-		buttonHtml += ' <button onclick="displayEditInventory(' + e.barcode + ')">Edit</button>'
+		buttonHtml += ' <button onclick="displayEditInventory(' + ')">Edit</button>'
 		var row = '<tr>'
 		+ '<td>' + e.barcode + '</td>'
 		+ '<td>' + e.product + '</td>'

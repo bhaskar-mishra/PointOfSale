@@ -22,7 +22,7 @@ public class ProductPojo {
     private String product;
 
     @Getter @Setter
-    private Double mrp;
+    private Double MRP;
 
     @Getter @Setter
     private String brand;

@@ -11,22 +11,23 @@ import java.util.List;
 @Repository
 public class InventoryDao extends AbstractDao{
 
-    private static String SELECTBYBARCODE = "select p from InventoryPojo p where barcode=:barcode";
+    private static String SELECT_BY_BARCODE = "select p from InventoryPojo p where barcode=:barcode";
     private static String UPDATE = "update InventoryPojo set quantity=:quantity where id=:id";
-    private static String SELECTALL = "select p from InventoryPojo p";
+    private static String SELECT_ALL = "select p from InventoryPojo p";
+
     @Transactional
     public void insert(InventoryPojo inventoryPojo) {
         em().persist(inventoryPojo);
     }
 
-    public InventoryPojo select(String barcode){
-        TypedQuery<InventoryPojo> query = getQuery(SELECTBYBARCODE, InventoryPojo.class);
+    public InventoryPojo selectByBarcode(String barcode){
+        TypedQuery<InventoryPojo> query = getQuery(SELECT_BY_BARCODE, InventoryPojo.class);
         query.setParameter("barcode",barcode);
         return getSingle(query);
     }
 
     public List<InventoryPojo> selectAll() {
-        TypedQuery<InventoryPojo> query = getQuery(SELECTALL, InventoryPojo.class);
+        TypedQuery<InventoryPojo> query = getQuery(SELECT_ALL, InventoryPojo.class);
         return query.getResultList();
     }
     public void update(InventoryPojo p) {
@@ -39,8 +40,9 @@ public class InventoryDao extends AbstractDao{
 
     @Transactional
     public  void setQuantity(String barcode,int quantity){
-        TypedQuery<InventoryPojo> query = getQuery(SELECTBYBARCODE, InventoryPojo.class);
+        TypedQuery<InventoryPojo> query = getQuery(SELECT_BY_BARCODE, InventoryPojo.class);
         query.setParameter("barcode",barcode);
         getSingle(query).setQuantity(quantity);
     }
+
 }

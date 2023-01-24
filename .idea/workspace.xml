@@ -5,17 +5,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f38d5da-046b-46f0-90f5-09d274d64e0e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/first_project.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringClone/.idea/SpringClone.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../SpringClone/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/brandsReport.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/inventoryReport.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/reports.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/salesReport.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/salesreport.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/BrandCategoryDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/InventoryReportDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/ProductDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/helper/SalesReportHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/BrandsReportForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InventoryReportData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InventoryReportForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InventoryUpdateForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/ProductEditForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/brandsReport.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/inventoryReport.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/salesReport.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../training_proj/.idea/libraries/Maven__javax_servlet_javax_servlet_api_4_0_1.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../training_proj/src/main/java/HelloWorldServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/SiteUiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/SiteUiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/BrandServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/BrandsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/InventoryServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/OrderItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/OrderItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ProductServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ReportsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ReportsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/BrandDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/BrandDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/InventoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/InventoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/InventoryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/InventoryDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/OrderDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/OrderDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/BrandData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/BrandCategoryData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/ProductForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/ProductForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/OrderPojo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/OrderPojo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/ProductPojo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/ProductPojo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/BrandService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/BrandService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/InventoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/OrderItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/OrderItemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ReportService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/brands.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/brands.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/brandsReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/brandsReport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/employee.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/inventory.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/inventory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/inventoryReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/inventoryReport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/orderItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/orderItem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/products.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/products.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/salesReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/salesReport.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/brands.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/brands.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/employee.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/inventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/inventory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/products.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../training_proj/employee.log" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/employee.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../training_proj/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../training_proj/src/main/java/EmployeeJdbcApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../training_proj/src/main/java/EmployeeJdbcApi.java" afterDir="false" />
@@ -41,8 +81,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -72,18 +112,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/Increff_ training/first_project/employee-spring-full-master/src/main/webapp/static",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Increff_ training/first_project/employee-spring-full-master/src/main/webapp/static&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Increff_ training\first_project\employee-spring-full-master\src\main\webapp\static" />
@@ -94,10 +135,11 @@
       <command value="mvn clean insta" />
       <command value="mvn jetty: run" />
       <command value="mvn jetty:ur" />
-      <command value="mvn clean install" />
       <command value="mvn jetty:urn" />
       <command value="mvn jetty:Run" />
       <command value="mvn jetty:ru" />
+      <command value="mvn jetty:runj" />
+      <command value="mvn clean install" />
       <command value="mvn jetty:run" />
     </option>
   </component>
