@@ -284,6 +284,16 @@ function pagination(){
 
 
 //INITIALIZATION CODE
+
+function setForm(){
+var role = $("meta[name=role]").attr("content");
+  if(role==="standard"){
+  var form = document.getElementById('product-form');
+  form.style.display = "none";
+  }
+}
+
+
 function init(){
 	$('#add-product').click(addProduct);
 	$('#update-product').click(updateProduct);
@@ -297,4 +307,5 @@ function init(){
 $(document).ready(addBrandOptions);
 $(document).ready(init);
 $(document).ready(getProductList);
+$(document).ready(setForm);
 

@@ -206,6 +206,16 @@ function displayUploadData(){
 
 
 //INITIALIZATION CODE
+
+function setForm(){
+  var role = $("meta[name=role]").attr("content");
+  if(role==="standard"){
+  var form = document.getElementById('brand-category-form');
+  form.style.display = "none";
+  }
+}
+
+
 function init(){
 	$('#add-brand-category').click(addBrandCategory);
 	$('#upload-data').click(displayUploadData);
@@ -217,4 +227,5 @@ function init(){
 
 $(document).ready(init);
 $(document).ready(getBrandCategoryList);
+$(document).ready(setForm);
 

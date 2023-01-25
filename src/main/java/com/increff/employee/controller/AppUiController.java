@@ -13,7 +13,12 @@ public class AppUiController extends AbstractUiController {
 	public ModelAndView home(@PathVariable String role) {
 
 		this.role = role;
-		return mav("home.html");
+		return mav("home.html",role,true);
+	}
+
+	@RequestMapping(value = "/ui/home/alternative")
+	public ModelAndView home() {
+		return mav("home.html",role,true);
 	}
 
 	@RequestMapping(value = "/ui/employee")
