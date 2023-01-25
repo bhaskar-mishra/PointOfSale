@@ -34,25 +34,5 @@ public class SiteUiController extends AbstractUiController {
 		return mav("features.html");
 	}
 
-	@RequestMapping(value = "/site/brands")
-	public ModelAndView brands(){return mav("brands.html");}
-	@RequestMapping(value = "/site/products")
-	public ModelAndView products(){return mav("products.html");}
-	@RequestMapping(value = "/site/inventory")
-	public ModelAndView inventory(){return mav("inventory.html");}
-	@RequestMapping(value = "/site/orders")
-	public ModelAndView order(){return mav("orders.html");}
-	@RequestMapping(value = "/site/orderItem/{randomKey}")
-	public ModelAndView orderItem(@PathVariable String randomKey){return mav("orderItem.html",randomKey);}
 
-	@RequestMapping(value = "/site/reports")
-	public ModelAndView reports(){return mav("reports.html");}
-
-	@RequestMapping(value = "/site/salesReport")
-	public ModelAndView salesReport(){return mav("salesReport.html");}
-
-	@RequestMapping(value = "/site/brandsReport")
-	public ModelAndView brandsReport(){return mav("brandsReport.html");}
-	@RequestMapping(value = "/site/inventoryReport")
-	public ModelAndView inventoryReport(){return mav("inventoryReport.html");}
 }

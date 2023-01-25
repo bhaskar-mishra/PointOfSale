@@ -47,4 +47,13 @@ public abstract class AbstractUiController {
 		return mav;
 	}
 
+	protected ModelAndView mav(String page,String role,boolean dummy) {
+		// Set info
+		ModelAndView mav = new ModelAndView(page);
+		mav.addObject("info", info);
+		mav.addObject("baseUrl", baseUrl);
+		mav.addObject("role",role);
+		return mav;
+	}
+
 }
