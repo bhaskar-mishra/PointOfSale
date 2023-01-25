@@ -102,11 +102,15 @@ function displayInventoryList(data){
 
 //INITIALIZATION CODE
 
-function setForm(){
-var role = $("meta[name=role]").attr("content");
+function setPage(){
+  var role = $("meta[name=role]").attr("content");
   if(role==="standard"){
   var form = document.getElementById('inventory-form');
   form.style.display = "none";
+  var admin = document.getElementById('admin-nav-link');
+  admin.style.display = "none";
+  var reports = document.getElementById('reports-nav-link');
+  reports.style.display = "none";
   }
 }
 
@@ -118,5 +122,5 @@ function init(){
 
 $(document).ready(init);
 $(document).ready(getInventoryList);
-$(document).ready(setForm);
+$(document).ready(setPage);
 

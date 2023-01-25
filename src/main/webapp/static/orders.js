@@ -94,6 +94,17 @@ function displayOrderList(data){
 }
 
 //INITIALIZATION CODE
+function setPage(){
+  var role = $("meta[name=role]").attr("content");
+  if(role==="standard"){
+  var admin = document.getElementById('admin-nav-link');
+  admin.style.display = "none";
+  var reports = document.getElementById('reports-nav-link');
+  reports.style.display = "none";
+  }
+}
+
+
 function init(){
 	$('#create-order').click(createOrder);
 //	$('#refresh-data').click(getUserList);
@@ -101,4 +112,5 @@ function init(){
 
 $(document).ready(init);
 $(document).ready(getOrderList);
+$(document).ready(setPage);
 

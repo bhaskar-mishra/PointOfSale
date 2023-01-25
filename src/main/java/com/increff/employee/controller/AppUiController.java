@@ -38,7 +38,7 @@ public class AppUiController extends AbstractUiController {
 	@RequestMapping(value = "/site/inventory")
 	public ModelAndView inventory(){return mav("inventory.html",role,true);}
 	@RequestMapping(value = "/site/orders")
-	public ModelAndView order(){return mav("orders.html");}
+	public ModelAndView order(){return mav("orders.html",role,true);}
 	@RequestMapping(value = "/site/orderItem/{randomKey}")
 	public ModelAndView orderItem(@PathVariable String randomKey){return mav("orderItem.html",randomKey);}
 

@@ -285,11 +285,15 @@ function pagination(){
 
 //INITIALIZATION CODE
 
-function setForm(){
-var role = $("meta[name=role]").attr("content");
+function setPage(){
+  var role = $("meta[name=role]").attr("content");
   if(role==="standard"){
   var form = document.getElementById('product-form');
   form.style.display = "none";
+  var admin = document.getElementById('admin-nav-link');
+  admin.style.display = "none";
+  var reports = document.getElementById('reports-nav-link');
+  reports.style.display = "none";
   }
 }
 
@@ -307,5 +311,5 @@ function init(){
 $(document).ready(addBrandOptions);
 $(document).ready(init);
 $(document).ready(getProductList);
-$(document).ready(setForm);
+$(document).ready(setPage);
 
