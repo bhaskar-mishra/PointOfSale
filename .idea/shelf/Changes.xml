@@ -1,0 +1,54 @@
+<changelist name="Changes" date="1674644347130" recycled="false">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/shelved.patch" />
+  <option name="DESCRIPTION" value="Changes" />
+  <binary>
+    <option name="BEFORE_PATH" value="../training_proj/target/classes/App.class" />
+    <option name="AFTER_PATH" value="../training_proj/target/classes/App.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/App.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="src/main/resources/com/increff/employee/employee.tsv" />
+    <option name="AFTER_PATH" value="POS/src/main/resources/com/increff/employee/employee.tsv" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/employee.tsv" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../training_proj/target/test-classes/Employee_Test.class" />
+    <option name="AFTER_PATH" value="../training_proj/target/test-classes/Employee_Test.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/Employee_Test.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../training_proj/target/classes/EmployeeHibernateApi.class" />
+    <option name="AFTER_PATH" value="../training_proj/target/classes/EmployeeHibernateApi.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/EmployeeHibernateApi.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../training_proj/target/classes/EmployeeJdbcApi.class" />
+    <option name="AFTER_PATH" value="../training_proj/target/classes/EmployeeJdbcApi.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/EmployeeJdbcApi.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../training_proj/target/classes/EmployeePojo.class" />
+    <option name="AFTER_PATH" value="../training_proj/target/classes/EmployeePojo.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/EmployeePojo.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../training_proj/target/classes/HibernateUtil.class" />
+    <option name="AFTER_PATH" value="../training_proj/target/classes/HibernateUtil.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/HibernateUtil.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="src/main/webapp/static/logo.jpg" />
+    <option name="AFTER_PATH" value="POS/src/main/webapp/static/logo.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/logo.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="src/main/webapp/static/salesreport.jpg" />
+    <option name="AFTER_PATH" value="POS/src/main/webapp/static/salesreport.jpg" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/salesreport.jpg" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="../training_proj/target/training_proj-1.jar" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+</changelist>
