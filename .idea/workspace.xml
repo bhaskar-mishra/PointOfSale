@@ -5,14 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f38d5da-046b-46f0-90f5-09d274d64e0e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../InvoiceApp/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../InvoiceApp/src/main/resources/invoice.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../InvoiceApp/src/main/resources/log4j.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../InvoiceApp/template.xsl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/DownloadPdfController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/DownloadPdfDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InvoiceDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InvoiceItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/AppUiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/AppUiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/brands.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/brands.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/inventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/inventory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/orders.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/orders.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/products.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/OrderItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/OrderItemDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/OrderItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/OrderItemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ReportService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/orderItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/orderItem.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

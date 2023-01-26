@@ -24,14 +24,14 @@ public class OrderItemDao extends AbstractDao{
         return getSingle(query);
     }
 
-    public List<OrderItemPojo> selectAll(int orderId)
+    public List<OrderItemPojo> selectAllById(int orderId)
     {
         TypedQuery<OrderItemPojo> query = getQuery(SELECTBYORDERID, OrderItemPojo.class);
         query.setParameter("orderId",orderId);
         return query.getResultList();
     }
 
-    public List<OrderItemPojo> selectAll(String randomKey){
+    public List<OrderItemPojo> selectAllByRandomKey(String randomKey){
         TypedQuery<OrderItemPojo> query = getQuery(SELECTBYRANDOMKEY, OrderItemPojo.class);
         query.setParameter("randomKey",randomKey);
         return query.getResultList();

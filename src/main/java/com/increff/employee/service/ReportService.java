@@ -57,7 +57,7 @@ public class ReportService {
 
        for(int orderId : orders)
        {
-           List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAll(orderId);
+           List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAllById(orderId);
            for(OrderItemPojo pojo : orderItemPojoList)
            {
                ProductPojo productPojo = productDao.selectByBarcode(pojo.getProduct());
@@ -92,7 +92,7 @@ public class ReportService {
       Map<String,List<SalesReportHelper>> brandCategoryDataMap = new HashMap<>();
 
       for(Integer orderId : orders){
-          List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAll(orderId);
+          List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAllById(orderId);
 
           for(OrderItemPojo orderItemPojo : orderItemPojoList){
               ProductPojo productPojo = productDao.selectByBarcode(orderItemPojo.getBarcode());
@@ -181,7 +181,7 @@ public class ReportService {
           //neither brand nor category is given
           if(brand.equals("") && category.equals("")){
               for(Integer orderId : orders){
-                  List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAll(orderId);
+                  List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAllById(orderId);
 
                   for(OrderItemPojo orderItemPojo : orderItemPojoList){
                       ProductPojo productPojo = productDao.selectByBarcode(orderItemPojo.getBarcode());
@@ -217,7 +217,7 @@ public class ReportService {
           {
                 //category is given but brand is not given
               for(Integer orderId : orders){
-                  List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAll(orderId);
+                  List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAllById(orderId);
 
                   for(OrderItemPojo orderItemPojo : orderItemPojoList){
                       ProductPojo productPojo = productDao.selectByBarcode(orderItemPojo.getBarcode());
@@ -252,7 +252,7 @@ public class ReportService {
 
           }else if(category.equals("")){
               for(Integer orderId : orders){
-                  List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAll(orderId);
+                  List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAllById(orderId);
 
                   for(OrderItemPojo orderItemPojo : orderItemPojoList){
                       ProductPojo productPojo = productDao.selectByBarcode(orderItemPojo.getBarcode());
@@ -311,7 +311,7 @@ public class ReportService {
           if(brand.equals("") && !category.equals("")){
               //category is given but brand is not given
               for(Integer orderId : orders){
-                  List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAll(orderId);
+                  List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAllById(orderId);
 
                   for(OrderItemPojo orderItemPojo : orderItemPojoList){
                       ProductPojo productPojo = productDao.selectByBarcode(orderItemPojo.getBarcode());
@@ -348,7 +348,7 @@ public class ReportService {
               System.out.println("inside the if block with no date chosen and no category chosen");
 
               for(Integer orderId : orders){
-                  List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAll(orderId);
+                  List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAllById(orderId);
 
                   for(OrderItemPojo orderItemPojo : orderItemPojoList){
                       ProductPojo productPojo = productDao.selectByBarcode(orderItemPojo.getBarcode());
@@ -386,7 +386,7 @@ public class ReportService {
               Integer quantity = 0;
               Double revenue = 0.0;
               for(Integer orderId : orders){
-                  List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAll(orderId);
+                  List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAllById(orderId);
 
                   for(OrderItemPojo orderItemPojo : orderItemPojoList){
                       ProductPojo productPojo = productDao.selectByBarcode(orderItemPojo.getBarcode());

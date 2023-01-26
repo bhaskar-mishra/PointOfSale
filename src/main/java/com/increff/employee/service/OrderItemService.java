@@ -64,7 +64,7 @@ public class OrderItemService {
 
     public List<OrderItemData> getAllItems(String randomKey) throws ApiException{
 
-        List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAll(randomKey);
+        List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAllByRandomKey(randomKey);
         List<OrderItemData> orderItemDataList = new ArrayList<>();
         for(OrderItemPojo orderItemPojo : orderItemPojoList){
             orderItemDataList.add(OrderDto.convertOrderItemPojoToData(orderItemPojo));

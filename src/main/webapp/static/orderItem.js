@@ -1,5 +1,6 @@
 
 var randomKey;
+var invoiceToDownload;
 function getOrderItemUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl;
@@ -131,10 +132,46 @@ function deleteOrderItem(id){
 	});
 }
 
+// DownloadPDF METHODS
+function getInvoiceDetails(){
+     var url = getOrderItemUrl();
+     url = url + "/api/getInvoice";
+     url = url + "/" + randomKey;
+
+     	$.ajax({
+     	   url: url,
+     	   type: 'GET',
+     	   success: function(data) {
+     	        console.log(data);
+     	   		getEncodedInvoice(data);
+     	   },
+     	   error: handleAjaxError
+     	});
+}
+
+function getEncodedInvoice(json){
+var url = "http://localhost:8000/api/generate";
+json = JSON.stringify(json);
+$.ajax({
+	   url: url,
+	   type: 'POST',
+	   data: json,
+	   headers: {
+       	'Content-Type': 'application/json'
+       },
+	   success: function(response) {
+	   console.log('invoice encoded successfully');
+	   		invoiceToDownload = response;
+	   },
+	   error: handleAjaxError
+	});
+}
+
 //UI DISPLAY METHODS
 
 function displayOrderItemList(data){
 	console.log('Printing user data');
+	console.log(JSON.stringify(data));
 	var $tbody = $('#orderItem-table').find('tbody');
     console.log($tbody.length);
 	$tbody.empty();
