@@ -2,16 +2,12 @@ package com.increff.employee.service;
 
 import com.increff.employee.dao.OrderDao;
 import com.increff.employee.dao.OrderItemDao;
-import com.increff.employee.dto.DownloadPdfDto;
 import com.increff.employee.model.InvoiceDetails;
 import com.increff.employee.model.InvoiceItem;
-import com.increff.employee.pojo.OrderItemPojo;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import  java.util.List;
 
 @Service
@@ -31,7 +27,7 @@ public class DownloadPdfService {
         InvoiceDetails invoiceDetails = new InvoiceDetails();
         invoiceDetails.setTime(LocalDateTime.now());
         invoiceDetails.setOrderId(orderId);
-        invoiceDetails.setItemList(invoiceItemList);
+        invoiceDetails.setItems(invoiceItemList);
         System.out.println("getInvoice working fine in DownloadPdfService");
         System.out.println("exiting getInvoice in DownloadPdfService");
         return invoiceDetails;

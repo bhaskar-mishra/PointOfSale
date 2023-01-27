@@ -22,18 +22,21 @@ public class DownloadPdfController {
     @Autowired
     private DownloadPdfDto downloadPdfDto;
 
+    private String invoiceToDownload;
+
     @ApiOperation("Gets invoice to be printed")
     @RequestMapping(path = "/api/getInvoice/{randomKey}",method = RequestMethod.GET)
-    public InvoiceDetails getInvoice(@PathVariable String randomKey) throws ApiException{
-
-        System.out.println("reaching getInvoice in DownloadPdfController");
+    public String getInvoice(@PathVariable String randomKey) throws ApiException{
         List<InvoiceItem> invoiceItemList = downloadPdfDto.convertToInvoiceItem(randomKey);
-        return downloadPdfService.getInvoice(randomKey,invoiceItemList);
+        InvoiceDetails invoiceDetails =  downloadPdfService.getInvoice(randomKey,invoiceItemList);
+        String encodedInvoice = downloadPdfDto.getEncodedInvoice(invoiceDetails);
+        this.invoiceToDownload = encodedInvoice;
+        return encodedInvoice;
     }
 
     @ApiOperation("Prints pdf")
-    @RequestMapping(path="api/printPdf/{invoiceEncoded}",method = RequestMethod.POST)
-    public void downloadInvoice(@PathVariable String invoiceEncoded) throws ApiException{
+    @RequestMapping(path="api/printPdf",method = RequestMethod.POST)
+    public void downloadInvoice() throws ApiException{
 
     }
 }

@@ -107,7 +107,11 @@ clearErrors();
  	   success: function() {
  	   var element = document.getElementById('place-order');
  	   element.disabled = true;
- 	   element.innerHTML = 'Order Placed';
+ 	   element.style.display = "none";
+ 	   var form = document.getElementById('orderItem-form');
+ 	   form.style.display = "none";
+ 	   var downloadInvoice = document.getElementById('download-invoice');
+         downloadInvoice.style.display = "block";
          getInvoiceDetails();
  	   },
  	   error: handleAjaxError
@@ -144,30 +148,30 @@ function getInvoiceDetails(){
      	   type: 'GET',
      	   success: function(data) {
      	        console.log(data);
-     	   		getEncodedInvoice(data);
+     	   		invoiceToDownload = data;
      	   },
      	   error: handleAjaxError
      	});
 }
 
-function getEncodedInvoice(json){
-var url = "http://localhost:8000/invoice/api/generate";
-json = JSON.stringify(json);
-$.ajax({
-	   url: url,
-	   type: 'POST',
-	   data: json,
-	   headers: {
-       	'Content-Type': 'application/json'
-       },
-	   success: function(response) {
-	   console.log('invoice encoded successfully');
-	   		invoiceToDownload = response;
-	   		console.log('invoice to download : '+invoiceToDownload);
-	   },
-	   error: handleAjaxError
-	});
-}
+//function getEncodedInvoice(json){
+//var url = "http://localhost:8000/invoice/api/generate";
+//json = JSON.stringify(json);
+//$.ajax({
+//	   url: url,
+//	   type: 'POST',
+//	   data: json,
+//	   headers: {
+//       	'Content-Type': 'application/json'
+//       },
+//	   success: function(response) {
+//	   console.log('invoice encoded successfully');
+//	   		invoiceToDownload = response;
+//	   		console.log('invoice to download : '+invoiceToDownload);
+//	   },
+//	   error: handleAjaxError
+//	});
+//}
 
 //UI DISPLAY METHODS
 
@@ -202,6 +206,9 @@ if(status==="COMPLETE"){
   var placeOrderButton = document.getElementById('place-order');
   placeOrderButton.innerHTML = "ORDER PLACED";
   placeOrderButton.disabled = true;
+  placeOrderButton.style.display = "none";
+  var downloadInvoice = document.getElementById('download-invoice');
+  downloadInvoice.style.display = "block";
 
   var orderItemForm = document.getElementById('orderItem-form');
   orderItemForm.style.display = "none";

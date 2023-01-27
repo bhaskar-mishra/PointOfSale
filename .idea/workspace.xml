@@ -12,7 +12,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/DownloadPdfController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/DownloadPdfController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/DownloadPdfDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/DownloadPdfDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InvoiceDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InvoiceDetails.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/orderItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/orderItem.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/static/orderItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/orderItem.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

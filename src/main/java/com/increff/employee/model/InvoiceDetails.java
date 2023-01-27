@@ -11,5 +11,5 @@ import java.util.List;
 public class InvoiceDetails {
     private Integer orderId;
     private LocalDateTime time;
-    private List<InvoiceItem> itemList;
+    private List<InvoiceItem> items;
 }

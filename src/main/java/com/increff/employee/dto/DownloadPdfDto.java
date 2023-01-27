@@ -8,6 +8,7 @@ import com.increff.employee.pojo.OrderItemPojo;
 import com.increff.employee.service.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,15 @@ public class DownloadPdfDto {
         System.out.println("convertToInvoiceItem working fine");
 
         return invoiceItemList;
+    }
+
+    public String getEncodedInvoice(InvoiceDetails invoiceDetails) throws ApiException{
+
+        String url = "http://localhost:8000/invoice/api/generate";
+
+        RestTemplate restTemplate = new RestTemplate();
+        String encodedInvoice = restTemplate.postForObject(url, invoiceDetails, String.class);
+        return encodedInvoice;
     }
 
 }
