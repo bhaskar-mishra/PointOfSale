@@ -25,11 +25,15 @@ public class DownloadPdfService {
 
     public InvoiceDetails getInvoice(String randomKeyForOrder,List<InvoiceItem> invoiceItemList) throws ApiException{
 
+
+        System.out.println("inside getInvoice in DownloadPdfService");
         Integer orderId = orderDao.selectByRandomKey(randomKeyForOrder).getOrderId();
         InvoiceDetails invoiceDetails = new InvoiceDetails();
         invoiceDetails.setTime(LocalDateTime.now());
         invoiceDetails.setOrderId(orderId);
         invoiceDetails.setItemList(invoiceItemList);
+        System.out.println("getInvoice working fine in DownloadPdfService");
+        System.out.println("exiting getInvoice in DownloadPdfService");
         return invoiceDetails;
     }
 }

@@ -1,6 +1,7 @@
 
 var randomKey;
 var invoiceToDownload;
+var orderItemListLength;
 function getOrderItemUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl;
@@ -95,7 +96,7 @@ clearErrors();
  var $tbody = $('#orderItem-table').find('tbody');
  var orderItemsCount = $tbody.length;
  console.log($tbody.length);
- if(orderItemsCount==1){
+ if(orderItemListLength==0){
   setError("place-order-error","no items in the order");
   return false;
  }
@@ -107,7 +108,7 @@ clearErrors();
  	   var element = document.getElementById('place-order');
  	   element.disabled = true;
  	   element.innerHTML = 'Order Placed';
-// 	   		redirectToOrdersPage();
+         getInvoiceDetails();
  	   },
  	   error: handleAjaxError
  	});
@@ -150,7 +151,7 @@ function getInvoiceDetails(){
 }
 
 function getEncodedInvoice(json){
-var url = "http://localhost:8000/api/generate";
+var url = "http://localhost:8000/invoice/api/generate";
 json = JSON.stringify(json);
 $.ajax({
 	   url: url,
@@ -162,6 +163,7 @@ $.ajax({
 	   success: function(response) {
 	   console.log('invoice encoded successfully');
 	   		invoiceToDownload = response;
+	   		console.log('invoice to download : '+invoiceToDownload);
 	   },
 	   error: handleAjaxError
 	});
@@ -170,7 +172,9 @@ $.ajax({
 //UI DISPLAY METHODS
 
 function displayOrderItemList(data){
+    orderItemListLength = data.length;
 	console.log('Printing user data');
+	console.log('data length in display orderItemList ' + data.length);
 	console.log(JSON.stringify(data));
 	var $tbody = $('#orderItem-table').find('tbody');
     console.log($tbody.length);
@@ -187,6 +191,9 @@ function displayOrderItemList(data){
 		+ '</tr>';
         $tbody.append(row);
 	}
+
+	console.log('inside displayOrderItemList in orderItem.js');
+	console.log('printing table length '+$tbody.length);
 }
 
 function resetDataHelper(data){

@@ -25,6 +25,8 @@ public class DownloadPdfController {
     @ApiOperation("Gets invoice to be printed")
     @RequestMapping(path = "/api/getInvoice/{randomKey}",method = RequestMethod.GET)
     public InvoiceDetails getInvoice(@PathVariable String randomKey) throws ApiException{
+
+        System.out.println("reaching getInvoice in DownloadPdfController");
         List<InvoiceItem> invoiceItemList = downloadPdfDto.convertToInvoiceItem(randomKey);
         return downloadPdfService.getInvoice(randomKey,invoiceItemList);
     }

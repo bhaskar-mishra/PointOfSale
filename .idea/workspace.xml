@@ -9,16 +9,10 @@
       <change afterPath="$PROJECT_DIR$/../InvoiceApp/src/main/resources/invoice.properties" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../InvoiceApp/src/main/resources/log4j.properties" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../InvoiceApp/template.xsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/DownloadPdfController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/DownloadPdfDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InvoiceDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InvoiceItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/OrderItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/OrderItemDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/OrderItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/OrderItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ReportService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/DownloadPdfController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/DownloadPdfController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/DownloadPdfDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/DownloadPdfDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/static/orderItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/orderItem.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
