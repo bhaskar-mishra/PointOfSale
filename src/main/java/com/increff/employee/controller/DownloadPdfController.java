@@ -10,6 +10,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 @Api
@@ -22,21 +26,15 @@ public class DownloadPdfController {
     @Autowired
     private DownloadPdfDto downloadPdfDto;
 
-    private String invoiceToDownload;
 
     @ApiOperation("Gets invoice to be printed")
-    @RequestMapping(path = "/api/getInvoice/{randomKey}",method = RequestMethod.GET)
-    public String getInvoice(@PathVariable String randomKey) throws ApiException{
-        List<InvoiceItem> invoiceItemList = downloadPdfDto.convertToInvoiceItem(randomKey);
-        InvoiceDetails invoiceDetails =  downloadPdfService.getInvoice(randomKey,invoiceItemList);
+    @RequestMapping(path = "/api/getInvoice/{randomKeyForOrder}",method = RequestMethod.GET)
+    public String getInvoice(@PathVariable String randomKeyForOrder) throws ApiException, IOException {
+        List<InvoiceItem> invoiceItemList = downloadPdfDto.convertToInvoiceItem(randomKeyForOrder);
+        InvoiceDetails invoiceDetails =  downloadPdfService.getInvoice(randomKeyForOrder,invoiceItemList);
         String encodedInvoice = downloadPdfDto.getEncodedInvoice(invoiceDetails);
-        this.invoiceToDownload = encodedInvoice;
+        downloadPdfService.downloadPdf(randomKeyForOrder,encodedInvoice);
         return encodedInvoice;
     }
 
-    @ApiOperation("Prints pdf")
-    @RequestMapping(path="api/printPdf",method = RequestMethod.POST)
-    public void downloadInvoice() throws ApiException{
-
-    }
 }

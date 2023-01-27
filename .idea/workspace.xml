@@ -11,8 +11,6 @@
       <change afterPath="$PROJECT_DIR$/../InvoiceApp/template.xsl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/DownloadPdfController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/DownloadPdfController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/DownloadPdfDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/DownloadPdfDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InvoiceDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InvoiceDetails.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/html/orderItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/orderItem.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/static/orderItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/orderItem.js" afterDir="false" />
@@ -108,5 +106,36 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

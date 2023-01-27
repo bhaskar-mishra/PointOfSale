@@ -148,30 +148,29 @@ function getInvoiceDetails(){
      	   type: 'GET',
      	   success: function(data) {
      	        console.log(data);
-     	   		invoiceToDownload = data;
      	   },
      	   error: handleAjaxError
      	});
 }
 
-//function getEncodedInvoice(json){
-//var url = "http://localhost:8000/invoice/api/generate";
-//json = JSON.stringify(json);
-//$.ajax({
-//	   url: url,
-//	   type: 'POST',
-//	   data: json,
-//	   headers: {
-//       	'Content-Type': 'application/json'
-//       },
-//	   success: function(response) {
-//	   console.log('invoice encoded successfully');
-//	   		invoiceToDownload = response;
-//	   		console.log('invoice to download : '+invoiceToDownload);
-//	   },
-//	   error: handleAjaxError
-//	});
-//}
+
+function downloadPdf(data){
+
+console.log('inside downloadPdf');
+    var url = getOrderItemUrl();
+    url = url + "/api/printPdf/"+randomKey;
+    url = url + "/" + data;
+    $.ajax({
+    	   url: url,
+    	   type: 'POST',
+    	   success: function() {
+    	    console.log('pdf downloaded successfully');
+    	   },
+    	   error: handleAjaxError
+    	});
+}
+
+
 
 //UI DISPLAY METHODS
 
@@ -243,6 +242,7 @@ function init(){
     inputItem.value = randomKey;
 	$('#add-orderItem').click(addItem);
 	$('#place-order').click(placeOrder);
+	$('#download-invoice').click(getInvoiceDetails);
 }
 
 $(document).ready(init);
