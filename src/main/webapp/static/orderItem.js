@@ -1,11 +1,15 @@
-
 var randomKey;
 var invoiceToDownload;
 var orderItemListLength;
+
+
+
 function getOrderItemUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl;
 }
+
+
 
 function clearErrors(){
 errors = document.getElementsByClassName('errors');
@@ -14,11 +18,15 @@ item.innerHTML = "";
 }
 }
 
+
+
 function setError(id,error){
  var formElementError = document.getElementById(id);
  formElementError.innerHTML = error;
  formElementError.style.color = "red";
 }
+
+
 
 function validateForm(){
 clearErrors();
@@ -43,6 +51,8 @@ var quantity = document.getElementById('inputQuantity').value;
 
   return returnVal;
 }
+
+
 
 //BUTTON ACTIONS
 function addItem(event){
@@ -73,6 +83,8 @@ function addItem(event){
 	return false;
 }
 
+
+
 function getOrderItemList(){
 	var url = getOrderItemUrl();
 	url+="/api/orderItem";
@@ -86,6 +98,8 @@ function getOrderItemList(){
 	   error: handleAjaxError
 	});
 }
+
+
 
 function placeOrder(event){
 clearErrors();
@@ -112,17 +126,40 @@ clearErrors();
  	   form.style.display = "none";
  	   var downloadInvoice = document.getElementById('download-invoice');
          downloadInvoice.style.display = "block";
-         getInvoiceDetails();
+         updateScheduler();
  	   },
  	   error: handleAjaxError
  	});
 }
+
+
+
+//UPDATES SCHEDULER WHEN AN ORDER IS PLACED
+function updateScheduler(){
+ var url = getOrderItemUrl();
+ url = url + "/api/scheduler/addSchedule/";
+ console.log('printing randomKey in update scheduler : '+randomKey);
+ url = url + randomKey;
+
+ $.ajax({
+ 	   url: url,
+ 	   type: 'POST',
+ 	   success: function() {
+ 	   		console.log('scheduler updated successfully');
+ 	   },
+ 	   error: handleAjaxError
+ 	});
+}
+
+
 
 function redirectToOrdersPage(){
 var url = getOrderItemUrl();
 url = url+"/site/orders";
 window.location.href = url;
 }
+
+
 
 function deleteOrderItem(id){
 	var url = getOrderItemUrl() + "/" + id;
@@ -136,6 +173,8 @@ function deleteOrderItem(id){
 	   error: handleAjaxError
 	});
 }
+
+
 
 // DownloadPDF METHODS
 function getInvoiceDetails(){
@@ -154,8 +193,8 @@ function getInvoiceDetails(){
 }
 
 
-function downloadPdf(data){
 
+function downloadPdf(data){
 console.log('inside downloadPdf');
     var url = getOrderItemUrl();
     url = url + "/api/printPdf/"+randomKey;
@@ -173,7 +212,6 @@ console.log('inside downloadPdf');
 
 
 //UI DISPLAY METHODS
-
 function displayOrderItemList(data){
     orderItemListLength = data.length;
 	console.log('Printing user data');
@@ -199,6 +237,8 @@ function displayOrderItemList(data){
 	console.log('printing table length '+$tbody.length);
 }
 
+
+
 function resetDataHelper(data){
 var status = data.status;
 if(status==="COMPLETE"){
@@ -214,6 +254,8 @@ if(status==="COMPLETE"){
 
 }
 }
+
+
 
 //resets buttons and hides form if the order is already placed
 function resetData(){
@@ -233,6 +275,8 @@ function resetData(){
 
 }
 
+
+
 //INITIALIZATION CODE
 function init(){
     randomKey =  $("meta[name=randomKey]").attr("content");
@@ -244,6 +288,8 @@ function init(){
 	$('#place-order').click(placeOrder);
 	$('#download-invoice').click(getInvoiceDetails);
 }
+
+
 
 $(document).ready(init);
 $(document).ready(getOrderItemList);
