@@ -9,18 +9,9 @@
       <change afterPath="$PROJECT_DIR$/../InvoiceApp/src/main/resources/invoice.properties" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../InvoiceApp/src/main/resources/log4j.properties" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../InvoiceApp/template.xsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/SchedulerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/SchedulerDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/SchedulerDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/SchedulerData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/SchedulerPojo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/SchedulerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/scheduler.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/scheduler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/AppUiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/AppUiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/orderItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/orderItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/salesReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/salesReport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/salesReport.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/salesReport.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

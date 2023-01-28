@@ -1,8 +1,10 @@
-
+var report;
 function getBaseUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl;
 }
+
+
 
 // METHODS FOR WHEN THE PAGE IS LOADED
 
@@ -20,6 +22,8 @@ function addBrandOptions()
   	});
 }
 
+
+
 function addBrandsToDropDown(data){
  var selectElement = document.getElementById('inputBrand');
   for(var i in data)
@@ -28,6 +32,8 @@ function addBrandsToDropDown(data){
    selectElement.add(new Option(e));
   }
 }
+
+
 
 // adds all the categories to the drop down
 function addCategoryOptions(){
@@ -42,6 +48,8 @@ var url = getBaseUrl() + "/api/brand/allCategories";
    	});
 }
 
+
+
 function addCategoriesToDropDown(data){
 var selectElement = document.getElementById('inputCategory');
 for(var i in data){
@@ -50,6 +58,8 @@ selectElement.add(new Option(e));
 }
 }
 
+
+
 function getReport(){
 var url = getBaseUrl();
 url = url + "/api/reportController/allSales";
@@ -57,20 +67,27 @@ $.ajax({
    	   url: url,
    	   type: 'GET',
    	   success: function(data) {
+   	   report = data;
    	   		displayReport(data);
    	   },
    	   error: handleAjaxError
    	});
 }
 
+
+
 // DROP DOWN METHODS
 function brandDropDownHandler(){
 return true;
 }
 
+
+
 function categoryDropDownHandler(){
 return true;
 }
+
+
 
 //UI DISPLAY METHODS
 
@@ -109,6 +126,7 @@ var $form = $("#sales-report-form");
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
+	     report = response;
 	   		displayReport(response);
 	   },
 	   error: handleAjaxError
@@ -116,6 +134,8 @@ var $form = $("#sales-report-form");
 
 
 }
+
+
 
 function displayReport(data){
 	console.log('Printing user data');
@@ -134,9 +154,15 @@ function displayReport(data){
 }
 
 
+//Download method
+function downloadReport(){
+       writeFileData(report);
+}
+
 //INITIALIZATION CODE
 function init(){
 	$('#get-sales-report').click(getReportOnClick);
+	$('#download-reports').click(downloadReport);
 //	$('#refresh-data').click(getUserList);
 }
 
