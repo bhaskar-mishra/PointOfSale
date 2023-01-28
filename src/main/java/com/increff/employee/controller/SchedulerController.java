@@ -28,14 +28,12 @@ public class SchedulerController {
     @ApiOperation(value = "gets all schedules")
     @RequestMapping(path = "/api/scheduler/getAllSchedules",method = RequestMethod.GET)
     public List<SchedulerData> getAllSchedules() throws ApiException{
-         List<SchedulerPojo> schedulerPojoList = schedulerService.getAllSchedules();
-         return schedulerDto.convertToSchedulerData(schedulerPojoList);
+         return schedulerDto.getAllSchedules();
     }
 
     @ApiOperation(value = "add a schedule")
-    @RequestMapping(path = "/api/scheduler/addSchedule/{randomKeyForOrder}",method = RequestMethod.POST)
-    public void addSchedule(@PathVariable String randomKeyForOrder) throws ApiException{
-        System.out.println("reaching add schedule");
-        schedulerService.addSchedule(randomKeyForOrder);
+    @RequestMapping(path = "/api/scheduler/addSchedule/{random_key_for_id}",method = RequestMethod.POST)
+    public void addSchedule(@PathVariable String random_key_for_id) throws ApiException{
+        schedulerDto.addSchedule(random_key_for_id);
     }
 }

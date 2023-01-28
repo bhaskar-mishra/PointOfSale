@@ -5,6 +5,7 @@ import com.increff.employee.dao.InventoryDao;
 import com.increff.employee.dao.ProductDao;
 import com.increff.employee.dto.InventoryDto;
 import com.increff.employee.dto.InventoryReportDto;
+import com.increff.employee.helper.InventoryReportHelper;
 import com.increff.employee.model.InventoryData;
 import com.increff.employee.model.InventoryReportData;
 import com.increff.employee.model.InventoryReportForm;
@@ -47,6 +48,8 @@ public class InventoryService {
         }
     }
 
+
+
     @Transactional(rollbackOn = ApiException.class)
     public List<InventoryData> get() throws ApiException{
         List<InventoryPojo> inventoryPojoList = inventoryDao.selectAll();
@@ -58,8 +61,10 @@ public class InventoryService {
         return inventoryDataList;
     }
 
+
+
     @Transactional(rollbackOn = ApiException.class)
-    public List<InventoryReportData> getInventoryReport(InventoryReportForm inventoryReportForm) throws ApiException{
+    public List<InventoryReportHelper> getInventoryReport(InventoryReportForm inventoryReportForm) throws ApiException{
         String brand = inventoryReportForm.getBrand();
         String category = inventoryReportForm.getCategory();
         String product = inventoryReportForm.getProduct();
@@ -68,7 +73,7 @@ public class InventoryService {
         if(category==null) category = "";
         if(product==null) product = "";
 
-        List<InventoryReportData> inventoryReportDataList = new ArrayList<>();
+        List<InventoryReportHelper> inventoryReportHelperList = new ArrayList<>();
         if(!brand.equals("") && !category.equals("") && !product.equals("")){
             ProductPojo productPojo = productDao.selectByBrandCategoryProduct(brand,category
             ,product);
@@ -80,7 +85,10 @@ public class InventoryService {
                 quantity = inventoryPojo.getQuantity();
             }
 
-            inventoryReportDataList.add(InventoryReportDto.inventoryReportFormToData(inventoryReportForm,quantity));
+            InventoryReportHelper inventoryReportHelper = new InventoryReportHelper();
+            inventoryReportHelper.setInventoryReportForm(inventoryReportForm);
+            inventoryReportHelper.setQuantity(quantity);
+            inventoryReportHelperList.add(inventoryReportHelper);
 
         }else if(!brand.equals("") && !category.equals("")){
             List<ProductPojo> productPojoList = productDao.selectByBrandCategory(brand,category);
@@ -93,7 +101,10 @@ public class InventoryService {
                     quantity = inventoryPojo.getQuantity();
                 }
 
-                inventoryReportDataList.add(InventoryReportDto.inventoryReportFormToData(inventoryReportForm,quantity));
+                InventoryReportHelper inventoryReportHelper = new InventoryReportHelper();
+                inventoryReportHelper.setInventoryReportForm(inventoryReportForm);
+                inventoryReportHelper.setQuantity(quantity);
+                inventoryReportHelperList.add(inventoryReportHelper);
             }
 
         }else if(!brand.equals("") && !product.equals("")){
@@ -107,7 +118,10 @@ public class InventoryService {
                         quantity = inventoryPojo.getQuantity();
                     }
 
-                    inventoryReportDataList.add(InventoryReportDto.inventoryReportFormToData(inventoryReportForm,quantity));
+                    InventoryReportHelper inventoryReportHelper = new InventoryReportHelper();
+                    inventoryReportHelper.setInventoryReportForm(inventoryReportForm);
+                    inventoryReportHelper.setQuantity(quantity);
+                    inventoryReportHelperList.add(inventoryReportHelper);
                 }
         }else if(!category.equals("") && !product.equals("")){
                List<ProductPojo> productPojoList = productDao.selectByCategoryProduct(category,product);
@@ -120,7 +134,10 @@ public class InventoryService {
                        quantity = inventoryPojo.getQuantity();
                    }
 
-                   inventoryReportDataList.add(InventoryReportDto.inventoryReportFormToData(inventoryReportForm,quantity));
+                   InventoryReportHelper inventoryReportHelper = new InventoryReportHelper();
+                   inventoryReportHelper.setInventoryReportForm(inventoryReportForm);
+                   inventoryReportHelper.setQuantity(quantity);
+                   inventoryReportHelperList.add(inventoryReportHelper);
                }
         }else {
             List<ProductPojo> productPojoList = productDao.selectByProduct(product);
@@ -133,31 +150,40 @@ public class InventoryService {
                     quantity = inventoryPojo.getQuantity();
                 }
 
-                inventoryReportDataList.add(InventoryReportDto.inventoryReportFormToData(inventoryReportForm,quantity));
+                InventoryReportHelper inventoryReportHelper = new InventoryReportHelper();
+                inventoryReportHelper.setInventoryReportForm(inventoryReportForm);
+                inventoryReportHelper.setQuantity(quantity);
+                inventoryReportHelperList.add(inventoryReportHelper);
             }
         }
-        return inventoryReportDataList;
+        return inventoryReportHelperList;
     }
+
+
+
+//    @Transactional
+//    public List<InventoryReportData> getInventoryDetailsOfAllProducts() throws ApiException{
+//        List<InventoryReportData> inventoryReportDataList = new ArrayList<>();
+//        List<ProductPojo> productPojoList = productDao.selectAll();
+//        for(ProductPojo productPojo : productPojoList){
+//            InventoryPojo inventoryPojo = inventoryDao.selectByBarcode(productPojo.getBarcode());
+//            Integer quantity;
+//            if(inventoryPojo==null){
+//                quantity = 0;
+//            }else {
+//                quantity = inventoryPojo.getQuantity();
+//            }
+//            inventoryReportDataList.add(InventoryReportDto.productToInventoryReportData(productPojo,quantity));
+//        }
+//        return inventoryReportDataList;
+//    }
+
+
 
     @Transactional
-    public List<InventoryReportData> getInventoryDetailsOfAllProducts() throws ApiException{
-        List<InventoryReportData> inventoryReportDataList = new ArrayList<>();
-        List<ProductPojo> productPojoList = productDao.selectAll();
-        for(ProductPojo productPojo : productPojoList){
-            InventoryPojo inventoryPojo = inventoryDao.selectByBarcode(productPojo.getBarcode());
-            Integer quantity;
-            if(inventoryPojo==null){
-                quantity = 0;
-            }else {
-                quantity = inventoryPojo.getQuantity();
-            }
-            inventoryReportDataList.add(InventoryReportDto.productToInventoryReportData(productPojo,quantity));
-        }
-        return inventoryReportDataList;
-    }
-
     public void updateInventoryForAGivenBarcode(String barcode, InventoryUpdateForm inventoryUpdateForm) throws ApiException{
-        inventoryDao.setQuantity(barcode,inventoryUpdateForm.getQuantity());
+        InventoryPojo inventoryPojo = inventoryDao.selectByBarcode(barcode);
+        inventoryPojo.setQuantity(inventoryUpdateForm.getQuantity());
     }
 
 //    @Transactional

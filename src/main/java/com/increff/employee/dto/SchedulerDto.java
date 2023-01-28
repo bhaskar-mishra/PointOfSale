@@ -4,6 +4,9 @@ package com.increff.employee.dto;
 import com.increff.employee.model.SchedulerData;
 import com.increff.employee.pojo.SchedulerPojo;
 import com.increff.employee.service.ApiException;
+import com.increff.employee.service.SchedulerService;
+import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,7 +15,19 @@ import java.util.List;
 @Service
 public class SchedulerDto {
 
-    public List<SchedulerData> convertToSchedulerData(List<SchedulerPojo> schedulerPojoList) throws ApiException{
+    @Autowired
+    private SchedulerService schedulerService;
+
+    public List<SchedulerData> getAllSchedules() throws ApiException{
+        List<SchedulerPojo> schedulerPojoList = schedulerService.getAllSchedules();
+        return convertToSchedulerData(schedulerPojoList);
+    }
+
+    public void addSchedule(String random_key_for_id) throws ApiException{
+        schedulerService.addSchedule(random_key_for_id);
+    }
+
+    private List<SchedulerData> convertToSchedulerData(List<SchedulerPojo> schedulerPojoList) throws ApiException{
         List<SchedulerData> schedulerDataList = new ArrayList<>();
         for(SchedulerPojo schedulerPojo : schedulerPojoList){
             SchedulerData schedulerData = new SchedulerData();

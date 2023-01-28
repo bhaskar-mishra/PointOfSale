@@ -43,33 +43,28 @@ public class OrderItemService {
         orderPojo.setStatus();
     }
 
-    public OrderItemPojo check(OrderItemForm orderItemForm) throws ApiException{
-        ProductPojo productByBarcode = productDao.selectByBarcode(orderItemForm.getBarcode());
-        if(productByBarcode==null)
-        {
-            throw new ApiException("This product does not exist");
-        }
 
-        InventoryPojo inventoryDetails = inventoryDao.selectByBarcode(productByBarcode.getBarcode());
-        if(orderItemForm.getQuantity()>inventoryDetails.getQuantity())
-        {
-            throw new ApiException("These many samples of the given product are not there");
-        }
-        inventoryDao.setQuantity(orderItemForm.getBarcode(),inventoryDetails.getQuantity()- orderItemForm.getQuantity());
-        String randomKey = orderItemForm.getRandomKey();
-        OrderPojo orderPojo = orderDao.selectByRandomKey(randomKey);
+//    public OrderItemPojo check(OrderItemForm orderItemForm) throws ApiException{
+//        ProductPojo productByBarcode = productDao.selectByBarcode(orderItemForm.getBarcode());
+//        if(productByBarcode==null)
+//        {
+//            throw new ApiException("This product does not exist");
+//        }
+//
+//        InventoryPojo inventoryDetails = inventoryDao.selectByBarcode(productByBarcode.getBarcode());
+//        if(orderItemForm.getQuantity()>inventoryDetails.getQuantity())
+//        {
+//            throw new ApiException("These many samples of the given product are not there");
+//        }
+//        inventoryDao.setQuantity(orderItemForm.getBarcode(),inventoryDetails.getQuantity()- orderItemForm.getQuantity());
+//        String randomKey = orderItemForm.getRandomKey();
+//        OrderPojo orderPojo = orderDao.selectByRandomKey(randomKey);
+//
+//        return OrderDto.convert(orderItemForm,productByBarcode.getProduct(),orderPojo.getOrderId());
+//    }
 
-        return OrderDto.convert(orderItemForm,productByBarcode.getProduct(),orderPojo.getOrderId());
-    }
-
-    public List<OrderItemData> getAllItems(String randomKey) throws ApiException{
-
-        List<OrderItemPojo> orderItemPojoList = orderItemDao.selectAllByRandomKey(randomKey);
-        List<OrderItemData> orderItemDataList = new ArrayList<>();
-        for(OrderItemPojo orderItemPojo : orderItemPojoList){
-            orderItemDataList.add(OrderDto.convertOrderItemPojoToData(orderItemPojo));
-        }
-        return orderItemDataList;
+    public List<OrderItemPojo> getAllItems(String randomKey) throws ApiException{
+        return orderItemDao.selectAllByRandomKey(randomKey);
     }
 
 }

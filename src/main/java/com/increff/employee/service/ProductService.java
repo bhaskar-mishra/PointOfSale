@@ -20,17 +20,17 @@ public class ProductService {
     private BrandDao brandDao;
 
     @Transactional
-    public void add(ProductPojo p) throws ApiException{
-        boolean unique = productDao.checkUnique(p.getBarcode());
+    public void add(ProductPojo productPojo) throws ApiException{
+        boolean unique = productDao.checkUnique(productPojo.getBarcode());
         if(!unique){
             throw new ApiException("This product is already there");
         }
-        BrandPojo pojo = brandDao.selectById(p.getBrandCategoryId());
+        BrandPojo pojo = brandDao.selectById(productPojo.getBrandCategoryId());
         if(pojo==null){
-            throw new ApiException("there's no brand with given brand-category id: "+p.getBrandCategoryId());
+            throw new ApiException("there's no brand with given brand-category id: "+productPojo.getBrandCategoryId());
         }
-        System.out.println(p.getBarcode());
-        productDao.insert(p);
+        System.out.println(productPojo.getBarcode());
+        productDao.insert(productPojo);
 
     }
 

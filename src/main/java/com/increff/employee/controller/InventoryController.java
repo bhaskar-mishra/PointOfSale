@@ -1,5 +1,6 @@
 package com.increff.employee.controller;
 
+import com.increff.employee.dto.InventoryDto;
 import com.increff.employee.model.*;
 import com.increff.employee.pojo.InventoryPojo;
 import com.increff.employee.service.ApiException;
@@ -19,12 +20,13 @@ public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
 
+    @Autowired
+    private InventoryDto inventoryDto;
+
     @ApiOperation(value = "Adds a product to the inventory")
     @RequestMapping(path = "/api/inventory",method = RequestMethod.POST)
-    public void addInventory(@RequestBody InventoryForm form) throws ApiException {
-        System.out.println("Reaching addInventory method");
-        InventoryPojo p = convert(form);
-        inventoryService.add(p);
+    public void addInventory(@RequestBody InventoryForm inventoryForm) throws ApiException {
+        inventoryDto.addInventory(inventoryForm);
     }
 
     @ApiOperation("Gets all products in the inventory")
@@ -33,33 +35,26 @@ public class InventoryController {
         return inventoryService.get();
     }
 
+
+    // It prints inventory of all the products
     @ApiOperation("Gets inventory details of all products")
     @RequestMapping(path = "/api/inventory/getInventoryAll",method = RequestMethod.GET)
     public List<InventoryReportData> getInventoryDetails() throws ApiException{
-        return inventoryService.getInventoryDetailsOfAllProducts();
+        return inventoryDto.getInventoryDetailsOfAllProducts();
     }
 
+
+    //prints inventory of products input by the user
     @ApiOperation("Gets inventory report on userInput")
     @RequestMapping(path = "/api/inventory/inventoryReport",method = RequestMethod.POST)
     public List<InventoryReportData> getInventoryReport(@RequestBody InventoryReportForm inventoryReportForm) throws ApiException{
-        return inventoryService.getInventoryReport(inventoryReportForm);
+        return inventoryDto.getInventoryReport(inventoryReportForm);
     }
 
     @ApiOperation("Updates inventory report")
     @RequestMapping(path = "/api/inventory/updateInventory/{barcode}",method = RequestMethod.PUT)
     public void updateInventoryForAGivenBarcode(@PathVariable String barcode,@RequestBody InventoryUpdateForm inventoryUpdateForm) throws ApiException{
-        System.out.println("reaching updateInventoryForAGivenBarcode in inventory controller");
-        System.out.println("barcode : "+barcode);
-        System.out.println("quantity : "+inventoryUpdateForm.getQuantity());
-        inventoryService.updateInventoryForAGivenBarcode(barcode,inventoryUpdateForm);
-    }
-
-    private static InventoryPojo convert(InventoryForm inventoryForm){
-        System.out.println("Form being converted to Pojo");
-        InventoryPojo inventoryPojo = new InventoryPojo();
-        inventoryPojo.setBarcode(inventoryForm.getBarcode());
-        inventoryPojo.setQuantity(inventoryForm.getQuantity());
-        return inventoryPojo;
+        inventoryDto.updateInventoryForAGivenBarcode(barcode,inventoryUpdateForm);
     }
 
 }

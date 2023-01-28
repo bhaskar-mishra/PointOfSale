@@ -11,6 +11,7 @@ import com.increff.employee.model.SalesReportForm;
 import com.increff.employee.pojo.OrderItemPojo;
 import com.increff.employee.pojo.ProductPojo;
 import com.increff.employee.pojo.Status;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,10 +34,10 @@ public class ReportService {
   private ProductDao productDao;
 
   @Transactional
-  public SalesReportData getSalesReportForABrandCategoryInGivenTime(SalesReportForm salesReportForm) throws ApiException, ParseException {
-       List<OrderData> orderList = orderService.getAll();
+  public SalesReportData getSalesReportForABrandCategoryInGivenTime(SalesReportForm salesReportForm,List<OrderData> orderDataList) throws ApiException, ParseException {
+
        List<Integer> orders = new ArrayList<>();
-       for(OrderData obj : orderList)
+       for(OrderData obj : orderDataList)
        {
            if(obj.getStatus()== (Status.PENDING).name()) continue;
           String time = obj.getTime();
@@ -78,13 +79,12 @@ public class ReportService {
   }
 
   @Transactional
-  public List<SalesReportData> getAllSales() throws ApiException{
-      List<OrderData> orderList = orderService.getAll();
+  public List<SalesReportData> getAllSales(List<OrderData> orderDataList) throws ApiException{
       List<Integer> orders = new ArrayList<>();
       List<SalesReportData> salesReportDataList = new ArrayList<>();
 
       //gets all the orders that are placed
-      for(OrderData orderData : orderList){
+      for(OrderData orderData : orderDataList){
           if(orderData.getStatus().equals(Status.COMPLETE.name())){
               orders.add(orderData.getOrderId());
           }
@@ -145,7 +145,7 @@ public class ReportService {
   //Get sales report based on the input given by the user
 
   @Transactional
-  public List<SalesReportData> getSalesOnInput(SalesReportForm salesReportForm) throws ApiException, ParseException {
+  public List<SalesReportData> getSalesOnInput(SalesReportForm salesReportForm,List<OrderData> orderDataList) throws ApiException, ParseException {
       String startDate = salesReportForm.getStartDate();
       String endDate = salesReportForm.getEndDate();
       String brand = salesReportForm.getBrand();
@@ -160,12 +160,11 @@ public class ReportService {
       System.out.println("category : "+category);
 
       List<SalesReportData> salesReportDataList = new ArrayList<>();
-      List<OrderData> orderList = orderService.getAll();
       List<Integer> orders = new ArrayList<>();
 
       //IF DATE FILTER IS GIVEN
       if(!startDate.equals("")){
-          for(OrderData orderData : orderList)
+          for(OrderData orderData : orderDataList)
           {
               if(orderData.getStatus().equals((Status.PENDING).name())) continue;
               String time = orderData.getTime();
@@ -286,7 +285,7 @@ public class ReportService {
               }
 
           }else {
-              salesReportDataList.add(getSalesReportForABrandCategoryInGivenTime(salesReportForm));
+              salesReportDataList.add(getSalesReportForABrandCategoryInGivenTime(salesReportForm,orderDataList));
           }
 
           for(String brandData : brandCategoryDataMap.keySet()){
@@ -302,7 +301,7 @@ public class ReportService {
           }
       }else
       {
-          for(OrderData orderData : orderList)
+          for(OrderData orderData : orderDataList)
           {
               if(orderData.getStatus().equals((Status.PENDING).name())) continue;
               orders.add(orderData.getOrderId());

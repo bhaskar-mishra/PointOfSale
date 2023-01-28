@@ -1,8 +1,6 @@
 package com.increff.employee.service;
 
 import com.increff.employee.dao.BrandDao;
-import com.increff.employee.dto.BrandCategoryDto;
-import com.increff.employee.model.BrandCategoryData;
 import com.increff.employee.model.BrandForm;
 import com.increff.employee.model.BrandsReportForm;
 import com.increff.employee.pojo.BrandPojo;
@@ -30,11 +28,6 @@ public class BrandService {
             throw new ApiException("This brand category already exists");
         }
         brandDao.insert(p);
-    }
-
-    @Transactional(rollbackOn = ApiException.class)
-    public BrandPojo get(int id) throws ApiException {
-        return getCheck(id);
     }
 
     @Transactional
@@ -80,7 +73,9 @@ public class BrandService {
         List<String> categoriesForGivenBrand = new ArrayList<>();
         for(BrandPojo pojo : brandPojoList)
         {
-            if(pojo.getBrand().equals(brand)) categoriesForGivenBrand.add(pojo.getCategory());
+            if(pojo.getBrand().equals(brand)) {
+                categoriesForGivenBrand.add(pojo.getCategory());
+            }
         }
 
         return categoriesForGivenBrand;
@@ -113,8 +108,7 @@ public class BrandService {
     }
 
     @Transactional(rollbackOn = ApiException.class)
-    public void update(int id, BrandForm brandForm) throws ApiException {
-        normalize(brandForm);
+    public void updateBrandCategory(int id, BrandForm brandForm) throws ApiException {
         BrandPojo brandPojo = getCheck(id);
 
         String brand = brandForm.getBrand();
@@ -140,10 +134,6 @@ public class BrandService {
         }
     }
 
-    protected static void normalize(BrandForm brandForm) {
-        brandForm.setBrand(brandForm.getBrand().toLowerCase().trim());
-        brandForm.setCategory(brandForm.getCategory().toLowerCase().trim());
-    }
 
     @Transactional
     public BrandPojo getCheck(int id) throws ApiException {
@@ -156,7 +146,7 @@ public class BrandService {
 
 
     @Transactional
-    public List<BrandCategoryData> getBrandsReport(BrandsReportForm brandsReportForm) throws ApiException{
+    public List<BrandPojo> getBrandsReport(BrandsReportForm brandsReportForm) throws ApiException{
 
         String brand = brandsReportForm.getBrand();
         String category = brandsReportForm.getCategory();
@@ -164,26 +154,26 @@ public class BrandService {
         if(brand==null) brand = "";
         if(category==null) category = "";
 
-        List<BrandCategoryData>  brandCategoryDataList = new ArrayList<>();;
+        List<BrandPojo>  brandPojoArrayList = new ArrayList<>();;
 
         if(!brand.equals("") && !category.equals("")){
             BrandPojo brandPojo = brandDao.selectByBrandCategory(brand,category);
             if(brandPojo!=null){
-                brandCategoryDataList.add(BrandCategoryDto.convert(brandPojo));
+                brandPojoArrayList.add(brandPojo);
             }
         }else if(brand.equals("")){
             List<BrandPojo> brandPojoList = brandDao.selectByCategory(category);
             for(BrandPojo brandPojo : brandPojoList){
-                brandCategoryDataList.add(BrandCategoryDto.convert(brandPojo));
+                brandPojoArrayList.add(brandPojo);
             }
         }else
         {
             List<BrandPojo> brandPojoList = brandDao.selectByBrand(brand);
             for(BrandPojo brandPojo : brandPojoList){
-                brandCategoryDataList.add(BrandCategoryDto.convert(brandPojo));
+                brandPojoArrayList.add(brandPojo);
             }
         }
-        return brandCategoryDataList;
+        return brandPojoArrayList;
     }
 
 }

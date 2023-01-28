@@ -25,32 +25,28 @@ public class BrandsController {
     @Autowired
     private BrandService brandService;
 
+    @Autowired
+    private BrandCategoryDto brandCategoryDto;
+
     @ApiOperation(value = "Adds a brand")
     @RequestMapping(path = "/api/brand",method = RequestMethod.POST)
-    public void addBrand(@RequestBody BrandForm form) throws ApiException{
-        BrandPojo p = BrandCategoryDto.convert(form);
-        brandService.add(p);
+    public void addBrandCategory(@RequestBody BrandForm brandForm) throws ApiException{
+        brandCategoryDto.addBrandCategory(brandForm);
     }
 
 
     @ApiOperation("Gets list of all the brand categories")
     @RequestMapping(path = "/api/brand",method = RequestMethod.GET)
-    public List<BrandCategoryData> getAllBrandCateogry() throws ApiException {
+    public List<BrandCategoryData> getAllBrandCateogries() throws ApiException {
         System.out.println("Inside getAllBrandCategory method in /api/brand");
-        List<BrandPojo> list = brandService.getAll();
-        List<BrandCategoryData> list2 = new ArrayList<>();
-        for(BrandPojo p : list){
-            list2.add(BrandCategoryDto.convert(p));
-        }
-
-        return list2;
+        return brandCategoryDto.getAllBrandCategories();
     }
 
     //GET Brands report
     @ApiOperation("gets brand report")
     @RequestMapping(path = "/api/brands/brandsReport",method = RequestMethod.POST)
     public List<BrandCategoryData> getBrandsReport(@RequestBody BrandsReportForm brandsReportForm) throws ApiException{
-        return brandService.getBrandsReport(brandsReportForm);
+        return brandCategoryDto.getBrandsReport(brandsReportForm);
     }
 
 
@@ -70,12 +66,10 @@ public class BrandsController {
     }
 
 
-
     @ApiOperation("Gets all the categories for a particular brand")
     @RequestMapping(path = "/api/brand/{brand}",method = RequestMethod.GET)
     public List<String> getCategoriesForBrand(@PathVariable String brand) throws ApiException{
-        System.out.println("Reaching getCategoriesForBrand method" + brand);
-        return brandService.getCategoriesForBrand(brand);
+        return brandCategoryDto.getCategoriesForBrand(brand);
 
     }
 
@@ -83,8 +77,8 @@ public class BrandsController {
 
     @ApiOperation(value = "gets brandCategoryId for a given brand-category")
     @RequestMapping(path = "/api/brand/{brand}/{category}",method = RequestMethod.GET)
-    public int getBrandCategoryId(@PathVariable String brand,@PathVariable String category) throws ApiException{
-        return brandService.getBrandCategoryId(brand,category);
+    public Integer getBrandCategoryId(@PathVariable String brand,@PathVariable String category) throws ApiException{
+        return brandCategoryDto.getBrandCategoryId(brand,category);
 
     }
 
@@ -100,8 +94,8 @@ public class BrandsController {
 
     @ApiOperation(value = "Updates a brand category")
     @RequestMapping(path = "/api/brand/{id}",method = RequestMethod.PUT)
-    public void update(@PathVariable int id,@RequestBody BrandForm brandForm)throws ApiException{
-        brandService.update(id,brandForm);
+    public void updateBrandCategory(@PathVariable int id, @RequestBody BrandForm brandForm)throws ApiException{
+        brandCategoryDto.updateBrandCategory(id,brandForm);
     }
 
 
