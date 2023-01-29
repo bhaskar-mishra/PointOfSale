@@ -37,8 +37,8 @@ public class ProductController {
 
     @ApiOperation(value = "Deletes a product")
     @RequestMapping(path = "/api/product/{barcode}",method = RequestMethod.DELETE)
-    public void deleteByBarcode(@PathVariable String barcode){
-        productService.deleteByBarcode(barcode);
+    public void deleteByBarcode(@PathVariable String barcode) throws ApiException {
+        productDto.deleteByBarcode(barcode);
     }
 
     @ApiOperation(value = "updates a product")

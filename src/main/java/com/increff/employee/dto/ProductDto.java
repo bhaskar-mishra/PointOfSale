@@ -7,9 +7,11 @@ import com.increff.employee.pojo.ProductPojo;
 import com.increff.employee.service.ApiException;
 import com.increff.employee.service.BrandService;
 import com.increff.employee.service.ProductService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,16 @@ public class ProductDto {
     @Autowired
     private ProductService productService;
 
+    @Transactional
+    public void deleteByBarcode(String barcode) throws ApiException{
+        if(barcode==null){
+            throw new ApiException("null barcode not acceptable");
+        }
+        productService.deleteByBarcode(barcode);
+    }
+
     public void addProduct(ProductForm productForm) throws ApiException{
+        validate(productForm);
         normalize(productForm);
         productService.add(convertFormToPojo(productForm));
     }
@@ -37,9 +48,12 @@ public class ProductDto {
     }
 
     public void updateProductWithGivenBarcode(String barcode,ProductEditForm productEditForm) throws ApiException{
+        if(barcode==null){
+            throw new ApiException("barcode null");
+        }
         barcode = barcode.toLowerCase().trim();
-        normalize(productEditForm);
         validateProductEditForm(barcode,productEditForm);
+        normalize(productEditForm);
         productService.updateProduct(barcode,productEditForm);
     }
 
@@ -69,9 +83,41 @@ public class ProductDto {
         return productData;
     }
 
+    private void validate(ProductForm productForm) throws ApiException{
+        if(productForm==null){
+            throw new ApiException("productForm null");
+        }
+
+        if(productForm.getProduct()==null || productForm.getProduct().equals("")){
+            throw new ApiException("invalid product");
+        }
+
+        if(productForm.getMrp()==null){
+            throw new ApiException("MRP can't be null");
+        }
+        if(productForm.getMrp().compareTo(0.0)<=0){
+            throw new ApiException("MRP can't be negative");
+        }
+    }
+
     private void validateProductEditForm(String barcode, ProductEditForm productEditForm) throws ApiException {
+        if(barcode==null){
+            throw new ApiException("invalid barcode");
+        }
         ProductPojo productPojo = productService.selectByBarcode(barcode);
+        if(productPojo==null){
+            throw new ApiException("incorrect barcode");
+        }
         System.out.println("inside validateProductEditForm : "+productEditForm.getMRP());
+
+        if(productEditForm.getProduct()==null && productEditForm.getMRP()==null){
+            throw new ApiException("no input");
+        }
+
+        if(productEditForm.getMRP().compareTo(0.0)<=0){
+            throw new ApiException("MRP can't be negative");
+        }
+
         if (productEditForm.getMRP() == null || productEditForm.getMRP().equals(0)) {
             productEditForm.setMRP(productEditForm.getMRP());
         }
