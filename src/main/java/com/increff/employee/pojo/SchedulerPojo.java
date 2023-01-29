@@ -10,7 +10,7 @@ import javax.persistence.Id;
 
 
 @Entity
-public class SchedulerPojo {
+public class SchedulerPojo extends AbstractDatePojo{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

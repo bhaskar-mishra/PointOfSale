@@ -5,7 +5,7 @@ import com.increff.employee.util.MyKey;
 import javax.persistence.*;
 
 @Entity
-public class BrandPojo {
+public class BrandPojo extends AbstractDatePojo{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

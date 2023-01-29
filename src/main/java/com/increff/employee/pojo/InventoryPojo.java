@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class InventoryPojo {
+public class InventoryPojo extends AbstractDatePojo{
 
     @Getter
     @Id

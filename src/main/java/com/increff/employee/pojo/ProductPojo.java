@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-public class ProductPojo {
+public class ProductPojo extends AbstractDatePojo{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter

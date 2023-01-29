@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-public class OrderPojo {
+public class OrderPojo extends AbstractDatePojo{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter

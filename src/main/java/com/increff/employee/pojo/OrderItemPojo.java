@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class OrderItemPojo {
+public class OrderItemPojo extends AbstractDatePojo{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
