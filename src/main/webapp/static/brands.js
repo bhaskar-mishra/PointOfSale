@@ -162,7 +162,7 @@ function displayBrandCategoryList(data){
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
-		var buttonHtml = buttonHtml = '<button onclick="deleteBrandCategory(' + e.id + ')">Delete</button>'
+		var buttonHtml = ''; //buttonHtml = '<button onclick="deleteBrandCategory(' + e.id + ')">Delete</button>'
 		buttonHtml += ' <button  onclick="displayEditBrandCategory(' + e.id + ')">Edit</button>'
 		var row = '<tr>'
 		+ '<td>' + (serialNo++)+ '</td>'

@@ -232,7 +232,7 @@ function displayProductList(data){
 	for(var i in data){
 		var e = data[i];
         product_barcode = e.barcode;
-        var buttonHtml = '<button onclick="deleteProduct(' + ')">Delete</button>'
+        var buttonHtml = ''; //'<button onclick="deleteProduct(' + ')">Delete</button>'
         		buttonHtml += ' <button onclick="displayEditProduct(' + e.id + ')">Edit</button>'
 		var row = '<tr>'
 		+ '<td>' + (serialNo++) + '</td>'

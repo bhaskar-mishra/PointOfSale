@@ -78,6 +78,93 @@ $(function(){
     });
 });
 
+
+//UPLOAD METHODS
+var fileData = [];
+var errorData = [];
+var processCount = 0;
+
+
+function processData(){
+	var file = $('#inventoryFile')[0].files[0];
+	readFileData(file, readFileDataCallback);
+}
+
+function readFileDataCallback(results){
+	fileData = results.data;
+	uploadRows();
+}
+
+function uploadRows(){
+	//Update progress
+	updateUploadDialog();
+	//If everything processed then return
+	if(processCount==fileData.length){
+		return;
+	}
+
+	//Process next row
+	var row = fileData[processCount];
+	processCount++;
+
+	var json = JSON.stringify(row);
+	var url = getInventoryUrl();
+
+	//Make ajax call
+	$.ajax({
+	   url: url,
+	   type: 'POST',
+	   data: json,
+	   headers: {
+       	'Content-Type': 'application/json'
+       },
+	   success: function(response) {
+	   		uploadRows();
+	   },
+	   error: function(response){
+	   		row.error=response.responseText
+	   		errorData.push(row);
+	   		uploadRows();
+	   }
+	});
+
+}
+
+function downloadErrors(){
+	writeFileData(errorData);
+}
+
+
+function resetUploadDialog(){
+	//Reset file name
+	var $file = $('#inventoryFile');
+	$file.val('');
+	$('#inventoryFileName').html("Choose File");
+	//Reset various counts
+	processCount = 0;
+	fileData = [];
+	errorData = [];
+	//Update counts
+	updateUploadDialog();
+}
+
+function updateUploadDialog(){
+	$('#rowCount').html("" + fileData.length);
+	$('#processCount').html("" + processCount);
+	$('#errorCount').html("" + errorData.length);
+}
+
+function updateFileName(){
+	var $file = $('#inventoryFile');
+	var fileName = $file.val();
+	$('#inventoryFileName').html(fileName);
+}
+
+function displayUploadData(){
+ 	resetUploadDialog();
+	$('#upload-inventory-modal').modal('toggle');
+}
+
 //UI DISPLAY METHODS
 
 function displayInventoryList(data){
@@ -117,6 +204,10 @@ function setPage(){
 
 function init(){
 	$('#add-inventory').click(addInventory);
+	$('#upload-data').click(displayUploadData);
+    $('#process-data').click(processData);
+    $('#download-errors').click(downloadErrors);
+    $('#inventoryFile').on('change', updateFileName)
 //	$('#refresh-data').click(getUserList);
 }
 
