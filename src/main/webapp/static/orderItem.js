@@ -187,26 +187,32 @@ function getInvoiceDetails(){
      	   type: 'GET',
      	   success: function(data) {
      	        console.log(data);
+     	        downloadPdf(data);
      	   },
      	   error: handleAjaxError
      	});
 }
 
 
+ //data is the base64 encoded string
+function base64ToArrayBuffer(base64) {
+    var binaryString = window.atob(base64);
+    var binaryLen = binaryString.length;
+    var bytes = new Uint8Array(binaryLen);
+    for (var i = 0; i < binaryLen; i++) {
+        var ascii = binaryString.charCodeAt(i);
+        bytes[i] = ascii;
+    }
+    return bytes;
+}
+
 
 function downloadPdf(data){
 console.log('inside downloadPdf');
-    var url = getOrderItemUrl();
-    url = url + "/api/printPdf/"+randomKey;
-    url = url + "/" + data;
-    $.ajax({
-    	   url: url,
-    	   type: 'POST',
-    	   success: function() {
-    	    console.log('pdf downloaded successfully');
-    	   },
-    	   error: handleAjaxError
-    	});
+    var arrrayBuffer = base64ToArrayBuffer(data);
+    var blob = new Blob([arrrayBuffer], {type: "application/pdf"});
+    var link = window.URL.createObjectURL(blob);
+    window.open(link,'', 'height=650,width=840');
 }
 
 

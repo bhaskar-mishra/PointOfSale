@@ -8,6 +8,7 @@ import com.increff.employee.service.DownloadPdfService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
@@ -28,13 +29,9 @@ public class DownloadPdfController {
 
 
     @ApiOperation("Gets invoice to be printed")
-    @RequestMapping(path = "/api/getInvoice/{randomKeyForOrder}",method = RequestMethod.GET)
-    public String getInvoice(@PathVariable String randomKeyForOrder) throws ApiException, IOException {
-        List<InvoiceItem> invoiceItemList = downloadPdfDto.convertToInvoiceItem(randomKeyForOrder);
-        InvoiceDetails invoiceDetails =  downloadPdfService.getInvoice(randomKeyForOrder,invoiceItemList);
-        String encodedInvoice = downloadPdfDto.getEncodedInvoice(invoiceDetails);
-        downloadPdfService.downloadPdf(randomKeyForOrder,encodedInvoice);
-        return encodedInvoice;
+    @RequestMapping(path = "/api/getInvoice/{random_key_for_order}",method = RequestMethod.GET)
+    public String getInvoice(@PathVariable String random_key_for_order) throws ApiException, IOException {
+        return downloadPdfDto.getInvoice(random_key_for_order);
     }
 
 }
