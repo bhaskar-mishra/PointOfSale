@@ -54,7 +54,7 @@ public class BrandsController {
     @ApiOperation("Gets all the brands")
     @RequestMapping(path = "/api/brand/allBrands",method = RequestMethod.GET)
     public List<String> getAllBrands() throws ApiException{
-        return brandService.getAllBrands();
+        return brandCategoryDto.getAllBrands();
     }
 
 
@@ -62,7 +62,7 @@ public class BrandsController {
     @ApiOperation("Gets all the categories")
     @RequestMapping(path = "/api/brand/allCategories",method = RequestMethod.GET)
     public List<String> getAllCategory() throws ApiException{
-        return brandService.getAllCategories();
+        return brandCategoryDto.getAllCategories();
     }
 
 
@@ -86,8 +86,8 @@ public class BrandsController {
 
     @ApiOperation(value = "Deletes a brand category")
     @RequestMapping(path = "/api/brand/{id}",method = RequestMethod.DELETE)
-    public void delete(@PathVariable int id){
-        brandService.delete(id);
+    public void delete(@PathVariable Integer id) throws ApiException {
+        brandCategoryDto.delete(id);
     }
 
 
