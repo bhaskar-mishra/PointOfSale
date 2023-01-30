@@ -29,13 +29,6 @@ public class BrandCategoryDto {
         return  brandService.getAllCategories();
     }
 
-    @Transactional
-    public void delete(Integer id) throws ApiException{
-        if(id==null){
-            throw new ApiException("null id not acceptable");
-        }
-        brandService.delete(id);
-    }
     public void addBrandCategory(BrandForm brandForm) throws ApiException {
         validate(brandForm);
         normalize(brandForm);
@@ -78,16 +71,14 @@ public class BrandCategoryDto {
         }
         brand = brand.toLowerCase().trim();
         category = category.toLowerCase().trim();
-        return brandService.getBrandCategoryId(brand,category);
+        return brandService.selectByBrandCategory(brand,category).getId();
     }
 
     public void updateBrandCategory(Integer id,BrandForm brandForm) throws ApiException{
-        if(id==null){
-            throw new ApiException("invalid id");
-        }
         validate(brandForm);
         normalize(brandForm);
-        brandService.updateBrandCategory(id,brandForm);
+        BrandPojo pojo = convertFormToPojo(brandForm);
+        brandService.updateBrandCategory(id,pojo);
     }
 
     public  BrandPojo convertFormToPojo(BrandForm brandForm) throws ApiException {

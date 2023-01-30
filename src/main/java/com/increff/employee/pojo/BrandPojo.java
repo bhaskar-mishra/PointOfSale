@@ -15,12 +15,8 @@ public class BrandPojo extends AbstractDatePojo{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private Integer id;
-
-
     @NotNull
     private String brand;
-
-
     @NotNull
     private String category;
 
