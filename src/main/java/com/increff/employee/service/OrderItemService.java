@@ -47,4 +47,17 @@ public class OrderItemService {
         return orderItemDao.selectAllById(orderId);
     }
 
+    @Transactional
+    public void updateOrderItem(Integer orderItemId,Integer quantity) throws ApiException{
+        OrderItemPojo orderItemPojo = orderItemDao.selectById(orderItemId);
+        if(orderItemPojo==null){
+            throw new ApiException("invalid orderItemId");
+        }
+        if(quantity==0){
+            orderItemDao.deleteById(orderItemId);
+        }else{
+            orderItemPojo.setQuantity(quantity);
+        }
+    }
+
 }

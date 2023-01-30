@@ -3,6 +3,7 @@ package com.increff.employee.dto;
 import com.increff.employee.dao.InventoryDao;
 import com.increff.employee.dao.OrderDao;
 import com.increff.employee.dao.ProductDao;
+import com.increff.employee.model.EditOrderItemForm;
 import com.increff.employee.model.OrderItemData;
 import com.increff.employee.model.OrderItemForm;
 import com.increff.employee.pojo.InventoryPojo;
@@ -35,6 +36,12 @@ public class OrderItemDto {
         orderItemForm.setBarcode(orderItemForm.getBarcode().toLowerCase().trim());
         OrderItemPojo orderItemPojo = validateAndConvertOrderItemForm(orderItemForm);
         orderItemService.addItem(orderItemPojo);
+    }
+
+    @Transactional
+    public void editOrderItem(EditOrderItemForm editOrderItemForm) throws ApiException {
+        validate(editOrderItemForm);
+        orderItemService.updateOrderItem(editOrderItemForm.getOrderItemId(), editOrderItemForm.getQuantity());
     }
 
     @Transactional
@@ -87,5 +94,19 @@ public class OrderItemDto {
         orderItemData.setProduct(orderItemPojo.getProduct());
         orderItemData.setQuantity(orderItemPojo.getQuantity());
         return orderItemData;
+    }
+
+    private void validate(EditOrderItemForm editOrderItemForm) throws ApiException{
+        if(editOrderItemForm==null){
+            throw new ApiException("invalid edit request(form null)");
+        }
+
+        if(editOrderItemForm.getOrderItemId()==null){
+            throw new ApiException("orderItemId invalid : null");
+        }
+
+        if(editOrderItemForm.getQuantity()<0){
+            throw new ApiException("quantity can't be negative");
+        }
     }
 }

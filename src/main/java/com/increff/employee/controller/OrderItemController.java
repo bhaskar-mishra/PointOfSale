@@ -1,6 +1,7 @@
 package com.increff.employee.controller;
 
 import com.increff.employee.dto.OrderItemDto;
+import com.increff.employee.model.EditOrderItemForm;
 import com.increff.employee.model.OrderItemData;
 import com.increff.employee.model.OrderItemForm;
 import com.increff.employee.pojo.OrderItemPojo;
@@ -39,6 +40,12 @@ public class OrderItemController {
     @RequestMapping(path = "/api/orderItem/{randomKey}",method = RequestMethod.GET)
     public List<OrderItemData> getOrderItems(@PathVariable String randomKey) throws ApiException{
         return orderItemDto.getOrderItemsForAnOrder(randomKey);
+    }
+
+    @ApiOperation(value = "edits and orderItem")
+    @RequestMapping(path = "api/orderItem/editOrderItem",method = RequestMethod.PUT)
+    public void editOrderItemId(@RequestBody EditOrderItemForm editOrderItemForm) throws ApiException{
+        orderItemDto.editOrderItem(editOrderItemForm);
     }
 
 

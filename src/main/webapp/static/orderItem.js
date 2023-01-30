@@ -1,8 +1,7 @@
 var randomKey;
 var invoiceToDownload;
 var orderItemListLength;
-
-
+var orderItemId;
 
 function getOrderItemUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
@@ -221,7 +220,8 @@ function updateOrderItem()
     console.log("this function will update order item");
     var $form = $("#editOrderItemForm");
     var json = toJson($form);
-    var url = getStoreUrl();
+    var url = getOrderItemUrl();
+    url = url +"/api/orderItem/editOrderItem";
 
     if((JSON.parse(json).quantity) == 0)
     {
@@ -251,6 +251,7 @@ function updateOrderItem()
 
 function displayEditOrderItem(id){
 $('#editOrderItemModal').modal();
+orderItemId = id;
 }
 
 
@@ -266,7 +267,7 @@ function displayOrderItemList(data){
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
-		var buttonHtml = ''
+		var buttonHtml = '<button onclick="deleteOrderItem(' + e.orderItemId+')">Delete</button>'
 		buttonHtml += ' <button onclick="displayEditOrderItem(' + e.orderItemId + ')">Edit</button>'
 		var row = '<tr>'
 		+ '<td>' + e.barcode + '</td>'

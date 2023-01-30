@@ -27,11 +27,11 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-12">
-                            <form class="form" id="inventory-edit-form">
+                            <form class="form" id="editOrderItemForm">
                                 <div class="form-group">
-                                    <label for="inputQuantityEdit" class="col-sm-2 col-form-label">OrderItemId</label>
+                                    <label for="editModalBarcode" class="col-sm-2 col-form-label">OrderItemId</label>
                                     <div class="col-sm-10">
-                                        <input type="text" readonly class="form-control" name="barcode" id="editModalBarcode" placeholder="Enter Barcode">
+                                        <input type="number" min=0 oninput="validity.valid||(value='');" readonly class="form-control" name="orderItemId" id="editModalBarcode" placeholder="Enter OrderId">
                                     </div>
                                 </div>
 
@@ -48,7 +48,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="updateInventory()">Save changes</button>
+                    <button type="button" class="btn btn-primary" onclick="updateOrderItem()">Save changes</button>
                 </div>
             </div>
         </div>
