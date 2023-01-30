@@ -14,6 +14,7 @@ public class OrderDao extends AbstractDao{
     private static String SELECTALL = "select p from OrderPojo p";
     private static String SELECTBYID = "select p from OrderPojo p where id=:id";
     private static String SELECTBYRANDOMKEY = "select p from OrderPojo p where randomKeyForId=:randomKeyForId";
+    private static  String SELECT_WITH_DATEFILTER = "select p from OrderPojo p where placedTime >= :start and placedTime<=:end";
     @Transactional
     public void insert(OrderPojo orderPojo){em().persist(orderPojo);}
     public List<OrderPojo> selectAll(){
@@ -32,5 +33,13 @@ public class OrderDao extends AbstractDao{
         TypedQuery<OrderPojo> query = getQuery(SELECTBYRANDOMKEY,OrderPojo.class);
         query.setParameter("randomKeyForId",randomKey);
         return getSingle(query);
+    }
+
+    public List<OrderPojo> selectOrderWithDateFilter(String start, String end)
+    {
+        TypedQuery<OrderPojo> query = getQuery(SELECT_WITH_DATEFILTER,OrderPojo.class);
+        query.setParameter("start",start);
+        query.setParameter("end",end);
+        return query.getResultList();
     }
 }

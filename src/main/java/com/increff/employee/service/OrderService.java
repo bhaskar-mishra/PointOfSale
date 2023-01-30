@@ -43,4 +43,9 @@ public class OrderService {
     public OrderPojo getOrderByRandomKey(String randomKey) throws ApiException{
         return orderDao.selectByRandomKey(randomKey);
     }
+
+    public List<OrderPojo> selectOrderWithDateFilter(String start, String end)
+    {
+        return orderDao.selectOrderWithDateFilter(start, end);
+    }
 }

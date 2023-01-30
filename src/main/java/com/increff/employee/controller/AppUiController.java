@@ -31,28 +31,28 @@ public class AppUiController extends AbstractUiController {
 		return mav("user.html");
 	}
 
-	@RequestMapping(value = "/site/brands")
+	@RequestMapping(value = "/ui/brands")
 	public ModelAndView brands(){return mav("brands.html",role,true);}
-	@RequestMapping(value = "/site/products")
+	@RequestMapping(value = "/ui/products")
 	public ModelAndView products(){return mav("products.html",role,true);}
-	@RequestMapping(value = "/site/inventory")
+	@RequestMapping(value = "/ui/inventory")
 	public ModelAndView inventory(){return mav("inventory.html",role,true);}
-	@RequestMapping(value = "/site/orders")
+	@RequestMapping(value = "/ui/orders")
 	public ModelAndView order(){return mav("orders.html",role,true);}
-	@RequestMapping(value = "/site/orderItem/{randomKey}")
+	@RequestMapping(value = "/ui/orderItem/{randomKey}")
 	public ModelAndView orderItem(@PathVariable String randomKey){return mav("orderItem.html",randomKey);}
 
-	@RequestMapping(value = "/site/reports")
+	@RequestMapping(value = "/ui/reports")
 	public ModelAndView reports(){return mav("reports.html");}
 
-	@RequestMapping(value = "/site/salesReport")
+	@RequestMapping(value = "/ui/salesReport")
 	public ModelAndView salesReport(){return mav("salesReport.html");}
 
-	@RequestMapping(value = "/site/brandsReport")
+	@RequestMapping(value = "/ui/brandsReport")
 	public ModelAndView brandsReport(){return mav("brandsReport.html");}
-	@RequestMapping(value = "/site/inventoryReport")
+	@RequestMapping(value = "/ui/inventoryReport")
 	public ModelAndView inventoryReport(){return mav("inventoryReport.html");}
-	@RequestMapping(value = "/site/scheduler")
+	@RequestMapping(value = "/ui/scheduler")
 	public ModelAndView scheduler(){return mav("scheduler.html");}
 
 }

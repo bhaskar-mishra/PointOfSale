@@ -20,7 +20,7 @@ public class SchedulerDao extends AbstractDao{
     public SchedulerPojo selectByDate(String date){
         TypedQuery<SchedulerPojo> schedulerPojoTypedQuery = getQuery(SELECT_BY_DATE, SchedulerPojo.class);
         schedulerPojoTypedQuery.setParameter("date",date);
-        return getSingle(schedulerPojoTypedQuery);
+        return schedulerPojoTypedQuery.getResultStream().findFirst().orElse(null);
     }
 
     public List<SchedulerPojo> selectAll(){

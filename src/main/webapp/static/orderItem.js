@@ -125,7 +125,6 @@ clearErrors();
  	   form.style.display = "none";
  	   var downloadInvoice = document.getElementById('download-invoice');
          downloadInvoice.style.display = "block";
-         updateScheduler();
  	   },
  	   error: handleAjaxError
  	});

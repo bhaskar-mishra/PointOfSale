@@ -80,6 +80,7 @@ function addBrandOptions()
   	   url: url,
   	   type: 'GET',
   	   success: function(data) {
+  	        console.log(data);
   	   		addBrandsToDropDown(data);
   	   },
   	   error: handleAjaxError
@@ -299,6 +300,7 @@ function setPage(){
 
 
 function init(){
+console.log('product page loading');
 	$('#add-product').click(addProduct);
 	$('#update-product').click(updateProduct);
 	$('#upload-data').click(displayUploadData);
