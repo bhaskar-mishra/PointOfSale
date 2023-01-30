@@ -43,9 +43,9 @@ var $form = $("#brand-category-edit-form");
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
-             var element = document.getElementById('success-alert');
-             console.log(element)
-             element.style.display = "inline";
+             getBrandCategoryList();
+             handleSuccess("Brand Updated");
+             $('#editBrandCategoryModal').modal('hide');
              },
 	   error: handleAjaxError
 	});

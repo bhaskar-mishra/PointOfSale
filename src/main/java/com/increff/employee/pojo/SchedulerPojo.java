@@ -1,27 +1,31 @@
 package com.increff.employee.pojo;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
+@Getter @Setter
+@Table(name = "pos_day_sales")
 public class SchedulerPojo extends AbstractDatePojo{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Getter @Setter
+    @NotNull
+    @Column(unique = true)
     String date;
-    @Getter @Setter
-    Integer invoiced_orders_count;
-    @Getter @Setter
-    Integer invoiced_items_count;
-    @Getter @Setter
+
+    @NotNull
+    Integer invoicedOrdersCount;
+
+    @NotNull
+    Integer invoicedItemsCount;
+
+    @NotNull
     Double revenue;
 }

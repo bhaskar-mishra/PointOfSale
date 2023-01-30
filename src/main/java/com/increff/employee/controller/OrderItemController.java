@@ -25,9 +25,6 @@ public class OrderItemController {
     @RequestMapping(path="/api/orderItem",method = RequestMethod.POST)
     public void addItem(@RequestBody OrderItemForm orderItemForm) throws ApiException
     {
-//        OrderItemPojo orderItemPojo = orderItemService.check(orderItemForm);
-//        System.out.println("Form converted successfully");
-//        orderItemService.addItem(orderItemPojo);
         orderItemDto.addItem(orderItemForm);
     }
 

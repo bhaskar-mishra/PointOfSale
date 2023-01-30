@@ -1,5 +1,6 @@
 package com.increff.employee.service;
 
+import com.google.protobuf.Api;
 import com.increff.employee.dao.InventoryDao;
 import com.increff.employee.dao.OrderDao;
 import com.increff.employee.dao.OrderItemDao;
@@ -23,13 +24,7 @@ public class OrderItemService {
 
     @Autowired
     private OrderItemDao orderItemDao;
-    @Autowired
-    private OrderDao orderDao;
 
-    @Autowired
-    private ProductDao productDao;
-    @Autowired
-    private InventoryDao inventoryDao;
 
     @Transactional
     public void addItem(OrderItemPojo orderItemPojo)
@@ -38,33 +33,18 @@ public class OrderItemService {
     }
 
     @Transactional(rollbackOn = ApiException.class)
-    public void placeOrder(String randomKey) throws ApiException{
-        OrderPojo orderPojo = orderDao.selectByRandomKey(randomKey);
+    public void placeOrder(OrderPojo orderPojo) throws ApiException{
         orderPojo.setStatus();
     }
 
 
-//    public OrderItemPojo check(OrderItemForm orderItemForm) throws ApiException{
-//        ProductPojo productByBarcode = productDao.selectByBarcode(orderItemForm.getBarcode());
-//        if(productByBarcode==null)
-//        {
-//            throw new ApiException("This product does not exist");
-//        }
-//
-//        InventoryPojo inventoryDetails = inventoryDao.selectByBarcode(productByBarcode.getBarcode());
-//        if(orderItemForm.getQuantity()>inventoryDetails.getQuantity())
-//        {
-//            throw new ApiException("These many samples of the given product are not there");
-//        }
-//        inventoryDao.setQuantity(orderItemForm.getBarcode(),inventoryDetails.getQuantity()- orderItemForm.getQuantity());
-//        String randomKey = orderItemForm.getRandomKey();
-//        OrderPojo orderPojo = orderDao.selectByRandomKey(randomKey);
-//
-//        return OrderDto.convert(orderItemForm,productByBarcode.getProduct(),orderPojo.getOrderId());
-//    }
-
     public List<OrderItemPojo> getAllItems(String randomKey) throws ApiException{
         return orderItemDao.selectAllByRandomKey(randomKey);
+    }
+
+    @Transactional
+    public List<OrderItemPojo> selectAllById(Integer orderId)throws ApiException {
+        return orderItemDao.selectAllById(orderId);
     }
 
 }

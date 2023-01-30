@@ -1,8 +1,6 @@
 package com.increff.employee.dto;
 
 import com.increff.employee.model.OrderData;
-import com.increff.employee.model.OrderItemData;
-import com.increff.employee.model.OrderItemForm;
 import com.increff.employee.pojo.*;
 import com.increff.employee.service.ApiException;
 import com.increff.employee.service.OrderService;
@@ -59,8 +57,8 @@ public class OrderDto {
     private OrderData convertPojoToData(OrderPojo orderPojo) throws ApiException{
         OrderData orderData = new OrderData();
         orderData.setOrderId(orderPojo.getOrderId());
-        orderData.setRandomKey(orderPojo.getRandomKeyForId());
-        orderData.setTime(orderPojo.getTime());
+        orderData.setRandomKey(orderPojo.getOrderCode());
+        orderData.setTime(orderPojo.getPlacedTime());
         if(orderPojo.getStatus().equals((Status.PENDING).name())){
             orderData.setStatus("PENDING");
         }else {

@@ -1,8 +1,6 @@
 package com.increff.employee.service;
 
 import com.increff.employee.dao.OrderDao;;
-import com.increff.employee.dto.OrderDto;
-import com.increff.employee.model.OrderData;
 import com.increff.employee.pojo.OrderPojo;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,7 @@ public class OrderService {
         OrderPojo orderPojo = new OrderPojo();
         orderDao.insert(orderPojo);
         String randomKeyForId = createRandomString();
-        orderPojo.setRandomKeyForId(randomKeyForId);
+        orderPojo.setOrderCode(randomKeyForId);
         return orderPojo;
     }
 

@@ -216,6 +216,44 @@ console.log('inside downloadPdf');
 }
 
 
+function updateOrderItem()
+{
+    console.log("this function will update order item");
+    var $form = $("#editOrderItemForm");
+    var json = toJson($form);
+    var url = getStoreUrl();
+
+    if((JSON.parse(json).quantity) == 0)
+    {
+        deleteOrderItem(JSON.parse(json).orderItemId);
+        return;
+    }
+
+    $.ajax({
+        	   url: url,
+        	   type: 'PUT',
+        	   data: json,
+        	   headers: {
+               	'Content-Type': 'application/json'
+               },
+        	   success: function(response) {
+        	   		getOrderItemList();
+        	   		handleSuccess("Item Updated");
+        	   		$('#exampleModalCenter').modal('hide');
+        	   },
+        	   error: handleAjaxError
+
+        	});
+
+        	return false;
+}
+
+
+function displayEditOrderItem(id){
+$('#editOrderItemModal').modal();
+}
+
+
 
 //UI DISPLAY METHODS
 function displayOrderItemList(data){
@@ -228,8 +266,8 @@ function displayOrderItemList(data){
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
-		var buttonHtml = '<button onclick="deleteOrderItem(' + e.orderItemId + ')">delete</button>'
-		buttonHtml += ' <button onclick="displayEditOrderItem(' + e.orderItemId + ')">edit</button>'
+		var buttonHtml = ''
+		buttonHtml += ' <button onclick="displayEditOrderItem(' + e.orderItemId + ')">Edit</button>'
 		var row = '<tr>'
 		+ '<td>' + e.barcode + '</td>'
 		+ '<td>' + e.product + '</td>'

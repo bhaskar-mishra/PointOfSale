@@ -7,7 +7,6 @@ import com.increff.employee.pojo.ProductPojo;
 import com.increff.employee.service.ApiException;
 import com.increff.employee.service.BrandService;
 import com.increff.employee.service.ProductService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +33,7 @@ public class ProductDto {
     public void addProduct(ProductForm productForm) throws ApiException{
         validate(productForm);
         normalize(productForm);
+
         productService.add(convertFormToPojo(productForm));
     }
 
@@ -65,7 +65,7 @@ public class ProductDto {
         brandCategoryId = brandService.getBrandCategoryId(productForm.getBrand(), productForm.getCategory());
         productPojo.setProduct(productForm.getProduct());
         productPojo.setBarcode(productForm.getBarcode());
-        productPojo.setMRP(productForm.getMrp());
+        productPojo.setMrp(productForm.getMrp());
         productPojo.setBrand(productForm.getBrand());
         productPojo.setCategory(productForm.getCategory());
         productPojo.setBrandCategoryId(brandCategoryId);
@@ -76,7 +76,7 @@ public class ProductDto {
         ProductData productData = new ProductData();
         productData.setId(productPojo.getId());
         productData.setProduct(productPojo.getProduct());
-        productData.setMrp(productPojo.getMRP());
+        productData.setMrp(productPojo.getMrp());
         productData.setBarcode(productPojo.getBarcode());
         productData.setBrand(productPojo.getBrand());
         productData.setCategory(productPojo.getCategory());

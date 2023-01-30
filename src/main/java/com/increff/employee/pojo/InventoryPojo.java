@@ -1,25 +1,28 @@
 package com.increff.employee.pojo;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class InventoryPojo extends AbstractDatePojo{
+@Getter
+@Setter
+@Table(name = "inventory_table")
+public class InventoryPojo extends AbstractDatePojo {
 
-    @Getter
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Getter @Setter
+    @NotNull
     private String barcode;
-    @Getter @Setter
+
+    @NotNull
     private Integer quantity;
-    @Getter @Setter
+
+    @NotNull
     private String product;
 }

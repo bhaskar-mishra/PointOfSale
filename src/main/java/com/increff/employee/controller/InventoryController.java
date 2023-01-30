@@ -31,8 +31,8 @@ public class InventoryController {
 
     @ApiOperation("Gets all products in the inventory")
     @RequestMapping(path = "/api/inventory",method = RequestMethod.GET)
-    public List<InventoryData> get() throws ApiException{
-        return inventoryService.get();
+    public List<InventoryData> getAllProductsInInventory() throws ApiException{
+        return inventoryDto.getAllProductsInInventory();
     }
 
 

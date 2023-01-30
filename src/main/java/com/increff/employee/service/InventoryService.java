@@ -28,37 +28,19 @@ public class InventoryService {
     @Autowired
     private ProductDao productDao;
 
+
     @Transactional
     public void add(InventoryPojo inventoryPojo) throws ApiException{
 
         System.out.println("Inside inventory add method in service");
-        String barcode = inventoryPojo.getBarcode();
-        InventoryPojo pojo = inventoryDao.selectByBarcode(barcode);
-        if(pojo!=null){
-            pojo.setQuantity(pojo.getQuantity()+inventoryPojo.getQuantity());
-        }else{
-            ProductPojo productPojo = productDao.selectByBarcode(barcode);
-            if(productPojo==null){
-                throw new ApiException("This product doesn't exist in the product table");
-            }
 
-            System.out.println("pojo set to be added");
-            inventoryPojo.setProduct(productPojo.getProduct());
-            inventoryDao.insert(inventoryPojo);
-        }
     }
 
 
 
     @Transactional(rollbackOn = ApiException.class)
-    public List<InventoryData> get() throws ApiException{
-        List<InventoryPojo> inventoryPojoList = inventoryDao.selectAll();
-        List<InventoryData> inventoryDataList = new ArrayList<>();
-        for(InventoryPojo inventoryPojo : inventoryPojoList){
-            inventoryDataList.add(InventoryDto.pojoToData(inventoryPojo));
-        }
-
-        return inventoryDataList;
+    public List<InventoryPojo> get() throws ApiException{
+        return inventoryDao.selectAll();
     }
 
 

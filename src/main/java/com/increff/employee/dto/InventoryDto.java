@@ -31,7 +31,31 @@ public class InventoryDto {
     public void addInventory(InventoryForm inventoryForm) throws ApiException{
         normalize(inventoryForm);
         InventoryPojo inventoryPojo = convertFormToPojo(inventoryForm);
+        String barcode = inventoryPojo.getBarcode();
+        InventoryPojo pojo = inventoryDao.selectByBarcode(barcode);
+        if(pojo!=null){
+            pojo.setQuantity(pojo.getQuantity()+inventoryPojo.getQuantity());
+        }else{
+            ProductPojo productPojo = productService.selectByBarcode(barcode);
+            if(productPojo==null){
+                throw new ApiException("This product doesn't exist in the product table");
+            }
+
+            System.out.println("pojo set to be added");
+            inventoryPojo.setProduct(productPojo.getProduct());
+            inventoryDao.insert(inventoryPojo);
+        }
         inventoryService.add(inventoryPojo);
+    }
+
+
+    public List<InventoryData> getAllProductsInInventory() throws ApiException{
+        List<InventoryPojo> inventoryPojoList =  inventoryService.get();
+        List<InventoryData> inventoryDataList = new ArrayList<>();
+        for(InventoryPojo inventoryPojo : inventoryPojoList){
+            inventoryDataList.add(pojoToData(inventoryPojo));
+        }
+        return inventoryDataList;
     }
 
     @Transactional
@@ -95,7 +119,7 @@ public class InventoryDto {
         return inventoryPojo;
     }
 
-    public static InventoryData pojoToData(InventoryPojo inventoryPojo){
+    private InventoryData pojoToData(InventoryPojo inventoryPojo){
         InventoryData inventoryData = new InventoryData();
         inventoryData.setBarcode(inventoryPojo.getBarcode());
         inventoryData.setQuantity(inventoryPojo.getQuantity());

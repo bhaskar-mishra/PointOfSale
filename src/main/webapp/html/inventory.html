@@ -8,13 +8,15 @@
 
 <nav th:replace="snippets.html :: name_app_navbar"></nav>
 
+<div th:replace="snippets.html :: name_status_popup"></div>
+
 <div class="container">
 
   <h3>INVENTORY PAGE</h3>
 
-  <div th:replace="snippets.html :: success_pop_up"></div>
+  <div th:replace="snippets.html :: name_status_popup"></div>
 
-  <!-- Modal -->
+  <!--Edit Inventory Modal -->
   <div class="modal fade" id="editInventoryModal" tabindex="-1" role="dialog" aria-labelledby="editInventoryModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">

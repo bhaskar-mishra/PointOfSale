@@ -54,7 +54,7 @@ public class ProductService {
         ProductPojo productPojo = productDao.selectByBarcode(barcode);
         productPojo.setProduct(productEditForm.getProduct());
         System.out.println("new MRP "+productEditForm.getMRP());
-        productPojo.setMRP(productEditForm.getMRP());
+        productPojo.setMrp(productEditForm.getMRP());
     }
 
     @Transactional

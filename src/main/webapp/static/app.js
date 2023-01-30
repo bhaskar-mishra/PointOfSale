@@ -14,8 +14,17 @@ function toJson($form){
 
 
 function handleAjaxError(response){
-	var response = JSON.parse(response.responseText);
-	alert(response.message);
+	var message = JSON.parse(response.responseText);
+    	document.getElementById('status').style.backgroundColor = "red";
+    	document.getElementById('status-message').innerHTML = message.message;
+    	$('.toast').toast('show');
+}
+
+function handleSuccess(message)
+{
+    document.getElementById('status-message').innerHTML = message;
+    document.getElementById('status').style.backgroundColor = "green";
+   	$('.toast').toast('show');
 }
 
 function readFileData(file, callback){

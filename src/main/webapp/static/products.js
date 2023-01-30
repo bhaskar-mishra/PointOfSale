@@ -46,9 +46,9 @@ var $form = $("#product-edit-form");
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
-             var element = document.getElementById('success-alert');
-             console.log(element)
-             element.style.display = "inline";
+             getProductList();
+             handleSuccess("Product Updated");
+             $('#editProductModal').modal('hide');
              },
 	   error: handleAjaxError
 	});

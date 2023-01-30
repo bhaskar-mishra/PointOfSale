@@ -42,7 +42,7 @@ public class ProductDao extends AbstractDao{
     public void update(ProductPojo p) throws ApiException {
         Query query = em().createQuery(UPDATE);
         query.setParameter("name",p.getProduct());
-        query.setParameter("mrp",p.getMRP());
+        query.setParameter("mrp",p.getMrp());
         query.setParameter("brand_category",p.getBrandCategoryId());
         query.setParameter("barcode",p.getBarcode());
         int numberOfEntriesUpdated = query.executeUpdate();

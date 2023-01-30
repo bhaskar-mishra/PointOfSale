@@ -1,6 +1,7 @@
 package com.increff.employee.dto;
 
 
+import com.increff.employee.dao.OrderDao;
 import com.increff.employee.dao.OrderItemDao;
 import com.increff.employee.model.InvoiceDetails;
 import com.increff.employee.model.InvoiceItem;
@@ -29,21 +30,24 @@ public class DownloadPdfDto {
     private  OrderItemDao orderItemDao;
     @Autowired
     private DownloadPdfService downloadPdfService;
+    @Autowired
+    OrderDao orderDao;
 
     public String getInvoice(String random_key_for_order) throws ApiException, IOException {
         List<InvoiceItem> invoiceItemList = convertToInvoiceItem(random_key_for_order);
-        InvoiceDetails invoiceDetails =  downloadPdfService.getInvoice(random_key_for_order,invoiceItemList);
+        Integer orderId = orderDao.selectByRandomKey(random_key_for_order).getOrderId();
+        InvoiceDetails invoiceDetails =  downloadPdfService.getInvoice(random_key_for_order,invoiceItemList,orderId);
         String encodedInvoice = getEncodedInvoice(invoiceDetails);
         downloadPdfService.downloadPdf(random_key_for_order,encodedInvoice);
         String filePath = ".\\src\\main\\resources\\pdf";
-        Path pdfPath = Paths.get(filePath+random_key_for_order+".pdf");
-        byte[] contents = Files.readAllBytes(pdfPath);
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_PDF);
-        String filename = random_key_for_order+"_invoice.pdf";
-        httpHeaders.setContentDispositionFormData(filename,filename);
-        httpHeaders.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(contents,httpHeaders, HttpStatus.OK);
+//        Path pdfPath = Paths.get(filePath+random_key_for_order+".pdf");
+//        byte[] contents = Files.readAllBytes(pdfPath);
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.setContentType(MediaType.APPLICATION_PDF);
+//        String filename = random_key_for_order+"_invoice.pdf";
+//        httpHeaders.setContentDispositionFormData(filename,filename);
+//        httpHeaders.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+//        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(contents,httpHeaders, HttpStatus.OK);
         return encodedInvoice;
     }
 

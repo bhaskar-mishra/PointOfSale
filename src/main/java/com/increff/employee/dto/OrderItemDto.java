@@ -37,8 +37,10 @@ public class OrderItemDto {
         orderItemService.addItem(orderItemPojo);
     }
 
+    @Transactional
     public void placeOrder(String randomKey) throws ApiException{
-        orderItemService.placeOrder(randomKey);
+        OrderPojo orderPojo = orderDao.selectByRandomKey(randomKey);
+        orderItemService.placeOrder(orderPojo);
     }
 
     public List<OrderItemData> getOrderItemsForAnOrder(String randomKey) throws ApiException{

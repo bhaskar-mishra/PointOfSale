@@ -176,4 +176,9 @@ public class BrandService {
         return brandPojoArrayList;
     }
 
+    @Transactional
+    public BrandPojo selectByBrandCategory(String brand,String category) throws ApiException{
+        return brandDao.selectByBrandCategory(brand,category);
+    }
+
 }

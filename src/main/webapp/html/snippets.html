@@ -109,6 +109,16 @@
   </div>
 </nav>
 
+<div th:fragment="name_status_popup" data-delay="10000" role="alert" id="status" class="toast"
+     aria-live="polite" style="width:250px; top:10px; right:10px">
+  <button style="margin-left: 2px;" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="toast-body" id="status-message" style="padding: 5px;">
+    Hello, world! This is a toast message.
+  </div>
+</div>
+
 <footer class="footer  mt-1" th:fragment="name_footer">
 	Copyright Increff 2019
 	&nbsp;

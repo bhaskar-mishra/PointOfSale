@@ -1,33 +1,39 @@
 package com.increff.employee.pojo;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
+@Getter @Setter
+@Table(name = "product_table")
 public class ProductPojo extends AbstractDatePojo{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
     private Integer id;
 
-    @Getter @Setter
+    @NotNull
+    @Column(unique = true)
     private String barcode;
 
-    @Getter @Setter
+    @NotNull
+    @Column(name = "brand_category_id")
     private Integer brandCategoryId;
 
-    @Getter @Setter
+    @NotNull
     private String product;
 
-    @Getter @Setter
-    private Double MRP;
 
-    @Getter @Setter
+    @NotNull
+    private Double mrp;
+
+    @NotNull
     private String brand;
 
-    @Getter @Setter
+
+    @NotNull
     private String category;
 
 

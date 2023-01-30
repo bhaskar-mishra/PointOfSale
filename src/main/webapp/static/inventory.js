@@ -1,4 +1,3 @@
-
 var product_barcode ;
 function getInventoryUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
@@ -21,6 +20,7 @@ function addInventory(event){
        },
 	   success: function(response) {
 	   		getInventoryList();
+            handleSuccess("Inventory added");
 	   },
 	   error: handleAjaxError
 	});
@@ -57,9 +57,9 @@ function updateInventory(){
         	'Content-Type': 'application/json'
         },
  	   success: function(response) {
-              var element = document.getElementById('success-alert');
-              console.log(element)
-              element.style.display = "inline";
+              getInventoryList()
+              handleSuccess("Inventory added");
+              $('#editInventoryModal').modal('hide');
               },
  	   error: handleAjaxError
  	});

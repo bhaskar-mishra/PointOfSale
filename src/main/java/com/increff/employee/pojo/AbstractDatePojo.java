@@ -24,5 +24,5 @@ public abstract class AbstractDatePojo {
 
     @Column(name = "version")
     @Version
-    Long version;
+    private Long version;
 }

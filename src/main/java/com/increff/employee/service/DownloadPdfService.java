@@ -17,17 +17,12 @@ import  java.util.List;
 @Service
 public class DownloadPdfService {
 
-    @Autowired
-    OrderItemDao orderItemDao;
-    @Autowired
-    OrderDao orderDao;
 
-
-    public InvoiceDetails getInvoice(String randomKeyForOrder,List<InvoiceItem> invoiceItemList) throws ApiException{
+    public InvoiceDetails getInvoice(String randomKeyForOrder,List<InvoiceItem> invoiceItemList,Integer orderId) throws ApiException{
 
 
         System.out.println("inside getInvoice in DownloadPdfService");
-        Integer orderId = orderDao.selectByRandomKey(randomKeyForOrder).getOrderId();
+
         InvoiceDetails invoiceDetails = new InvoiceDetails();
         invoiceDetails.setTime(LocalDateTime.now());
         invoiceDetails.setOrderId(orderId);
