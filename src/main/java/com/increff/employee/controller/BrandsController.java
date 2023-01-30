@@ -69,6 +69,10 @@ public class BrandsController {
         brandCategoryDto.updateBrandCategory(id,brandForm);
     }
 
-
+    @ApiOperation(value = "gets a brand category by id")
+    @RequestMapping(path = "/api/brand/getById/{id}",method = RequestMethod.GET)
+    public BrandCategoryData getBrandCategoryById(@PathVariable Integer id) throws ApiException{
+        return brandCategoryDto.getBrandCategoryById(id);
+    }
 
 }

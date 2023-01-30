@@ -1,5 +1,6 @@
 package com.increff.employee.service;
 
+import com.google.protobuf.Api;
 import com.increff.employee.dao.BrandDao;
 import com.increff.employee.model.BrandForm;
 import com.increff.employee.model.BrandsReportForm;
@@ -134,6 +135,15 @@ public class BrandService {
             }
         }
         return brandPojoArrayList;
+    }
+
+    @Transactional
+    public BrandPojo getBrandCategoryById(Integer id) throws ApiException{
+        BrandPojo brandPojo =  brandDao.selectById(id);
+        if(brandPojo==null){
+            throw new ApiException("no such brand exists");
+        }
+        return brandPojo;
     }
 
     @Transactional

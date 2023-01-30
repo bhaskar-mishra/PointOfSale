@@ -29,7 +29,6 @@ public class ProductService {
         if(pojo==null){
             throw new ApiException("there's no brand with given brand-category id: "+productPojo.getBrandCategoryId());
         }
-        System.out.println(productPojo.getBarcode());
         productDao.insert(productPojo);
 
     }

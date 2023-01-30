@@ -80,6 +80,22 @@ $.ajax({
 function displayEditBrandCategory(id){
 $('#editBrandCategoryModal').modal();
 brandCategoryId = id;
+
+var url = getBrandCategoryUrl();
+url = url + "/getById/" + id;
+	$.ajax({
+	   url: url,
+	   type: 'GET',
+	   success: function(data) {
+	   console.log(data);
+	   		var brand = document.getElementById('inputBrandEdit');
+	   		var category = document.getElementById('inputCategoryEdit');
+	   		brand.value = data.brand;
+	   		category.value = data.category;
+	   },
+	   error: handleAjaxError
+	});
+
 }
 
 $(function(){

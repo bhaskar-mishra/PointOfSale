@@ -32,7 +32,6 @@ public class ProductPojo extends AbstractDatePojo{
     @NotNull
     private String brand;
 
-
     @NotNull
     private String category;
 

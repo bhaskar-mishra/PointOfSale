@@ -36,6 +36,14 @@ public class BrandCategoryDto {
         brandService.add(brandPojo);
     }
 
+    public BrandCategoryData getBrandCategoryById(Integer id) throws ApiException{
+        if(id==null){
+            throw new ApiException("invalid request : id null");
+        }
+        BrandPojo brandPojo = brandService.getBrandCategoryById(id);
+        return convertPojoToData(brandPojo);
+    }
+
     public List<BrandCategoryData> getAllBrandCategories() throws ApiException{
         List<BrandPojo> brandPojoList = brandService.getAll();
         List<BrandCategoryData> brandCategoryDataList = new ArrayList<>();
