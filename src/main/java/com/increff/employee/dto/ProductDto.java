@@ -62,7 +62,7 @@ public class ProductDto {
         ProductPojo productPojo = new ProductPojo();
         Integer brandCategoryId = 0;
 
-        brandCategoryId = brandService.getBrandCategoryId(productForm.getBrand(), productForm.getCategory());
+        brandCategoryId = brandService.selectByBrandCategory(productForm.getBrand(), productForm.getCategory()).getId();
         productPojo.setProduct(productForm.getProduct());
         productPojo.setBarcode(productForm.getBarcode());
         productPojo.setMrp(productForm.getMrp());

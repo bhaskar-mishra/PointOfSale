@@ -23,10 +23,9 @@ public class BrandService {
 
     @Transactional
     public void add(BrandPojo p) throws ApiException {
-        boolean unique = brandDao.checkUnique(p.getBrand(), p.getCategory());
-        if (!unique) {
-            throw new ApiException("This brand category already exists");
-        }
+        BrandPojo pojo = brandDao.selectByBrandCategory(p.getBrand(), p.getCategory());
+        if(pojo!=null)
+            throw new ApiException("Brand category combination already exist");
         brandDao.insert(p);
     }
 
@@ -84,66 +83,27 @@ public class BrandService {
     @Transactional
     public Integer getBrandCategoryId(String brand,String category) throws ApiException
     {
-
-        System.out.println("inside getBrandCategory");
-        List<BrandPojo> brandPojoList = getAll();
-
-        Integer id = -1;
-        for(BrandPojo brandPojo : brandPojoList)
-        {
-            if(brandPojo.getBrand().equals(brand) && brandPojo.getCategory().equals(category))
-            {
-                id = brandPojo.getId();
-                break;
-            }
-        }
-
-        return id;
+        BrandPojo pojo = brandDao.selectByBrandCategory(brand, category);
+        if(pojo == null)
+            throw new ApiException("no brand category found with given brand category combination");
+        return pojo.getId();
     }
 
-
-    @Transactional
-    public void delete(int id) {
-        brandDao.delete(id);
-    }
 
     @Transactional(rollbackOn = ApiException.class)
-    public void updateBrandCategory(int id, BrandForm brandForm) throws ApiException {
-        BrandPojo brandPojo = getCheck(id);
+    public void updateBrandCategory(int id, BrandPojo brandPojo) throws ApiException {
+        String brand = brandPojo.getBrand();
+        String category = brandPojo.getCategory();
 
-        String brand = brandForm.getBrand();
-        String category = brandForm.getCategory();
+        BrandPojo pojo = brandDao.selectByBrandCategory(brand, category);
+        if(pojo!=null)
+            throw new ApiException("Brand category Combination already exists");
 
-        if(brand==null || brand.equals("")){
-            brand = brandPojo.getBrand();
-        }
+        pojo = brandDao.selectById(brandPojo.getId());
 
-        if(category==null || category.equals("")){
-            category = brandPojo.getCategory();
-        }
-
-
-        Integer brandCategoryId = getBrandCategoryId(brand,category);
-
-        if(brandCategoryId.equals(-1)){
-            brandDao.updateBrandCategory(id,brand,category);
-        }else if(brandCategoryId.equals(id)){
-            brandDao.updateBrandCategory(id,brand,category);
-        }else {
-            delete(id);
-        }
+        pojo.setBrand(brandPojo.getBrand());
+        pojo.setCategory(brandPojo.getCategory());
     }
-
-
-    @Transactional
-    public BrandPojo getCheck(int id) throws ApiException {
-        BrandPojo brandPojo = brandDao.selectById(id);
-        if (brandPojo == null) {
-            throw new ApiException("Brand category with given id does not exist, id: " + id);
-        }
-        return brandPojo;
-    }
-
 
     @Transactional
     public List<BrandPojo> getBrandsReport(BrandsReportForm brandsReportForm) throws ApiException{
