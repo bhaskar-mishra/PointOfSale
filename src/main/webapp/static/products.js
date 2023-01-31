@@ -1,5 +1,7 @@
 
 var product_barcode;
+var productName;
+var mrp;
 function getProductUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl ;
@@ -20,7 +22,8 @@ function addProduct(event){
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
-	        resetForm();
+	        handleSuccess("Product Added Successfully");
+	        document.getElementById('product-form').reset();
 	   		getProductList();
 	   },
 	   error: handleAjaxError
@@ -29,19 +32,8 @@ function addProduct(event){
 	return false;
 }
 
-function resetForm(){
-  document.getElementById('inputBrand')[0].selectedIndex = 0;
 
-  var selectElement = document.getElementById('inputCategory');
-   var L = selectElement.options.length - 1;
-     for(var i = L; i >= 1; i--) {
-        selectElement.remove(i);
-     }
 
-     document.getElementById('inputBarcode').value = "Enter Barcode";
-     document.getElementById('inputProduct').value = "Enter Product";
-     document.getElementById('inputMRP').value = "MRP";
-}
 
 //Edits a product with a given barcode
 
@@ -146,6 +138,9 @@ selectElement.add(new Option(e));
 
 function displayEditProduct(){
 $('#editProductsModal').modal();
+document.getElementById('inputBarcodeEdit').value = product_barcode;
+document.getElementById('inputProductEdit').value = productName;
+document.getElementById('inputMRPEdit').value = mrp;
 }
 
 $(function(){
@@ -248,6 +243,8 @@ function displayProductList(data){
 	for(var i in data){
 		var e = data[i];
         product_barcode = e.barcode;
+        productName = e.product;
+        mrp = e.mrp;
         var buttonHtml = ''; //'<button onclick="deleteProduct(' + ')">Delete</button>'
         		buttonHtml += ' <button onclick="displayEditProduct(' + e.id + ')">Edit</button>'
 		var row = '<tr>'

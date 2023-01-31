@@ -48,10 +48,6 @@ public class ProductDto {
     }
 
     public void updateProductWithGivenBarcode(String barcode,ProductEditForm productEditForm) throws ApiException{
-        if(barcode==null){
-            throw new ApiException("barcode null");
-        }
-        barcode = barcode.toLowerCase().trim();
         validateProductEditForm(barcode,productEditForm);
         normalize(productEditForm);
         productService.updateProduct(barcode,productEditForm);
@@ -87,14 +83,22 @@ public class ProductDto {
             throw new ApiException("productForm null");
         }
 
+        if(productForm.getBrand()==null && productForm.getCategory()==null){
+            throw new ApiException("invalid brand category");
+        }
+
         if(productForm.getProduct()==null || productForm.getProduct().equals("")){
             throw new ApiException("invalid product");
+        }
+
+        if(productForm.getBarcode()==null || productForm.getBarcode().equals("")){
+            throw new ApiException("invalid barcode");
         }
 
         if(productForm.getMrp()==null){
             throw new ApiException("MRP can't be null");
         }
-        if(productForm.getMrp().compareTo(0.0)<=0){
+        if(productForm.getMrp().compareTo(0.0)<0){
             throw new ApiException("MRP can't be negative");
         }
     }
@@ -112,17 +116,19 @@ public class ProductDto {
             throw new ApiException("no input");
         }
 
-        if(productEditForm.getMRP().compareTo(0.0)<=0){
+        if(productEditForm.getProduct()==null || productEditForm.getProduct().equals("")){
+            throw new ApiException("Invalid input: input a valid product");
+        }
+
+        if(productEditForm.getMRP()==null || productEditForm.getMRP().equals(0.0)){
+            throw new ApiException("Invalid input : mrp not correct");
+        }
+
+        if(productEditForm.getMRP().compareTo(0.0)<0){
             throw new ApiException("MRP can't be negative");
         }
 
-        if (productEditForm.getMRP() == null || productEditForm.getMRP().equals(0)) {
-            productEditForm.setMRP(productEditForm.getMRP());
-        }
 
-        if(productEditForm.getProduct()==null || productEditForm.getProduct().equals("")){
-            productEditForm.setProduct(productPojo.getProduct());
-        }
     }
 
     private void normalize(ProductForm productForm){
