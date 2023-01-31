@@ -1,4 +1,5 @@
-var product_barcode ;
+var product_barcode;
+var quantity;
 function getInventoryUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/inventory";
@@ -19,8 +20,9 @@ function addInventory(event){
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
+	        document.getElementById('inventory-form').reset();
+	        handleSuccess('Inventory added');
 	   		getInventoryList();
-            handleSuccess("Inventory added");
 	   },
 	   error: handleAjaxError
 	});
@@ -44,7 +46,6 @@ function getInventoryList(){
 function updateInventory(){
  var url = getInventoryUrl();
  url = url + "/updateInventory";
- url = url + "/" + product_barcode;
 
  var $form = $("#inventory-edit-form");
  	var json = toJson($form);
@@ -58,16 +59,29 @@ function updateInventory(){
         },
  	   success: function(response) {
               getInventoryList()
-              handleSuccess("Inventory added");
+              handleSuccess("Inventory Updated");
               $('#editInventoryModal').modal('hide');
+              document.getElementById('inventory-edit-form').reset();
               },
  	   error: handleAjaxError
  	});
 
 }
 
-function displayEditInventory(){
+function displayEditInventory(barcode){
 $('#editInventoryModal').modal();
+document.getElementById('inputBarcodeEdit').value = barcode;
+var url = getInventoryUrl() + "/" + barcode;
+	$.ajax({
+	   url: url,
+	   type: 'GET',
+	   success: function(data) {
+	   console.log(data);
+	   console.log('data fetched successfully');
+	        document.getElementById('inputQuantityEdit').value = data.quantity;
+	   },
+	   error: handleAjaxError
+	});
 }
 
 $(function(){
@@ -168,14 +182,14 @@ function displayUploadData(){
 //UI DISPLAY METHODS
 
 function displayInventoryList(data){
-	console.log('Printing user data');
+	console.log('Printing inventory list');
+	console.log(data.length);
 	var $tbody = $('#inventory-table').find('tbody');
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
-		product_barcode = e.barcode;
 		var buttonHtml = ''
-		buttonHtml += ' <button onclick="displayEditInventory(' + ')">Edit</button>'
+		buttonHtml += ' <button onclick="displayEditInventory(\'' + e.barcode + '\')">Edit</button>'
 		var row = '<tr>'
 		+ '<td>' + e.barcode + '</td>'
 		+ '<td>' + e.product + '</td>'
@@ -185,6 +199,7 @@ function displayInventoryList(data){
         $tbody.append(row);
 	}
 }
+
 
 
 //INITIALIZATION CODE
@@ -204,6 +219,7 @@ function setPage(){
 
 function init(){
 	$('#add-inventory').click(addInventory);
+	$('#update-inventory').click(updateInventory);
 	$('#upload-data').click(displayUploadData);
     $('#process-data').click(processData);
     $('#download-errors').click(downloadErrors);

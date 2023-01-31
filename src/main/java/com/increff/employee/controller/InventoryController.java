@@ -2,7 +2,6 @@ package com.increff.employee.controller;
 
 import com.increff.employee.dto.InventoryDto;
 import com.increff.employee.model.*;
-import com.increff.employee.pojo.InventoryPojo;
 import com.increff.employee.service.ApiException;
 import com.increff.employee.service.InventoryService;
 import io.swagger.annotations.Api;
@@ -10,7 +9,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Api
@@ -31,8 +29,14 @@ public class InventoryController {
 
     @ApiOperation("Gets all products in the inventory")
     @RequestMapping(path = "/api/inventory",method = RequestMethod.GET)
-    public List<InventoryData> getAllProductsInInventory() throws ApiException{
-        return inventoryDto.getAllProductsInInventory();
+    public List<InventoryData> getAllInventory() throws ApiException{
+        return inventoryDto.getAllInventory();
+    }
+
+    @ApiOperation("Gets inventory for a particular product")
+    @RequestMapping(path = "/api/inventory/{barcode}")
+    public InventoryData getInventory(@PathVariable String barcode) throws ApiException{
+        return inventoryDto.getInventory(barcode);
     }
 
 
@@ -52,9 +56,9 @@ public class InventoryController {
     }
 
     @ApiOperation("Updates inventory report")
-    @RequestMapping(path = "/api/inventory/updateInventory/{barcode}",method = RequestMethod.PUT)
-    public void updateInventoryForAGivenBarcode(@PathVariable String barcode,@RequestBody InventoryUpdateForm inventoryUpdateForm) throws ApiException{
-        inventoryDto.updateInventoryForAGivenBarcode(barcode,inventoryUpdateForm);
+    @RequestMapping(path = "/api/inventory/updateInventory",method = RequestMethod.PUT)
+    public void updateInventory(@RequestBody InventoryForm inventoryForm) throws ApiException{
+        inventoryDto.updateInventory(inventoryForm);
     }
 
 }

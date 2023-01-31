@@ -1,22 +1,15 @@
 package com.increff.employee.service;
 
-import com.google.protobuf.Api;
 import com.increff.employee.dao.InventoryDao;
 import com.increff.employee.dao.ProductDao;
-import com.increff.employee.dto.InventoryDto;
-import com.increff.employee.dto.InventoryReportDto;
 import com.increff.employee.helper.InventoryReportHelper;
-import com.increff.employee.model.InventoryData;
-import com.increff.employee.model.InventoryReportData;
-import com.increff.employee.model.InventoryReportForm;
-import com.increff.employee.model.InventoryUpdateForm;
+import com.increff.employee.model.*;
 import com.increff.employee.pojo.InventoryPojo;
 import com.increff.employee.pojo.ProductPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.security.ProtectionDomain;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,14 +24,29 @@ public class InventoryService {
 
     @Transactional
     public void add(InventoryPojo inventoryPojo) throws ApiException{
-             inventoryDao.insert(inventoryPojo);
+             InventoryPojo inventoryPojo1 = inventoryDao.selectByBarcode(inventoryPojo.getBarcode());
+             if(inventoryPojo1!=null){
+                 inventoryPojo1.setQuantity(inventoryPojo1.getQuantity()+ inventoryPojo.getQuantity());
+             }else {
+                 inventoryDao.insert(inventoryPojo);
+             }
     }
 
 
 
     @Transactional(rollbackOn = ApiException.class)
-    public List<InventoryPojo> get() throws ApiException{
+    public List<InventoryPojo> getAllInventory() throws ApiException{
         return inventoryDao.selectAll();
+    }
+
+    @Transactional(rollbackOn = ApiException.class)
+    public InventoryPojo getInventoryByBarcode(String barcode) throws ApiException{
+        InventoryPojo inventoryPojo = inventoryDao.selectByBarcode(barcode);
+        if(inventoryPojo==null){
+            throw new ApiException("this product is not in inventory");
+        }
+
+        return inventoryPojo;
     }
 
 
@@ -140,52 +148,14 @@ public class InventoryService {
     }
 
 
-
-//    @Transactional
-//    public List<InventoryReportData> getInventoryDetailsOfAllProducts() throws ApiException{
-//        List<InventoryReportData> inventoryReportDataList = new ArrayList<>();
-//        List<ProductPojo> productPojoList = productDao.selectAll();
-//        for(ProductPojo productPojo : productPojoList){
-//            InventoryPojo inventoryPojo = inventoryDao.selectByBarcode(productPojo.getBarcode());
-//            Integer quantity;
-//            if(inventoryPojo==null){
-//                quantity = 0;
-//            }else {
-//                quantity = inventoryPojo.getQuantity();
-//            }
-//            inventoryReportDataList.add(InventoryReportDto.productToInventoryReportData(productPojo,quantity));
-//        }
-//        return inventoryReportDataList;
-//    }
-
-
-
     @Transactional
-    public void updateInventoryForAGivenBarcode(String barcode, InventoryUpdateForm inventoryUpdateForm) throws ApiException{
-        InventoryPojo inventoryPojo = inventoryDao.selectByBarcode(barcode);
-        inventoryPojo.setQuantity(inventoryUpdateForm.getQuantity());
+    public void updateInventory(InventoryForm inventoryForm) throws ApiException{
+        InventoryPojo inventoryPojo = inventoryDao.selectByBarcode(inventoryForm.getBarcode());
+        if(inventoryPojo==null){
+            throw new ApiException("This product is not in inventory");
+        }
+        inventoryPojo.setQuantity(inventoryForm.getQuantity());
     }
 
-//    @Transactional
-//    public InventoryPojo getCheck(int id) throws ApiException{
-//        InventoryPojo p = dao.select(id);
-//        if(p==null)
-//        {
-//            throw new ApiException("This product doesn't exist in the inventory");
-//        }
-//
-//        return p;
-//    }
 
-//    @Transactional(rollbackOn = ApiException.class)
-//    public void update(int id,InventoryPojo p) throws ApiException{
-//        if(p.getQuantity()<0)
-//        {
-//            throw new ApiException("There are not these many samples of this product available");
-//        }
-//        InventoryPojo d = getCheck(p.getId());
-//        d.setId(p.getId());
-//        d.setQuantity(p.getQuantity());
-//        dao.update(d);
-//    }
 }

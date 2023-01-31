@@ -1,3 +1,6 @@
-barcode quantity
-abc 10
-aac 20
+barcode	quantity
+code	10
+abc	20
+def	30
+xy	20
+def	-20

@@ -124,7 +124,7 @@ public class ProductDto {
     }
 
     private void validateProductEditForm(String barcode, ProductEditForm productEditForm) throws ApiException {
-        if(barcode==null){
+        if(barcode==null || barcode.toLowerCase().trim().equals("")){
             throw new ApiException("invalid barcode");
         }
         ProductPojo productPojo = productService.selectByBarcode(barcode);

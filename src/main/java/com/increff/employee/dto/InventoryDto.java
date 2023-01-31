@@ -29,27 +29,34 @@ public class InventoryDto {
     private InventoryDao inventoryDao;
 
     public void addInventory(InventoryForm inventoryForm) throws ApiException{
+        validate(inventoryForm);
         normalize(inventoryForm);
-        InventoryPojo inventoryPojo = convertFormToPojo(inventoryForm);
-        String barcode = inventoryPojo.getBarcode();
-        InventoryPojo pojo = inventoryDao.selectByBarcode(barcode);
-        if(pojo!=null){
-            pojo.setQuantity(pojo.getQuantity()+inventoryPojo.getQuantity());
-        }else{
-            ProductPojo productPojo = productService.selectByBarcode(barcode);
-            if(productPojo==null){
-                throw new ApiException("This product doesn't exist in the product table");
-            }
-
-            inventoryPojo.setProduct(productPojo.getProduct());
-            inventoryDao.insert(inventoryPojo);
+        ProductPojo productPojo = productService.selectByBarcode(inventoryForm.getBarcode());
+        if(productPojo==null){
+            throw new ApiException("invalid barcode");
         }
+        InventoryPojo inventoryPojo = convertFormToPojo(inventoryForm);
+        inventoryPojo.setProduct(productPojo.getProduct()); // delete product field from inventory and therefore this line
         inventoryService.add(inventoryPojo);
     }
 
 
-    public List<InventoryData> getAllProductsInInventory() throws ApiException{
-        List<InventoryPojo> inventoryPojoList =  inventoryService.get();
+    public InventoryData getInventory(String barcode) throws ApiException{
+        if(barcode==null || barcode.toLowerCase().trim().equals("")){
+            throw new ApiException("invalid barcode");
+        }
+
+        ProductPojo productPojo = productService.selectByBarcode(barcode);
+        if(productPojo==null){
+            throw new ApiException("invalid barcode");
+        }
+
+        InventoryPojo inventoryPojo = inventoryService.getInventoryByBarcode(barcode);
+        return convertPojoToData(productPojo.getProduct(),inventoryPojo);
+    }
+
+    public List<InventoryData> getAllInventory() throws ApiException{
+        List<InventoryPojo> inventoryPojoList =  inventoryService.getAllInventory();
         List<InventoryData> inventoryDataList = new ArrayList<>();
         for(InventoryPojo inventoryPojo : inventoryPojoList){
             inventoryDataList.add(pojoToData(inventoryPojo));
@@ -87,9 +94,10 @@ public class InventoryDto {
     }
 
     @Transactional
-    public void updateInventoryForAGivenBarcode(String barcode, InventoryUpdateForm inventoryUpdateForm) throws ApiException{
-        barcode = barcode.toLowerCase().trim();
-        inventoryService.updateInventoryForAGivenBarcode(barcode,inventoryUpdateForm);
+    public void updateInventory(InventoryForm inventoryForm) throws ApiException{
+        validate(inventoryForm);
+        normalize(inventoryForm);
+        inventoryService.updateInventory(inventoryForm);
     }
 
 
@@ -134,6 +142,39 @@ public class InventoryDto {
         inventoryReportForm.setProduct(inventoryReportForm.getProduct().toLowerCase().trim());
         inventoryReportForm.setBrand(inventoryReportForm.getBrand().toLowerCase().trim());
         inventoryReportForm.setCategory(inventoryReportForm.getCategory().toLowerCase().trim());
+    }
+
+    private void validate(InventoryForm inventoryForm) throws ApiException{
+        if(inventoryForm==null){
+            throw new ApiException("invalid request (form is null)");
+        }
+
+        if(inventoryForm.getBarcode()==null || inventoryForm.getBarcode().trim().equals("")){
+            throw new ApiException("invalid barcode");
+        }
+
+        if(inventoryForm.getQuantity()==null){
+            throw new ApiException("quantity unknown");
+        }
+
+        try {
+            Integer quantity = Integer.parseInt((""+inventoryForm.getQuantity()));
+        }catch (Exception exception){
+            throw new ApiException("quantity should be a positive numeric value");
+        }
+
+        if(inventoryForm.getQuantity()<=0){
+            throw new ApiException("quantity should be a positive numeric value");
+        }
+    }
+
+    private InventoryData convertPojoToData(String product,InventoryPojo inventoryPojo){
+        InventoryData inventoryData = new InventoryData();
+        inventoryData.setQuantity(inventoryPojo.getQuantity());
+        inventoryData.setProduct(product);
+        inventoryData.setBarcode(inventoryPojo.getBarcode());
+        inventoryData.setProduct(inventoryPojo.getProduct());
+        return inventoryData;
     }
 
 
