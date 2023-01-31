@@ -1,3 +1,8 @@
-barcode brand   category    product mrp
-abc bhaskar mishra  bm2 10
-aac aayush  maurya  am2 20
+barcode	brand	category	product	mrp
+lo7e9	bhaskar	mishra	bmw1	200
+lo7e10	aayush	maurya	amw2	200.20
+abc	aayush	maurya	amw3	200
+def	nestle	noodles	maggie2	200
+lo7e11	nestle	noodles	maggie3	-200
+lo7e12	amazon	prime	amp3
+lo7e13	amazon	prime	amp4	@200

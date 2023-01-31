@@ -140,12 +140,12 @@ public class ProductDto {
             throw new ApiException("Invalid input: input a valid product");
         }
 
-        if(productEditForm.getMRP()==null || productEditForm.getMRP().equals(0.0)){
-            throw new ApiException("Invalid input : mrp not correct");
+        if(productEditForm.getMRP()==null){
+            throw new ApiException("Invalid input : mrp can't be null");
         }
 
         if(productEditForm.getMRP().compareTo(0.0)<0){
-            throw new ApiException("MRP can't be negative");
+            throw new ApiException("MRP has to be a positive numeric value");
         }
 
 
