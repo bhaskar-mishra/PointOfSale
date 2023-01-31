@@ -21,13 +21,13 @@ public class ProductService {
 
     @Transactional
     public void add(ProductPojo productPojo) throws ApiException{
-        boolean unique = productDao.checkUnique(productPojo.getBarcode());
-        if(!unique){
-            throw new ApiException("This product is already there");
+        ProductPojo productPojo1 = productDao.selectByBarcode(productPojo.getBarcode());
+        if(productPojo1!=null){
+            throw new ApiException("This product already exists");
         }
-        BrandPojo pojo = brandDao.selectById(productPojo.getBrandCategoryId());
+        BrandPojo pojo = brandDao.selectByBrandCategory(productPojo.getBrand(),productPojo.getCategory());
         if(pojo==null){
-            throw new ApiException("there's no brand with given brand-category id: "+productPojo.getBrandCategoryId());
+            throw new ApiException("incorrect brand category");
         }
         productDao.insert(productPojo);
 

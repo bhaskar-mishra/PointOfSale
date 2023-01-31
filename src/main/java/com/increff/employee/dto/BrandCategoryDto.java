@@ -128,11 +128,11 @@ public class BrandCategoryDto {
             throw new ApiException("Invalid brand category");
         }
 
-        if(brandForm.getBrand()==null || brandForm.getBrand().equals("")){
+        if(brandForm.getBrand()==null || brandForm.getBrand().toLowerCase().trim().equals("")){
             throw new ApiException("invalid brand");
         }
 
-        if(brandForm.getCategory()==null || brandForm.getCategory().equals("")){
+        if(brandForm.getCategory()==null || brandForm.getCategory().toLowerCase().trim().equals("")){
             throw new ApiException("invalid category");
         }
     }

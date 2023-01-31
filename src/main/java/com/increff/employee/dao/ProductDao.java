@@ -47,13 +47,6 @@ public class ProductDao extends AbstractDao{
         query.setParameter("barcode",p.getBarcode());
     }
 
-    public boolean checkUnique(String barcode)
-    {
-            TypedQuery<ProductPojo> query = getQuery(SELECT_BY_BARCODE, ProductPojo.class);
-            query.setParameter("barcode", barcode);
-            return (query.getResultList().size() == 0);
-
-    }
 
     public ProductPojo selectByBarcode(String barcode) {
         TypedQuery<ProductPojo> query = getQuery(SELECT_BY_BARCODE, ProductPojo.class);

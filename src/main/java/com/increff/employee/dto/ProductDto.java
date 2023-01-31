@@ -3,6 +3,7 @@ package com.increff.employee.dto;
 import com.increff.employee.model.ProductData;
 import com.increff.employee.model.ProductEditForm;
 import com.increff.employee.model.ProductForm;
+import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.pojo.ProductPojo;
 import com.increff.employee.service.ApiException;
 import com.increff.employee.service.BrandService;
@@ -57,7 +58,11 @@ public class ProductDto {
         ProductPojo productPojo = new ProductPojo();
         Integer brandCategoryId = 0;
 
-        brandCategoryId = brandService.selectByBrandCategory(productForm.getBrand(), productForm.getCategory()).getId();
+        BrandPojo brandPojo = brandService.selectByBrandCategory(productForm.getBrand(), productForm.getCategory());
+        if(brandPojo==null){
+            throw new ApiException("Incorrect Brand Category");
+        }
+        brandCategoryId = brandPojo.getId();
         productPojo.setProduct(productForm.getProduct());
         productPojo.setBarcode(productForm.getBarcode());
         productPojo.setMrp(productForm.getMrp());
@@ -80,26 +85,41 @@ public class ProductDto {
 
     private void validate(ProductForm productForm) throws ApiException{
         if(productForm==null){
-            throw new ApiException("productForm null");
+            throw new ApiException("productForm is null");
         }
 
-        if(productForm.getBrand()==null && productForm.getCategory()==null){
+        if(productForm.getBrand()==null || productForm.getBrand().toLowerCase().trim().equals("")){
             throw new ApiException("invalid brand category");
         }
 
-        if(productForm.getProduct()==null || productForm.getProduct().equals("")){
+        if(productForm.getCategory()==null || productForm.getCategory().toLowerCase().trim().equals("")){
+            throw new ApiException("invalid brand category");
+        }
+
+        if(productForm.getProduct()==null || productForm.getProduct().toLowerCase().trim().equals("")){
             throw new ApiException("invalid product");
         }
 
-        if(productForm.getBarcode()==null || productForm.getBarcode().equals("")){
+        if(productForm.getCategory()==null || productForm.getCategory().toLowerCase().equals("")){
+            throw new ApiException("invalid category");
+        }
+
+        if(productForm.getBarcode()==null || productForm.getBarcode().toLowerCase().trim().equals("")){
             throw new ApiException("invalid barcode");
         }
 
         if(productForm.getMrp()==null){
             throw new ApiException("MRP can't be null");
         }
-        if(productForm.getMrp().compareTo(0.0)<0){
-            throw new ApiException("MRP can't be negative");
+
+        try{
+            Double mrp = Double.parseDouble((""+productForm.getMrp()));
+        }catch (NumberFormatException exception){
+            throw new ApiException("MRP has to be numeric");
+        }
+
+        if(productForm.getMrp().compareTo(0.0)<=0){
+            throw new ApiException("MRP should be a positive numeric value");
         }
     }
 
