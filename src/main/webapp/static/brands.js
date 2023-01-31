@@ -242,6 +242,7 @@ function setPage(){
 
 function init(){
 	$('#add-brand-category').click(addBrandCategory);
+	$('#update-brand-category').click(updateBrandCategory);
 	$('#upload-data').click(displayUploadData);
     $('#process-data').click(processData);
     $('#download-errors').click(downloadErrors);

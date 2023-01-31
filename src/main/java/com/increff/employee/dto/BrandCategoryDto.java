@@ -9,7 +9,6 @@ import com.increff.employee.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +19,31 @@ public class BrandCategoryDto {
     @Autowired
     BrandService brandService;
 
+    public void addBrandCategory(BrandForm brandForm) throws ApiException {
+        DtoUtils.validateBrandForm(brandForm);
+        normalize(brandForm);
+        BrandPojo brandPojo = DtoUtils.convertBrandFormToPojo(brandForm);
+        brandService.add(brandPojo);
+    }
+
+    public BrandCategoryData getBrandCategoryById(Integer id) throws ApiException{
+        if(id==null){
+            throw new ApiException("invalid request : id null");
+        }
+        BrandPojo brandPojo = brandService.getBrandCategoryById(id);
+        if(brandPojo==null){
+            throw new ApiException("Invalid brand category id");
+        }
+        return DtoUtils.convertBrandPojoToData(brandPojo);
+    }
+
+    public void updateBrandCategory(Integer id,BrandForm brandForm) throws ApiException{
+        DtoUtils.validateBrandForm(brandForm);
+        normalize(brandForm);
+        BrandPojo pojo = DtoUtils.convertBrandFormToPojo(brandForm);
+        brandService.updateBrandCategory(id,pojo);
+    }
+
 
     public List<String> getAllBrands() throws ApiException{
         return brandService.getAllBrands();
@@ -29,26 +53,12 @@ public class BrandCategoryDto {
         return  brandService.getAllCategories();
     }
 
-    public void addBrandCategory(BrandForm brandForm) throws ApiException {
-        validate(brandForm);
-        normalize(brandForm);
-        BrandPojo brandPojo = convertFormToPojo(brandForm);
-        brandService.add(brandPojo);
-    }
-
-    public BrandCategoryData getBrandCategoryById(Integer id) throws ApiException{
-        if(id==null){
-            throw new ApiException("invalid request : id null");
-        }
-        BrandPojo brandPojo = brandService.getBrandCategoryById(id);
-        return convertPojoToData(brandPojo);
-    }
 
     public List<BrandCategoryData> getAllBrandCategories() throws ApiException{
         List<BrandPojo> brandPojoList = brandService.getAll();
         List<BrandCategoryData> brandCategoryDataList = new ArrayList<>();
         for(BrandPojo brandPojo : brandPojoList){
-            brandCategoryDataList.add(convertPojoToData(brandPojo));
+            brandCategoryDataList.add(DtoUtils.convertBrandPojoToData(brandPojo));
         }
 
         return brandCategoryDataList;
@@ -60,7 +70,7 @@ public class BrandCategoryDto {
         List<BrandPojo> brandPojoList = brandService.getBrandsReport(brandsReportForm);
         List<BrandCategoryData> brandCategoryDataList = new ArrayList<>();
         for(BrandPojo brandPojo : brandPojoList){
-            brandCategoryDataList.add(convertPojoToData(brandPojo));
+            brandCategoryDataList.add(DtoUtils.convertBrandPojoToData(brandPojo));
         }
         return brandCategoryDataList;
     }
@@ -82,60 +92,7 @@ public class BrandCategoryDto {
         return brandService.selectByBrandCategory(brand,category).getId();
     }
 
-    public void updateBrandCategory(Integer id,BrandForm brandForm) throws ApiException{
-        validate(brandForm);
-        normalize(brandForm);
-        BrandPojo pojo = convertFormToPojo(brandForm);
-        brandService.updateBrandCategory(id,pojo);
-    }
 
-    public  BrandPojo convertFormToPojo(BrandForm brandForm) throws ApiException {
-        validate(brandForm);
-        BrandPojo brandPojo = new BrandPojo();
-        brandPojo.setBrand(brandForm.getBrand());
-        brandPojo.setCategory(brandForm.getCategory());
-
-        return brandPojo;
-    }
-
-    public  BrandCategoryData convertPojoToData(BrandPojo brandPojo) throws ApiException {
-        validate(brandPojo);
-        BrandCategoryData brandCategoryData = new BrandCategoryData();
-        brandCategoryData.setId(brandPojo.getId());
-        brandCategoryData.setBrand(brandPojo.getBrand());
-        brandCategoryData.setCategory(brandPojo.getCategory());
-        return brandCategoryData;
-    }
-
-    private void validate(BrandPojo brandPojo) throws ApiException{
-        if(brandPojo==null){
-            throw new ApiException("pojo null");
-        }
-        if(brandPojo.getBrand()==null || brandPojo.getBrand().equals("")){
-            throw new ApiException("invalid brand");
-        }
-        if(brandPojo.getCategory()==null || brandPojo.getCategory().equals("")){
-            throw new ApiException("invalid category");
-        }
-    }
-
-    private void validate(BrandForm brandForm) throws ApiException{
-        if(brandForm==null){
-            throw new ApiException("Invalid form");
-        }
-
-        if(brandForm.getBrand()==null && brandForm.getCategory()==null){
-            throw new ApiException("Invalid brand category");
-        }
-
-        if(brandForm.getBrand()==null || brandForm.getBrand().toLowerCase().trim().equals("")){
-            throw new ApiException("invalid brand");
-        }
-
-        if(brandForm.getCategory()==null || brandForm.getCategory().toLowerCase().trim().equals("")){
-            throw new ApiException("invalid category");
-        }
-    }
 
     private void validate(BrandsReportForm brandsReportForm) throws ApiException{
         if(brandsReportForm.getBrand()==null && brandsReportForm.getCategory()==null){

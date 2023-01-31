@@ -25,10 +25,6 @@ public class ProductService {
         if(productPojo1!=null){
             throw new ApiException("This product already exists");
         }
-        BrandPojo pojo = brandDao.selectByBrandCategory(productPojo.getBrand(),productPojo.getCategory());
-        if(pojo==null){
-            throw new ApiException("incorrect brand category");
-        }
         productDao.insert(productPojo);
 
     }
@@ -49,19 +45,13 @@ public class ProductService {
     }
 
     @Transactional(rollbackOn = ApiException.class)
-    public void updateProduct(String barcode, ProductEditForm productEditForm) throws ApiException{
-        ProductPojo productPojo = productDao.selectByBarcode(barcode);
+    public void updateProduct(ProductEditForm productEditForm) throws ApiException{
+        ProductPojo productPojo = productDao.selectByBarcode(productEditForm.getBarcode());
+        if(productPojo==null){
+            throw new ApiException("invalid barcode");
+        }
         productPojo.setProduct(productEditForm.getProduct());
         productPojo.setMrp(productEditForm.getMRP());
-    }
-
-    @Transactional
-    public void deleteByBarcode(String barcode){
-        productDao.delete(barcode);
-    }
-
-    protected static void normalize(ProductPojo p){
-        p.setProduct(p.getProduct().toLowerCase().trim());
     }
 
 }
