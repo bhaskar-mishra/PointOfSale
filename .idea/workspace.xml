@@ -5,7 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f38d5da-046b-46f0-90f5-09d274d64e0e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/increff/employee/brands.tsv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/increff/employee/inventory.tsv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/increff/employee/products.tsv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/EmployeeApiController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/EmployeeDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/EmployeeInMemDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/InventoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/InventoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/DownloadPdfDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/DownloadPdfDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/InventoryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/InventoryDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/ProductDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/SalesReportDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/SalesReportDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/SchedulerDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dto/SchedulerDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/EmployeeService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/InventoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/brands.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/brands.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/inventory.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/inventory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/products.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/products.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/brands.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/brands.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/products.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +89,9 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/increff/employee/controller" />
       <recent name="D:\Increff_ training\first_project\employee-spring-full-master\src\main\webapp\static" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/com/increff/employee" />
+    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
@@ -92,6 +117,9 @@
     </task>
     <servers />
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.tsv" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -102,36 +130,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/increff/employee/service/DownloadPdfService.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

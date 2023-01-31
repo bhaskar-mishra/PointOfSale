@@ -104,10 +104,6 @@ public class SalesReportDto {
         if(brand==null) brand = "";
         if(category==null) category = "";
 
-        System.out.println("startDate: "+startDate);
-        System.out.println("endDate: "+endDate);
-        System.out.println("brand : "+brand);
-        System.out.println("category : "+category);
 
         List<SalesReportData> salesReportDataList = new ArrayList<>();
         List<Integer> orders = new ArrayList<>();
@@ -293,8 +289,6 @@ public class SalesReportDto {
                     }
                 }
             }else if(category.equals("") && !brand.equals("")){
-
-                System.out.println("inside the if block with no date chosen and no category chosen");
 
                 for(Integer orderId : orders){
                     List<OrderItemPojo> orderItemPojoList = orderItemService.selectAllById(orderId);

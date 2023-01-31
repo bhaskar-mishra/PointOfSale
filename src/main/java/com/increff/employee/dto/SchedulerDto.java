@@ -91,10 +91,6 @@ public class SchedulerDto {
         List<SchedulerData> schedulerDataList = new ArrayList<>();
         for (SchedulerPojo schedulerPojo : schedulerPojoList) {
             SchedulerData schedulerData = new SchedulerData();
-            System.out.println("date : " + schedulerPojo.getDate());
-            System.out.println("invoice_orders_count : " + schedulerPojo.getInvoicedOrdersCount());
-            System.out.println("invoice_items_count : " + schedulerPojo.getInvoicedItemsCount());
-            System.out.println("total_revenue : " + schedulerPojo.getRevenue());
             schedulerData.setDate(schedulerPojo.getDate());
             schedulerData.setTotal_revenue(schedulerPojo.getRevenue());
             schedulerData.setInvoiced_items_count(schedulerPojo.getInvoicedItemsCount());

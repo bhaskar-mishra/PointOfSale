@@ -52,7 +52,6 @@ public class ProductService {
     public void updateProduct(String barcode, ProductEditForm productEditForm) throws ApiException{
         ProductPojo productPojo = productDao.selectByBarcode(barcode);
         productPojo.setProduct(productEditForm.getProduct());
-        System.out.println("new MRP "+productEditForm.getMRP());
         productPojo.setMrp(productEditForm.getMRP());
     }
 

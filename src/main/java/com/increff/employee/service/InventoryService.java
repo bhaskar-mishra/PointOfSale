@@ -31,9 +31,7 @@ public class InventoryService {
 
     @Transactional
     public void add(InventoryPojo inventoryPojo) throws ApiException{
-
-        System.out.println("Inside inventory add method in service");
-
+             inventoryDao.insert(inventoryPojo);
     }
 
 

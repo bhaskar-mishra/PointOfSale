@@ -20,12 +20,27 @@ function addProduct(event){
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
+	        resetForm();
 	   		getProductList();
 	   },
 	   error: handleAjaxError
 	});
 
 	return false;
+}
+
+function resetForm(){
+  document.getElementById('inputBrand')[0].selectedIndex = 0;
+
+  var selectElement = document.getElementById('inputCategory');
+   var L = selectElement.options.length - 1;
+     for(var i = L; i >= 1; i--) {
+        selectElement.remove(i);
+     }
+
+     document.getElementById('inputBarcode').value = "Enter Barcode";
+     document.getElementById('inputProduct').value = "Enter Product";
+     document.getElementById('inputMRP').value = "MRP";
 }
 
 //Edits a product with a given barcode

@@ -41,7 +41,6 @@ public class InventoryDto {
                 throw new ApiException("This product doesn't exist in the product table");
             }
 
-            System.out.println("pojo set to be added");
             inventoryPojo.setProduct(productPojo.getProduct());
             inventoryDao.insert(inventoryPojo);
         }

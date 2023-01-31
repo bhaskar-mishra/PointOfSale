@@ -58,7 +58,6 @@ public class ProductDto {
     }
 
     private   ProductPojo convertFormToPojo(ProductForm productForm) throws ApiException {
-        System.out.println("reaching convert inside product DTO");
         ProductPojo productPojo = new ProductPojo();
         Integer brandCategoryId = 0;
 
@@ -108,7 +107,6 @@ public class ProductDto {
         if(productPojo==null){
             throw new ApiException("incorrect barcode");
         }
-        System.out.println("inside validateProductEditForm : "+productEditForm.getMRP());
 
         if(productEditForm.getProduct()==null && productEditForm.getMRP()==null){
             throw new ApiException("no input");

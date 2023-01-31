@@ -35,7 +35,6 @@ public class InventoryDao extends AbstractDao{
         Query query = em().createQuery(UPDATE);
         query.setParameter("id",id);
         query.setParameter("quantity",p.getQuantity());
-        int numberOfEntriesUpdated = query.executeUpdate();
     }
 
     @Transactional

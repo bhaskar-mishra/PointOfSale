@@ -45,7 +45,6 @@ public class ProductDao extends AbstractDao{
         query.setParameter("mrp",p.getMrp());
         query.setParameter("brand_category",p.getBrandCategoryId());
         query.setParameter("barcode",p.getBarcode());
-        int numberOfEntriesUpdated = query.executeUpdate();
     }
 
     public boolean checkUnique(String barcode)

@@ -19,6 +19,10 @@ function addBrandCategory(event){
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
+	   var brand = document.getElementById('inputBrand');
+	   brand.value = 'Enter Brand';
+	   var category = document.getElementById('inputCategory');
+	   category.value = 'Enter Category';
 	   		getBrandCategoryList();
 	   },
 	   error: handleAjaxError
