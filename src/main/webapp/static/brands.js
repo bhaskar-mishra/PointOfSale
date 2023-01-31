@@ -138,6 +138,7 @@ function uploadRows(){
 	updateUploadDialog();
 	//If everything processed then return
 	if(processCount==fileData.length){
+	getBrandCategoryList();
 		return;
 	}
 

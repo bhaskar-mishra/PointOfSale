@@ -100,7 +100,7 @@ public class BrandService {
         if(pojo!=null)
             throw new ApiException("Brand category Combination already exists");
 
-        pojo = brandDao.selectById(brandPojo.getId());
+        pojo = brandDao.selectById(id);
 
         pojo.setBrand(brandPojo.getBrand());
         pojo.setCategory(brandPojo.getCategory());
