@@ -29,22 +29,23 @@ public class ProductController {
         productDto.addProduct(productForm);
     }
 
+    @ApiOperation(value = "Gets product by barcode")
+    @RequestMapping(path = "/api/product/{barcode}",method = RequestMethod.GET)
+    public ProductData getProduct(@PathVariable String barcode) throws ApiException{
+        return  productDto.getProductByBarcode(barcode);
+    }
+
     @ApiOperation(value = "selects all products")
     @RequestMapping(path = "/api/product",method = RequestMethod.GET)
     public List<ProductData> getAllProducts() throws ApiException{
         return productDto.getAllProducts();
     }
 
-    @ApiOperation(value = "Deletes a product")
-    @RequestMapping(path = "/api/product/{barcode}",method = RequestMethod.DELETE)
-    public void deleteByBarcode(@PathVariable String barcode) throws ApiException {
-        productDto.deleteByBarcode(barcode);
-    }
 
     @ApiOperation(value = "updates a product")
-    @RequestMapping(path = "/api/product/{barcode}",method = RequestMethod.PUT)
-    public void updateProductWithGivenBarcode(@PathVariable String barcode, @RequestBody ProductEditForm productEditForm) throws ApiException{
-          productDto.updateProductWithGivenBarcode(barcode,productEditForm);
+    @RequestMapping(path = "/api/product",method = RequestMethod.PUT)
+    public void updateProduct(@RequestBody ProductEditForm productEditForm) throws ApiException{
+          productDto.updateProductWithGivenBarcode(productEditForm);
     }
 
 

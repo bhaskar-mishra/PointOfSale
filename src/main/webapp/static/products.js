@@ -1,7 +1,3 @@
-
-var product_barcode;
-var productName;
-var mrp;
 function getProductUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl ;
@@ -38,12 +34,12 @@ function addProduct(event){
 //Edits a product with a given barcode
 
 function updateProduct(){
+console.log('inside update product');
 var url = getProductUrl();
 url+="/api/product";
-url = url + "/" + product_barcode;
-
+console.log('url');
 var $form = $("#product-edit-form");
-	var json = toJson($form);
+var json = toJson($form);
 
 	$.ajax({
 	   url: url,
@@ -55,7 +51,7 @@ var $form = $("#product-edit-form");
 	   success: function(response) {
              getProductList();
              handleSuccess("Product Updated");
-             $('#editProductModal').modal('hide');
+             $('#editProductsModal').modal('hide');
              },
 	   error: handleAjaxError
 	});
@@ -136,11 +132,22 @@ selectElement.add(new Option(e));
 
 }
 
-function displayEditProduct(){
+function displayEditProduct(barcode){
 $('#editProductsModal').modal();
-document.getElementById('inputBarcodeEdit').value = product_barcode;
-document.getElementById('inputProductEdit').value = productName;
-document.getElementById('inputMRPEdit').value = mrp;
+document.getElementById('inputBarcodeEdit').value = barcode;
+var url = getProductUrl()+"/api/product/"+barcode;
+ $.ajax({
+   	   url: url,
+   	   type: 'GET',
+   	   success: function(data) {
+   	   console.log('data fetched for given barcode');
+   	   console.log(data);
+   	   		document.getElementById('inputProductEdit').value = data.product;
+   	   		document.getElementById('inputMRPEdit').value = data.mrp;
+   	   },
+   	   error: handleAjaxError
+   	});
+
 }
 
 $(function(){
@@ -242,11 +249,8 @@ function displayProductList(data){
 	var serialNo = 1;
 	for(var i in data){
 		var e = data[i];
-        product_barcode = e.barcode;
-        productName = e.product;
-        mrp = e.mrp;
         var buttonHtml = ''; //'<button onclick="deleteProduct(' + ')">Delete</button>'
-        		buttonHtml += ' <button onclick="displayEditProduct(' + e.id + ')">Edit</button>'
+        		buttonHtml += ' <button onclick="displayEditProduct(\'' + e.barcode + '\')">Edit</button>'
 		var row = '<tr>'
 		+ '<td>' + (serialNo++) + '</td>'
 		+ '<td>' + e.barcode + '</td>'

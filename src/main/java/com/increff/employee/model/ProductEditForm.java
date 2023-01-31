@@ -7,5 +7,6 @@ import lombok.Setter;
 public class ProductEditForm {
 
     private String product;
+    private String barcode;
     private Double MRP;
 }

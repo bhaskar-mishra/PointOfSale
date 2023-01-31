@@ -1,5 +1,6 @@
 package com.increff.employee.dto;
 
+import com.google.protobuf.Api;
 import com.increff.employee.model.ProductData;
 import com.increff.employee.model.ProductEditForm;
 import com.increff.employee.model.ProductForm;
@@ -23,13 +24,6 @@ public class ProductDto {
     @Autowired
     private ProductService productService;
 
-    @Transactional
-    public void deleteByBarcode(String barcode) throws ApiException{
-        if(barcode==null){
-            throw new ApiException("null barcode not acceptable");
-        }
-        productService.deleteByBarcode(barcode);
-    }
 
     public void addProduct(ProductForm productForm) throws ApiException{
         validate(productForm);
@@ -48,10 +42,21 @@ public class ProductDto {
         return productDataList;
     }
 
-    public void updateProductWithGivenBarcode(String barcode,ProductEditForm productEditForm) throws ApiException{
-        validateProductEditForm(barcode,productEditForm);
-        normalize(productEditForm);
-        productService.updateProduct(barcode,productEditForm);
+    public ProductData getProductByBarcode(String barcode) throws ApiException{
+        if(barcode==null || barcode.toLowerCase().trim().equals("")){
+            throw new ApiException("invalid barcode");
+        }
+
+        ProductPojo productPojo = productService.selectByBarcode(barcode);
+        if(productPojo==null){
+            throw new ApiException("invalid barcode");
+        }
+
+       return convertPojoToData(productPojo);
+    }
+
+    public void updateProductWithGivenBarcode(ProductEditForm productEditForm) throws ApiException{
+        validate(productEditForm);
     }
 
     private   ProductPojo convertFormToPojo(ProductForm productForm) throws ApiException {
@@ -74,7 +79,6 @@ public class ProductDto {
 
     private   ProductData convertPojoToData(ProductPojo productPojo){
         ProductData productData = new ProductData();
-        productData.setId(productPojo.getId());
         productData.setProduct(productPojo.getProduct());
         productData.setMrp(productPojo.getMrp());
         productData.setBarcode(productPojo.getBarcode());
@@ -123,32 +127,33 @@ public class ProductDto {
         }
     }
 
-    private void validateProductEditForm(String barcode, ProductEditForm productEditForm) throws ApiException {
-        if(barcode==null || barcode.toLowerCase().trim().equals("")){
+
+    public void validate(ProductEditForm productEditForm) throws ApiException{
+        if(productEditForm==null){
+            throw new ApiException("invalid request");
+        }
+
+        if(productEditForm.getBarcode()==null || productEditForm.getBarcode().toLowerCase().equals("")){
             throw new ApiException("invalid barcode");
         }
-        ProductPojo productPojo = productService.selectByBarcode(barcode);
-        if(productPojo==null){
-            throw new ApiException("incorrect barcode");
-        }
 
-        if(productEditForm.getProduct()==null && productEditForm.getMRP()==null){
-            throw new ApiException("no input");
-        }
-
-        if(productEditForm.getProduct()==null || productEditForm.getProduct().equals("")){
-            throw new ApiException("Invalid input: input a valid product");
+        if(productEditForm.getProduct()==null || productEditForm.getProduct().toLowerCase().trim().equals("")){
+            throw new ApiException("product invalid");
         }
 
         if(productEditForm.getMRP()==null){
-            throw new ApiException("Invalid input : mrp can't be null");
+            throw new ApiException("mrp should be a positive numeric value");
         }
 
-        if(productEditForm.getMRP().compareTo(0.0)<0){
-            throw new ApiException("MRP has to be a positive numeric value");
+        try{
+            Double mrp = Double.parseDouble(""+productEditForm.getMRP());
+        }catch (Exception exception){
+            throw new ApiException("invalid mrp : mrp should be a positive numeric value");
         }
 
-
+        if(productEditForm.getMRP().compareTo(0.0)<=0){
+            throw new ApiException("invalid mrp : mrp should be a positive numeric value");
+        }
     }
 
     private void normalize(ProductForm productForm){
