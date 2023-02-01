@@ -23,8 +23,21 @@ public class OrderDto {
         return orderData;
     }
 
-    public OrderData getOrderWithGivenId(Integer id) throws ApiException{
-        OrderPojo orderPojo = orderService.getOrderById(id);
+    public OrderData getOrderByCode(String orderCode) throws ApiException{
+        if(orderCode==null || orderCode.trim().split(" ").length!=1){
+            throw new ApiException("invalid orderCode");
+        }
+        OrderPojo orderPojo = orderService.getOrderByOrderCode(orderCode);
+        return DtoUtils.convertOrderPojoToData(orderPojo);
+    }
+
+    public OrderData getOrderById(Integer orderId) throws ApiException{
+        if(orderId==null){
+            throw new ApiException("invalid orderId");
+        }
+
+        OrderPojo orderPojo = orderService.getOrderById(orderId);
+
         return DtoUtils.convertOrderPojoToData(orderPojo);
     }
 

@@ -58,24 +58,38 @@ public class OrderItemDto {
     @Transactional
     public void editOrderItem(EditOrderItemForm editOrderItemForm) throws ApiException {
         DtoUtils.validateEditOrderItemForm(editOrderItemForm);
-        OrderItemPojo orderItemPojo = orderItemService.getOrderItemById(editOrderItemForm.getOrderItemId());
+        editOrderItemForm.setBarcode(editOrderItemForm.getBarcode().toLowerCase().trim());
+        OrderPojo orderPojo = orderService.getOrderByOrderCode(editOrderItemForm.getBarcode());
+        if(orderPojo.getStatus().equals("PLACED")){
+            throw new ApiException("Order is already placed! Can't be edited");
+        }
+        ProductPojo productPojo = productService.selectByBarcode(editOrderItemForm.getBarcode());
+        OrderItemPojo orderItemPojo = orderItemService.getByOrderAndProductId(orderPojo.getOrderId(),productPojo.getId());
         InventoryPojo inventoryPojo = inventoryService.getInventoryById(orderItemPojo.getProductId());
+        Integer quantityAvailable = inventoryPojo.getQuantity()+orderItemPojo.getQuantity();
+        if(quantityAvailable<editOrderItemForm.getQuantity()){
+            throw new ApiException("Available samples : "+quantityAvailable);
+        }
         inventoryService.updateInventory(orderItemPojo.getProductId(),inventoryPojo.getQuantity()
                 + orderItemPojo.getQuantity()
                 - editOrderItemForm.getQuantity()
         );
-        orderItemService.updateOrderItem(editOrderItemForm.getOrderItemId(), editOrderItemForm.getQuantity());
+        orderItemService.updateOrderItem(orderItemPojo.getOrderItemId(), editOrderItemForm.getQuantity());
     }
 
-    @Transactional
-    public void placeOrder(String orderCode) throws ApiException{
-        OrderPojo orderPojo = orderService.getOrderByOrderCode(orderCode);
-        orderPojo.setStatus("PLACED");
-        orderPojo.setPlacedTime(ZonedDateTime.now());
+    public OrderItemData getOrderItemById(Integer id) throws ApiException{
+        if(id==null){
+            throw new ApiException("invalid orderItemId");
+        }
+        OrderItemPojo orderItemPojo = orderItemService.getOrderItemById(id);
+        ProductPojo productPojo = productService.selectById(orderItemPojo.getProductId());
+        return DtoUtils.convertOrderItemPojoToData(orderItemPojo,productPojo.getProduct(),productPojo.getBarcode());
     }
 
-    public List<OrderItemData> getOrderItemsForAnOrder(String orderCode) throws ApiException{
-        OrderPojo orderPojo = orderService.getOrderByOrderCode(orderCode);
+
+
+    public List<OrderItemData> getOrderItemsByCode(String orderCode) throws ApiException{
+        OrderPojo orderPojo = orderService.getOrderByOrderCode(orderCode);//this is to check if orderCode is valid
         List<OrderItemPojo> orderItemPojoList = orderItemService.getAllItemsById(orderPojo.getOrderId());
         List<OrderItemData> orderItemDataList = new ArrayList<>();
         for(OrderItemPojo orderItemPojo : orderItemPojoList){
@@ -85,5 +99,38 @@ public class OrderItemDto {
 
         return orderItemDataList;
     }
+
+    @Transactional
+    public void placeOrder(String orderCode) throws ApiException{
+        if(orderCode==null || orderCode.trim().split(" ").length!=1 || orderCode.trim().equals("")){
+            throw new ApiException("invalid orderCode");
+        }
+        OrderPojo orderPojo = orderService.getOrderByOrderCode(orderCode);
+        List<OrderItemPojo> orderItemPojoList = orderItemService.getAllItemsById(orderPojo.getOrderId());
+        if(orderItemPojoList.size()==0){
+            throw new ApiException("no items in order");
+        }
+        orderPojo.setStatus("PLACED");
+        orderPojo.setPlacedTime(ZonedDateTime.now());
+    }
+
+    @Transactional
+    public void deleteOrderItemById(Integer orderItemId) throws ApiException{
+        if(orderItemId==null){
+            throw new ApiException("invalid orderItemId");
+        }
+
+        OrderItemPojo orderItemPojo = orderItemService.getOrderItemById(orderItemId);
+        OrderPojo orderPojo = orderService.getOrderById(orderItemPojo.getOrderId());
+
+        if(orderPojo.getStatus().equals("PLACED")){
+            throw new ApiException("Order already placed! Item can't be deleted");
+        }
+
+        InventoryPojo inventoryPojo = inventoryService.getInventoryById(orderItemPojo.getProductId());
+        inventoryPojo.setQuantity(inventoryPojo.getQuantity()+orderItemPojo.getQuantity());
+        orderItemService.deleteOrderItemById(orderItemId);
+    }
+
 
 }

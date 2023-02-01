@@ -32,10 +32,16 @@ public class OrderController {
      return orderDto.getAll();
  }
 
-@ApiOperation(value = "gets an order with given id")
-@RequestMapping(path = "/api/order/{id}",method = RequestMethod.GET)
-public OrderData getOrderWithGivenId(@PathVariable int id) throws ApiException{
-     return orderDto.getOrderWithGivenId(id);
+@ApiOperation(value = "gets an order by orderCode")
+@RequestMapping(path = "/api/order/{orderCode}",method = RequestMethod.GET)
+public OrderData getOrderByCode(@PathVariable String orderCode) throws ApiException{
+     return orderDto.getOrderByCode(orderCode);
+}
+
+@ApiOperation(value = "gets an order by orderId")
+@RequestMapping(path = "/api/order/getById/{orderId}",method = RequestMethod.GET)
+public OrderData getOrderById(@PathVariable Integer orderId) throws ApiException{
+     return orderDto.getOrderById(orderId);
 }
 
 //@ApiOperation(value = "gets an order with given random key")

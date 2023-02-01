@@ -2,6 +2,8 @@ var orderCode;
 var invoiceToDownload;
 var orderItemListLength;
 var orderItemId;
+var status;
+
 
 function getOrderItemUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
@@ -24,6 +26,9 @@ function addItem(event){
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
+	        handleSuccess('item added');
+	        document.getElementById('orderItem-form').reset();
+	        document.getElementById('inputOrderId').value = orderCode;
 	   		getOrderItemList();
 	   },
 	   error: handleAjaxError
@@ -37,7 +42,7 @@ function addItem(event){
 function getOrderItemList(){
 	var url = getOrderItemUrl();
 	url+="/api/orderItem";
-	url = url + "/" + randomKey;
+	url = url + "/" + orderCode;
 	$.ajax({
 	   url: url,
 	   type: 'GET',
@@ -51,30 +56,24 @@ function getOrderItemList(){
 
 
 function placeOrder(event){
-clearErrors();
  var url = getOrderItemUrl();
  url = url+"/api/orderItem";
- url = url+"/" + randomKey;
-
+ url = url+"/" + orderCode;
  var $tbody = $('#orderItem-table').find('tbody');
  var orderItemsCount = $tbody.length;
  console.log($tbody.length);
- if(orderItemListLength==0){
-  setError("place-order-error","no items in the order");
-  return false;
- }
 
  $.ajax({
  	   url: url,
  	   type: 'PUT',
  	   success: function() {
  	   var element = document.getElementById('place-order');
- 	   element.disabled = true;
  	   element.style.display = "none";
  	   var form = document.getElementById('orderItem-form');
  	   form.style.display = "none";
- 	   var downloadInvoice = document.getElementById('download-invoice');
+ 	     var downloadInvoice = document.getElementById('download-invoice');
          downloadInvoice.style.display = "block";
+         handleSuccess("Order Placed");
  	   },
  	   error: handleAjaxError
  	});
@@ -101,22 +100,17 @@ function updateScheduler(){
 
 
 
-function redirectToOrdersPage(){
-var url = getOrderItemUrl();
-url = url+"/site/orders";
-window.location.href = url;
-}
-
-
 
 function deleteOrderItem(id){
-	var url = getOrderItemUrl() + "/" + id;
+
+	var url = getOrderItemUrl() + "/api/orderItem/" + id;
 
 	$.ajax({
 	   url: url,
 	   type: 'DELETE',
 	   success: function(data) {
-	   		getBrandCategoryList();
+	        handleSuccess("an item deleted");
+	   		getOrderItemList();
 	   },
 	   error: handleAjaxError
 	});
@@ -128,7 +122,7 @@ function deleteOrderItem(id){
 function getInvoiceDetails(){
      var url = getOrderItemUrl();
      url = url + "/api/getInvoice";
-     url = url + "/" + randomKey;
+     url = url + "/" + orderCode;
 
      	$.ajax({
      	   url: url,
@@ -166,17 +160,10 @@ console.log('inside downloadPdf');
 
 function updateOrderItem()
 {
-    console.log("this function will update order item");
     var $form = $("#editOrderItemForm");
     var json = toJson($form);
     var url = getOrderItemUrl();
     url = url +"/api/orderItem/editOrderItem";
-
-    if((JSON.parse(json).quantity) == 0)
-    {
-        deleteOrderItem(JSON.parse(json).orderItemId);
-        return;
-    }
 
     $.ajax({
         	   url: url,
@@ -188,7 +175,7 @@ function updateOrderItem()
         	   success: function(response) {
         	   		getOrderItemList();
         	   		handleSuccess("Item Updated");
-        	   		$('#exampleModalCenter').modal('hide');
+        	   		$('#editOrderItemModal').modal('hide');
         	   },
         	   error: handleAjaxError
 
@@ -199,8 +186,25 @@ function updateOrderItem()
 
 
 function displayEditOrderItem(id){
-$('#editOrderItemModal').modal();
+if(status==="PLACED"){
+return true;
+}
 orderItemId = id;
+$('#editOrderItemModal').modal('toggle');
+
+var url = getOrderItemUrl();
+	url+="/api/orderItem/getById";
+	url = url + "/" + id;
+	$.ajax({
+	   url: url,
+	   type: 'GET',
+	   success: function(data) {
+	   		document.getElementById('editModalOrderCode').value = orderCode;
+	   		document.getElementById('editModalBarcode').value = data.barcode;
+	   		document.getElementById('editModalQuantity').value = data.quantity;
+	   },
+	   error: handleAjaxError
+	});
 }
 
 
@@ -222,6 +226,8 @@ function displayOrderItemList(data){
 		+ '<td>' + e.barcode + '</td>'
 		+ '<td>' + e.product + '</td>'
 		+ '<td>' + e.quantity + '</td>'
+		+ '<td>' + e.price + '</td>'
+		+ '<td>' + e.total + '</td>'
 		+ '<td>' + buttonHtml + '</td>'
 		+ '</tr>';
         $tbody.append(row);
@@ -234,40 +240,31 @@ function displayOrderItemList(data){
 
 
 function resetDataHelper(data){
-var status = data.status;
-if(status==="COMPLETE"){
-  var placeOrderButton = document.getElementById('place-order');
-  placeOrderButton.innerHTML = "ORDER PLACED";
-  placeOrderButton.disabled = true;
-  placeOrderButton.style.display = "none";
-  var downloadInvoice = document.getElementById('download-invoice');
-  downloadInvoice.style.display = "block";
+status = data.status;
+if(status==="PLACED"){
+  document.getElementById('place-order').style.display = "none";
 
-  var orderItemForm = document.getElementById('orderItem-form');
-  orderItemForm.style.display = "none";
+  document.getElementById('download-invoice').style.display = "block";
 
+  document.getElementById('orderItem-form').style.display = "none";
 }
+}
+
+function resetData(){
+var url = getOrderItemUrl() + "/api/order/"+orderCode;
+ $.ajax({
+ 	   url: url,
+ 	   type: 'GET',
+ 	   success: function(data) {
+ 	   		resetDataHelper(data);
+ 	   },
+ 	   error: handleAjaxError
+ 	});
 }
 
 
 
 //resets buttons and hides form if the order is already placed
-function resetData(){
-  var url = getOrderItemUrl();
-  url+="/api/order/useRandomKey";
-  url+="/";
-  url+=randomKey;
-
-  $.ajax({
-  	   url: url,
-  	   type: 'GET',
-  	   success: function(data) {
-  	   		resetDataHelper(data);
-  	   },
-  	   error: handleAjaxError
-  	});
-
-}
 
 
 
@@ -279,6 +276,7 @@ function init(){
     var inputItem = document.getElementById("inputOrderId");
     inputItem.value = orderCode;
 	$('#add-orderItem').click(addItem);
+	$('#update-orderItem').click(updateOrderItem);
 	$('#place-order').click(placeOrder);
 	$('#download-invoice').click(getInvoiceDetails);
 }

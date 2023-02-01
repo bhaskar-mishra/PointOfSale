@@ -13,7 +13,7 @@ public class OrderDao extends AbstractDao{
 
     private static String SELECTALL = "select p from OrderPojo p";
     private static String SELECTBYID = "select p from OrderPojo p where id=:id";
-    private static String SELECTBYORDERCODE = "select p from OrderPojo p where orderCode=:orderCode";
+    private static String SELECT_BY_ORDER_CODE = "select p from OrderPojo p where orderCode=:orderCode";
     private static  String SELECT_WITH_DATEFILTER = "select p from OrderPojo p where placedTime >= :start and placedTime<=:end";
     @Transactional
     public void insert(OrderPojo orderPojo){em().persist(orderPojo);}
@@ -30,7 +30,7 @@ public class OrderDao extends AbstractDao{
 
     public OrderPojo selectByOrderCode(String orderCode) throws ApiException
     {
-        TypedQuery<OrderPojo> query = getQuery(SELECTBYORDERCODE,OrderPojo.class);
+        TypedQuery<OrderPojo> query = getQuery(SELECT_BY_ORDER_CODE,OrderPojo.class);
         query.setParameter("orderCode" , orderCode);
         return getSingle(query);
     }

@@ -15,11 +15,11 @@
 
 
     <!--Edit Inventory Modal -->
-    <div class="modal fade" id="editOrderItemModal" tabindex="-1" role="dialog" aria-labelledby="editInventoryModalTitle" aria-hidden="true">
+    <div class="modal fade" id="editOrderItemModal" tabindex="-1" role="dialog" aria-labelledby="editOrderItemModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editInventoryLongTitle">Edit Inventory</h5>
+                    <h5 class="modal-title" id="editOrderItemLongTitle">Edit OrderItem</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -28,17 +28,25 @@
                     <div class="row">
                         <div class="col-12">
                             <form class="form" id="editOrderItemForm">
+
                                 <div class="form-group">
-                                    <label for="editModalBarcode" class="col-sm-2 col-form-label">OrderItemId</label>
+                                    <label for="editModalOrderCode" class="col-sm-2 col-form-label">Order Id</label>
                                     <div class="col-sm-10">
-                                        <input type="number" min=0 oninput="validity.valid||(value='');" readonly class="form-control" name="orderItemId" id="editModalBarcode" placeholder="Enter OrderId">
+                                        <input type="text" readonly class="form-control" name="orderCode" id="editModalOrderCode" placeholder="Enter OrderCode">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="inputQuantityEdit" class="col-sm-2 col-form-label">Quantity</label>
+                                    <label for="editModalBarcode" class="col-sm-2 col-form-label">Barcode</label>
                                     <div class="col-sm-10">
-                                        <input type="number" min=0 oninput="validity.valid||(value='');" class="form-control" name="quantity" id="inputQuantityEdit" placeholder="Enter Quantity">
+                                        <input type="text" readonly class="form-control" name="barcode" id="editModalBarcode" placeholder="Enter Barcode">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="editModalQuantity" class="col-sm-2 col-form-label">Quantity</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" min=0 oninput="validity.valid||(value='');" class="form-control" name="quantity" id="editModalQuantity" placeholder="Enter Quantity">
                                     </div>
                                 </div>
                                 &nbsp;
@@ -48,7 +56,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="updateOrderItem()">Save changes</button>
+                    <button type="button" class="btn btn-primary" id="update-orderItem" >Save changes</button>
                 </div>
             </div>
         </div>
@@ -113,6 +121,8 @@
                     <th scope="col">BARCODE</th>
                     <th scope="col">PRODUCT</th>
                     <th scope="col">QUANTITY</th>
+                    <th scope="col">PRICE</th>
+                    <th scope="col">TOTAL</th>
                     <th scope="col">ACTION</th>
                 </tr>
                 </thead>

@@ -24,8 +24,17 @@ public class OrderItemService {
         if(orderItemPojo1!=null){
             orderItemPojo1.setQuantity(orderItemPojo1.getQuantity()+ orderItemPojo.getQuantity());
             orderItemPojo1.setSellingPrice(orderItemPojo.getSellingPrice());
+            return ;
         }
         orderItemDao.insert(orderItemPojo);
+    }
+
+    public OrderItemPojo getByOrderAndProductId(Integer orderId,Integer productId) throws ApiException{
+        OrderItemPojo orderItemPojo = orderItemDao.selectByOrderAndProductId(orderId,productId);
+        if(orderItemPojo==null){
+            throw new ApiException("this order item doesn't exist");
+        }
+        return orderItemPojo;
     }
 
 
@@ -43,17 +52,34 @@ public class OrderItemService {
 
     @Transactional
     public List<OrderItemPojo> getAllItemsById(Integer orderId)throws ApiException {
-        return orderItemDao.selectAllById(orderId);
+        List<OrderItemPojo> orderItemPojoList =  orderItemDao.selectAllById(orderId);
+        if(orderItemPojoList==null){
+            throw new ApiException("invalid orderId");
+        }
+
+        return orderItemPojoList;
     }
 
     @Transactional
     public void updateOrderItem(Integer orderItemId,Integer quantity) throws ApiException{
         OrderItemPojo orderItemPojo = orderItemDao.selectById(orderItemId);
+        if(orderItemPojo==null) {
+            throw new ApiException("invalid orderItemId");
+        }
         if(quantity==0){
             orderItemDao.deleteById(orderItemId);
         }else{
             orderItemPojo.setQuantity(quantity);
         }
+    }
+
+    @Transactional
+    public void deleteOrderItemById(Integer orderItemId) throws ApiException{
+        OrderItemPojo orderItemPojo = orderItemDao.selectById(orderItemId);
+        if(orderItemPojo==null){
+            throw new ApiException("invalid orderItemId");
+        }
+        orderItemDao.deleteById(orderItemId);
     }
 
 }

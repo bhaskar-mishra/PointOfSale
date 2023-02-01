@@ -29,19 +29,31 @@ public class OrderItemController {
     @RequestMapping(path = "/api/orderItem/{orderCode}",method = RequestMethod.PUT)
     public void placeOrder(@PathVariable String orderCode) throws ApiException
     {
-        orderItemDto.placeOrder(orderCode);
+         orderItemDto.placeOrder(orderCode);
     }
 
-    @ApiOperation(value = "gets the list of all orderItems for a given order Id")
+    @ApiOperation(value = "gets the list of all orderItems for a given order code")
     @RequestMapping(path = "/api/orderItem/{orderCode}",method = RequestMethod.GET)
     public List<OrderItemData> getOrderItems(@PathVariable String orderCode) throws ApiException{
-        return orderItemDto.getOrderItemsForAnOrder(orderCode);
+         return orderItemDto.getOrderItemsByCode(orderCode);
+    }
+
+    @ApiOperation(value = "gets order item by id")
+    @RequestMapping(path = "/api/orderItem/getById/{orderItemId}",method = RequestMethod.GET)
+    public OrderItemData getOrderItemById(@PathVariable Integer orderItemId) throws ApiException{
+        return  orderItemDto.getOrderItemById(orderItemId);
     }
 
     @ApiOperation(value = "edits and orderItem")
     @RequestMapping(path = "api/orderItem/editOrderItem",method = RequestMethod.PUT)
     public void editOrderItemId(@RequestBody EditOrderItemForm editOrderItemForm) throws ApiException{
         orderItemDto.editOrderItem(editOrderItemForm);
+    }
+
+    @ApiOperation(value = "deletes order item by id")
+    @RequestMapping(path = "/api/orderItem/{orderItemId}",method = RequestMethod.DELETE)
+    public void deleteOrderItemById(@PathVariable Integer orderItemId) throws ApiException{
+        orderItemDto.deleteOrderItemById(orderItemId);
     }
 
 

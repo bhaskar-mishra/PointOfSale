@@ -48,10 +48,10 @@ function getOrderList(){
 
 
 
-function editOrderItem(id){
+function editOrder(id){
 console.log("inside editOrderItem");
 var url = getOrderUrl();
-url = url+"/api/order";
+url = url+"/api/order/getById";
 url = url +"/" + id;
 
 $.ajax({
@@ -75,12 +75,10 @@ function displayOrderList(data){
 	console.log(data.length);
 	for(var i in data){
 		var e = data[i];
-		var randomKey = e.randomKey;
-		console.log(randomKey);
 		console.log(e.orderId);
-        var buttonHtml  = ' <button onclick="editOrderItem(' + e.orderId + ')">Edit</button>'
+        var buttonHtml  = ' <button onclick="editOrder(' + e.orderId + ')">Edit</button>'
 		var row = '<tr>'
-		+ '<td>' + e.randomKey + '</td>'
+		+ '<td>' + e.orderCode + '</td>'
 		+ '<td>' + e.status + '</td>'
 		+ '<td>' + e.time + '</td>'
 		+ '<td>' + buttonHtml + '</td>'

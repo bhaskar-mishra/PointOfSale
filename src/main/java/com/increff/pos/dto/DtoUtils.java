@@ -3,6 +3,7 @@ package com.increff.pos.dto;
 import com.increff.pos.model.*;
 import com.increff.pos.pojo.*;
 import com.increff.pos.service.ApiException;
+import io.swagger.annotations.Api;
 
 public class DtoUtils {
 
@@ -256,6 +257,8 @@ public class DtoUtils {
         orderItemData.setQuantity(orderItemPojo.getQuantity());
         orderItemData.setProduct(product);
         orderItemData.setBarcode(barcode);
+        orderItemData.setPrice(orderItemPojo.getSellingPrice());
+        orderItemData.setTotal((orderItemPojo.getSellingPrice()*orderItemPojo.getQuantity()));
         return orderItemData;
     }
 
@@ -264,12 +267,28 @@ public class DtoUtils {
             throw new ApiException("invalid edit request(form null)");
         }
 
-        if(editOrderItemForm.getOrderItemId()==null){
-            throw new ApiException("orderItemId invalid : null");
+        if(editOrderItemForm.getOrderCode()==null
+                || editOrderItemForm.getOrderCode().trim().equals("")
+        || editOrderItemForm.getOrderCode().trim().split(" ").length!=1){
+            throw new ApiException("invalid order code");
+        }
+
+        if(editOrderItemForm.getBarcode()==null || editOrderItemForm.getBarcode().trim().equals("")){
+            throw new ApiException("invalid barcode");
+        }
+
+        if(editOrderItemForm.getQuantity()==null){
+            throw new ApiException("quantity unknown");
+        }
+
+        try {
+            Integer quantity = Integer.parseInt(""+editOrderItemForm.getQuantity());
+        }catch (Exception exception){
+            throw new ApiException("quantity should be a positive numeric value");
         }
 
         if(editOrderItemForm.getQuantity()<0){
-            throw new ApiException("quantity can't be negative");
+            throw new ApiException("quantity should be a positive numeric value");
         }
     }
 
