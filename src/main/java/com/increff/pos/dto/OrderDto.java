@@ -19,29 +19,34 @@ public class OrderDto {
 
     public OrderData createOrder() throws ApiException{
         OrderPojo orderPojo = orderService.createOrder();
-        OrderData orderData = convertPojoToData(orderPojo);
+        OrderData orderData = DtoUtils.convertOrderPojoToData(orderPojo);
         return orderData;
+    }
+
+    public OrderData getOrderWithGivenId(Integer id) throws ApiException{
+        OrderPojo orderPojo = orderService.getOrderById(id);
+        return DtoUtils.convertOrderPojoToData(orderPojo);
     }
 
     public List<OrderData> getAll() throws ApiException{
         List<OrderPojo> orderPojoList = orderService.getAll();
         List<OrderData> orderDataList = new ArrayList<>();
         for(OrderPojo orderPojo : orderPojoList){
-            orderDataList.add(convertPojoToData(orderPojo));
+            orderDataList.add(DtoUtils.convertOrderPojoToData(orderPojo));
         }
 
         return orderDataList;
     }
 
-    public OrderData getOrderWithGivenId(Integer id) throws ApiException{
-        OrderPojo orderPojo = orderService.getOrderById(id);
-        return convertPojoToData(orderPojo);
-    }
 
-    public OrderData getOrderWtihGivenRandomKey(String randomKey) throws ApiException{
-        OrderPojo orderPojo = orderService.getOrderByRandomKey(randomKey);
-        return convertPojoToData(orderPojo);
-    }
+
+
+
+
+//    public OrderData getOrderWtihGivenRandomKey(String randomKey) throws ApiException{
+//        OrderPojo orderPojo = orderService.getOrderByOrderCode(randomKey);
+//        return DtoUtils.convertOrderPojoToData(orderPojo);
+//    }
 //    public static OrderItemPojo convert(OrderItemForm orderItemForm,String product,Integer orderId) throws ApiException
 //    {
 //        OrderItemPojo orderItemPojo = new OrderItemPojo();
@@ -54,18 +59,7 @@ public class OrderDto {
 //        return orderItemPojo;
 //    }
 
-    private OrderData convertPojoToData(OrderPojo orderPojo) throws ApiException{
-        OrderData orderData = new OrderData();
-        orderData.setOrderId(orderPojo.getOrderId());
-        orderData.setRandomKey(orderPojo.getOrderCode());
-        orderData.setTime(orderPojo.getPlacedTime());
-        if(orderPojo.getStatus().equals((Status.PENDING).name())){
-            orderData.setStatus("PENDING");
-        }else {
-            orderData.setStatus("COMPLETE");
-        }
-        return orderData;
-    }
+
 
 
 }

@@ -5,7 +5,6 @@ import com.increff.pos.model.EditOrderItemForm;
 import com.increff.pos.model.OrderItemData;
 import com.increff.pos.model.OrderItemForm;
 import com.increff.pos.service.ApiException;
-import com.increff.pos.service.OrderItemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,6 @@ import java.util.List;
 @RestController
 public class OrderItemController {
     @Autowired
-    private OrderItemService orderItemService;
-    @Autowired
     private OrderItemDto orderItemDto;
 
     @ApiOperation(value = "adds an orderItem")
@@ -29,16 +26,16 @@ public class OrderItemController {
     }
 
     @ApiOperation(value = "places an order")
-    @RequestMapping(path = "/api/orderItem/{randomKey}",method = RequestMethod.PUT)
-    public void placeOrder(@PathVariable String randomKey) throws ApiException
+    @RequestMapping(path = "/api/orderItem/{orderCode}",method = RequestMethod.PUT)
+    public void placeOrder(@PathVariable String orderCode) throws ApiException
     {
-        orderItemDto.placeOrder(randomKey);
+        orderItemDto.placeOrder(orderCode);
     }
 
     @ApiOperation(value = "gets the list of all orderItems for a given order Id")
-    @RequestMapping(path = "/api/orderItem/{randomKey}",method = RequestMethod.GET)
-    public List<OrderItemData> getOrderItems(@PathVariable String randomKey) throws ApiException{
-        return orderItemDto.getOrderItemsForAnOrder(randomKey);
+    @RequestMapping(path = "/api/orderItem/{orderCode}",method = RequestMethod.GET)
+    public List<OrderItemData> getOrderItems(@PathVariable String orderCode) throws ApiException{
+        return orderItemDto.getOrderItemsForAnOrder(orderCode);
     }
 
     @ApiOperation(value = "edits and orderItem")

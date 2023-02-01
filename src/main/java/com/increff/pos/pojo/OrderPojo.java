@@ -5,8 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.rmi.server.UID;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Getter @Setter
@@ -14,30 +17,19 @@ import java.util.Date;
 public class OrderPojo extends AbstractDatePojo{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
     private Integer orderId;
 
-    private String status = (Status.PENDING).name();
+    private String status = "PENDING";
 
     @NotNull
     @Column(name = "placed_time")
-    private String placedTime;
+    private ZonedDateTime placedTime;
 
     @NotNull
-    @Column(unique = true)
-    private String orderCode;//orderCode;
+    @Column(unique = true, name = "order_code")
+    private String orderCode;
 
-    public OrderPojo(){
-         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-         Date date = new Date();
-         placedTime = formatter.format(date);
-    }
-
-    public void setStatus(){
-        status = (Status.COMPLETE).name();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        placedTime = formatter.format(date);
-    }
 
 }
 

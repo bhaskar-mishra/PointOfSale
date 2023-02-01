@@ -38,10 +38,10 @@ public OrderData getOrderWithGivenId(@PathVariable int id) throws ApiException{
      return orderDto.getOrderWithGivenId(id);
 }
 
-@ApiOperation(value = "gets an order with given random key")
-@RequestMapping(path = "/api/order/useRandomKey/{randomKey}",method = RequestMethod.GET)
-public OrderData getOrderWithGivenRandomKey(@PathVariable String randomKey) throws ApiException{
-     return orderDto.getOrderWtihGivenRandomKey(randomKey);
-}
+//@ApiOperation(value = "gets an order with given random key")
+//@RequestMapping(path = "/api/order/useRandomKey/{randomKey}",method = RequestMethod.GET)
+//public OrderData getOrderWithGivenRandomKey(@PathVariable String randomKey) throws ApiException{
+//     return orderDto.getOrderWtihGivenRandomKey(randomKey);
+//}
 
 }

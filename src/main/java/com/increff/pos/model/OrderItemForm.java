@@ -3,14 +3,10 @@ package com.increff.pos.model;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter @Setter
 public class OrderItemForm {
-
-    @Getter @Setter
-    private String randomKey;
-    @Getter @Setter
+    private String orderCode;
     private String barcode;
-    @Getter @Setter
     private Integer quantity;
-    @Getter @Setter
     private Double price;
 }

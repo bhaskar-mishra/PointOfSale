@@ -24,12 +24,12 @@ public abstract class AbstractUiController {
 		return mav;
 	}
 
-	protected ModelAndView mav(String page,String randomKey) {
+	protected ModelAndView mav(String page,String orderCode) {
 		// Set info
 		ModelAndView mav = new ModelAndView(page);
 		mav.addObject("info", info);
 		mav.addObject("baseUrl", baseUrl);
-		mav.addObject("randomKey",randomKey);
+		mav.addObject("orderCode", orderCode);
 		return mav;
 	}
 

@@ -6,7 +6,6 @@ function getOrderUrl(){
 
 //BUTTON ACTIONS
 function createOrder(event){
-	//Set the values to update
 	console.log("create order clicked");
 	var url = getOrderUrl() + "/api/order";
 
@@ -24,16 +23,14 @@ function createOrder(event){
 
 function redirectToOrderItem(data){
  var baseUrl = getOrderUrl();
- var randomKey = data.randomKey;
-// var orderId = data.orderId;
- baseUrl+="/site/orderItem";
- baseUrl = baseUrl + "/" + randomKey;
+ var orderCode = data.orderCode;
+ baseUrl+="/ui/orderItem";
+ baseUrl = baseUrl + "/" + orderCode;
  window.location.href = baseUrl;
 }
 
 function getOrderList(){
-
-console.log("Working fine till here");
+    console.log("Working fine till here");
 	var url = getOrderUrl();
 	console.log(url);
 	url = url + "/api/order"

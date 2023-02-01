@@ -13,7 +13,7 @@ public class OrderDao extends AbstractDao{
 
     private static String SELECTALL = "select p from OrderPojo p";
     private static String SELECTBYID = "select p from OrderPojo p where id=:id";
-    private static String SELECTBYRANDOMKEY = "select p from OrderPojo p where randomKeyForId=:randomKeyForId";
+    private static String SELECTBYORDERCODE = "select p from OrderPojo p where orderCode=:orderCode";
     private static  String SELECT_WITH_DATEFILTER = "select p from OrderPojo p where placedTime >= :start and placedTime<=:end";
     @Transactional
     public void insert(OrderPojo orderPojo){em().persist(orderPojo);}
@@ -28,10 +28,10 @@ public class OrderDao extends AbstractDao{
         return getSingle(query);
     }
 
-    public OrderPojo selectByRandomKey(String randomKey) throws ApiException
+    public OrderPojo selectByOrderCode(String orderCode) throws ApiException
     {
-        TypedQuery<OrderPojo> query = getQuery(SELECTBYRANDOMKEY,OrderPojo.class);
-        query.setParameter("randomKeyForId",randomKey);
+        TypedQuery<OrderPojo> query = getQuery(SELECTBYORDERCODE,OrderPojo.class);
+        query.setParameter("orderCode" , orderCode);
         return getSingle(query);
     }
 

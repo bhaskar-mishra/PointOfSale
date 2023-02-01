@@ -1,9 +1,7 @@
 package com.increff.pos.dto;
 
 import com.increff.pos.model.*;
-import com.increff.pos.pojo.BrandPojo;
-import com.increff.pos.pojo.InventoryPojo;
-import com.increff.pos.pojo.ProductPojo;
+import com.increff.pos.pojo.*;
 import com.increff.pos.service.ApiException;
 
 public class DtoUtils {
@@ -177,6 +175,102 @@ public class DtoUtils {
         inventoryPojo.setBarcode("");
         inventoryPojo.setProduct("");
         return inventoryPojo;
+    }
+
+    //ORDER DTO INVOKES THESE METHODS
+    protected static OrderData convertOrderPojoToData(OrderPojo orderPojo) throws ApiException{
+        OrderData orderData = new OrderData();
+        orderData.setOrderId(orderPojo.getOrderId());
+        orderData.setOrderCode(orderPojo.getOrderCode());
+        orderData.setTime(orderPojo.getPlacedTime());
+        if(orderPojo.getStatus().equals("PENDING")){
+            orderData.setStatus("PENDING");
+        }else {
+            orderData.setStatus("PLACED");
+        }
+        return orderData;
+    }
+
+
+    //ORDER ITEM DTO INVOKES THESE METHODS
+
+    protected static void validate(OrderItemForm orderItemForm) throws ApiException{
+        if(orderItemForm==null){
+            throw new ApiException("invalid request : no input");
+        }
+
+        if(orderItemForm.getOrderCode()==null
+                || orderItemForm.getOrderCode().trim().equals("")
+                ||orderItemForm.getOrderCode().trim().split(" ").length!=1){
+            throw new ApiException("invalid orderCode");
+        }
+
+        if(orderItemForm.getBarcode()==null || orderItemForm.getBarcode().toLowerCase().trim().equals("")){
+            throw new ApiException("invalid barcode");
+        }
+
+        if(orderItemForm.getQuantity()==null){
+            throw new ApiException("quantity unknown");
+        }
+
+        try{
+            Integer quantity = Integer.parseInt(""+orderItemForm.getQuantity());
+        }catch (Exception exception){
+            throw new ApiException("quantity should be a positive numeric value");
+        }
+
+        if(orderItemForm.getQuantity()<=0){
+            throw new ApiException("quantity should be a positive numeric value");
+        }
+
+        if(orderItemForm.getPrice()==null){
+            throw new ApiException("price unknown");
+        }
+
+        try{
+            Double price = Double.parseDouble(""+orderItemForm.getPrice());
+        }catch (Exception e){
+            throw new ApiException("price should be a positive numeric value");
+        }
+
+        if(orderItemForm.getPrice().compareTo(0.0)<=0){
+            throw new ApiException("price should be a positive numeric value");
+        }
+
+    }
+
+    protected static OrderItemPojo convertOrderItemFormToPojo(OrderItemForm orderItemForm, Integer productId, Integer orderId) throws ApiException {
+        OrderItemPojo orderItemPojo = new OrderItemPojo();
+        orderItemPojo.setOrderId(orderId);
+        orderItemPojo.setSellingPrice(orderItemForm.getPrice());
+        orderItemPojo.setQuantity(orderItemForm.getQuantity());
+        orderItemPojo.setProductId(productId);
+        return orderItemPojo;
+    }
+
+
+    protected static OrderItemData convertOrderItemPojoToData(OrderItemPojo orderItemPojo, String product, String barcode) {
+        OrderItemData orderItemData = new OrderItemData();
+        orderItemData.setOrderItemId(orderItemPojo.getOrderItemId());
+        orderItemData.setOrderId(orderItemPojo.getOrderId());
+        orderItemData.setQuantity(orderItemPojo.getQuantity());
+        orderItemData.setProduct(product);
+        orderItemData.setBarcode(barcode);
+        return orderItemData;
+    }
+
+    protected static void validateEditOrderItemForm(EditOrderItemForm editOrderItemForm) throws ApiException{
+        if(editOrderItemForm==null){
+            throw new ApiException("invalid edit request(form null)");
+        }
+
+        if(editOrderItemForm.getOrderItemId()==null){
+            throw new ApiException("orderItemId invalid : null");
+        }
+
+        if(editOrderItemForm.getQuantity()<0){
+            throw new ApiException("quantity can't be negative");
+        }
     }
 
 

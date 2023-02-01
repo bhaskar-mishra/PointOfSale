@@ -39,8 +39,8 @@ public class AppUiController extends AbstractUiController {
 	public ModelAndView inventory(){return mav("inventory.html",role,true);}
 	@RequestMapping(value = "/ui/orders")
 	public ModelAndView order(){return mav("orders.html",role,true);}
-	@RequestMapping(value = "/ui/orderItem/{randomKey}")
-	public ModelAndView orderItem(@PathVariable String randomKey){return mav("orderItem.html",randomKey);}
+	@RequestMapping(value = "/ui/orderItem/{orderCode}")
+	public ModelAndView orderItem(@PathVariable String orderCode){return mav("orderItem.html", orderCode);}
 
 	@RequestMapping(value = "/ui/reports")
 	public ModelAndView reports(){return mav("reports.html");}

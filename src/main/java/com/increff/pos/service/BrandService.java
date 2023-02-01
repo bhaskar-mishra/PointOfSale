@@ -21,7 +21,7 @@ public class BrandService {
     private BrandDao brandDao;
 
     public void add(BrandPojo brandPojo) throws ApiException {
-        if(checkUnique(brandPojo.getBrand(),brandPojo.getCategory())){
+        if(!checkUnique(brandPojo.getBrand(),brandPojo.getCategory())){
             throw new ApiException("this brand category already exists");
         }
         brandDao.insert(brandPojo);

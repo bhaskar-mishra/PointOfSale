@@ -1,4 +1,4 @@
-var randomKey;
+var orderCode;
 var invoiceToDownload;
 var orderItemListLength;
 var orderItemId;
@@ -8,59 +8,9 @@ function getOrderItemUrl(){
 	return baseUrl;
 }
 
-
-
-function clearErrors(){
-errors = document.getElementsByClassName('errors');
-for(let item of errors){
-item.innerHTML = "";
-}
-}
-
-
-
-function setError(id,error){
- var formElementError = document.getElementById(id);
- formElementError.innerHTML = error;
- formElementError.style.color = "red";
-}
-
-
-
-function validateForm(){
-clearErrors();
-var returnVal = true;
-var barcode = document.getElementById('inputBarcode').value;
-if(barcode===""){
-setError("barcodeError","Invalid barcode");
-returnVal = false;
-}
-
-var quantity = document.getElementById('inputQuantity').value;
- if(isNaN(quantity)||quantity==0){
- setError("quantityError","Input a valid number");
- returnVal = false;
- }
-
- var price = document.getElementById('inputSellingPrice').value;
-  if(isNaN(price) || price==0){
-  setError("priceError","price not valid");
-  returnVal = false;
-  }
-
-  return returnVal;
-}
-
-
-
 //BUTTON ACTIONS
 function addItem(event){
 	//Set the values to update
-
-	if(!validateForm()){
-	return false;
-	}
-
 	var $form = $("#orderItem-form");
 	var json = toJson($form);
 	var url = getOrderItemUrl();
@@ -323,16 +273,15 @@ function resetData(){
 
 //INITIALIZATION CODE
 function init(){
-    randomKey =  $("meta[name=randomKey]").attr("content");
-    console.log(randomKey);
+    orderCode =  $("meta[name=orderCode]").attr("content");
+    console.log(orderCode);
     console.log("inside init method in orderItem page");
     var inputItem = document.getElementById("inputOrderId");
-    inputItem.value = randomKey;
+    inputItem.value = orderCode;
 	$('#add-orderItem').click(addItem);
 	$('#place-order').click(placeOrder);
 	$('#download-invoice').click(getInvoiceDetails);
 }
-
 
 
 $(document).ready(init);

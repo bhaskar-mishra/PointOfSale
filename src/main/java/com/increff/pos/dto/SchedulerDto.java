@@ -26,12 +26,6 @@ public class SchedulerDto {
     private SchedulerService schedulerService;
 
     @Autowired
-    private OrderItemDao orderItemDao;
-
-    @Autowired
-    private OrderDao orderDao;
-
-    @Autowired
     private OrderService orderService;
 
     @Autowired
@@ -71,7 +65,7 @@ public class SchedulerDto {
             List<OrderItemPojo> orderItemPojoList = orderItemService.getAllItems(id);
             for (OrderItemPojo i : orderItemPojoList) {
                 totalItems += i.getQuantity();
-                totalRevenue += i.getQuantity() * i.getPrice();
+                totalRevenue += i.getQuantity() * i.getSellingPrice();
             }
         }
 
