@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,5 +50,9 @@ public class OrderService {
     public List<OrderPojo> selectOrderWithDateFilter(String start, String end)
     {
         return orderDao.selectOrderWithDateFilter(start, end);
+    }
+
+    public List<OrderPojo> selectOrderWithDateFilter(ZonedDateTime startDateTime,ZonedDateTime endDateTime) throws ApiException{
+        return orderDao.selectOrderWithDateFilter(startDateTime,endDateTime);
     }
 }

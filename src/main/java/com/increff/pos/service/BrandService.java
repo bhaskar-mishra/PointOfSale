@@ -1,7 +1,6 @@
 package com.increff.pos.service;
 
 import com.increff.pos.dao.BrandDao;
-import com.increff.pos.model.BrandsReportForm;
 import com.increff.pos.pojo.BrandPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +35,10 @@ public class BrandService {
         return brandPojo;
     }
 
+    public List<BrandPojo> getAllBrandCategories() throws ApiException {
+        return brandDao.selectAll();
+    }
+
 
     public void updateBrandCategory(Integer id, BrandPojo brandPojo) throws ApiException {
         String brand = brandPojo.getBrand();
@@ -56,12 +59,16 @@ public class BrandService {
     }
 
 
+    private boolean checkUnique(String brand,String category) throws ApiException{
+        BrandPojo brandPojo = brandDao.selectByBrandCategory(brand,category);
+        if(brandPojo==null){
+            return true;
+        }
+        return false;
+    }
 
-
-
-
-    public List<BrandPojo> getAll() throws ApiException {
-        return brandDao.selectAll();
+    public BrandPojo selectByBrandCategory(String brand,String category) throws ApiException{
+        return brandDao.selectByBrandCategory(brand,category);
     }
 
 
@@ -98,72 +105,13 @@ public class BrandService {
     }
 
 
-    public List<String> getCategoriesForBrand(String brand) throws ApiException{
-        List<BrandPojo> brandPojoList = getAll();
-        List<String> categoriesForGivenBrand = new ArrayList<>();
-        for(BrandPojo pojo : brandPojoList)
-        {
-            if(pojo.getBrand().equals(brand)) {
-                categoriesForGivenBrand.add(pojo.getCategory());
-            }
-        }
-
-        return categoriesForGivenBrand;
-    }
-
-
-    public Integer getBrandCategoryId(String brand,String category) throws ApiException
-    {
-        BrandPojo pojo = brandDao.selectByBrandCategory(brand, category);
-        if(pojo == null)
-            throw new ApiException("no brand category found with given brand category combination");
-        return pojo.getId();
+    public List<BrandPojo> getCategoriesForBrand(String brand) throws ApiException{
+        List<BrandPojo> brandPojoList = brandDao.selectByBrand(brand);
+        return brandPojoList;
     }
 
 
 
 
-
-    public List<BrandPojo> getBrandsReport(BrandsReportForm brandsReportForm) throws ApiException{
-
-        String brand = brandsReportForm.getBrand();
-        String category = brandsReportForm.getCategory();
-
-        if(brand==null) brand = "";
-        if(category==null) category = "";
-
-        List<BrandPojo>  brandPojoArrayList = new ArrayList<>();;
-
-        if(!brand.equals("") && !category.equals("")){
-            BrandPojo brandPojo = brandDao.selectByBrandCategory(brand,category);
-            if(brandPojo!=null){
-                brandPojoArrayList.add(brandPojo);
-            }
-        }else if(brand.equals("")){
-            List<BrandPojo> brandPojoList = brandDao.selectByCategory(category);
-            for(BrandPojo brandPojo : brandPojoList){
-                brandPojoArrayList.add(brandPojo);
-            }
-        }else
-        {
-            List<BrandPojo> brandPojoList = brandDao.selectByBrand(brand);
-            for(BrandPojo brandPojo : brandPojoList){
-                brandPojoArrayList.add(brandPojo);
-            }
-        }
-        return brandPojoArrayList;
-    }
-
-    private boolean checkUnique(String brand,String category) throws ApiException{
-        BrandPojo brandPojo = brandDao.selectByBrandCategory(brand,category);
-        if(brandPojo==null){
-            return true;
-        }
-        return false;
-    }
-
-    public BrandPojo selectByBrandCategory(String brand,String category) throws ApiException{
-        return brandDao.selectByBrandCategory(brand,category);
-    }
 
 }

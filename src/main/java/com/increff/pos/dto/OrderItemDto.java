@@ -59,7 +59,7 @@ public class OrderItemDto {
     public void editOrderItem(EditOrderItemForm editOrderItemForm) throws ApiException {
         DtoUtils.validateEditOrderItemForm(editOrderItemForm);
         editOrderItemForm.setBarcode(editOrderItemForm.getBarcode().toLowerCase().trim());
-        OrderPojo orderPojo = orderService.getOrderByOrderCode(editOrderItemForm.getBarcode());
+        OrderPojo orderPojo = orderService.getOrderByOrderCode(editOrderItemForm.getOrderCode());
         if(orderPojo.getStatus().equals("PLACED")){
             throw new ApiException("Order is already placed! Can't be edited");
         }

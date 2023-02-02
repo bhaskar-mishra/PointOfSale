@@ -4,119 +4,81 @@ function getBaseUrl(){
 	return baseUrl;
 }
 
-
-
 // METHODS FOR WHEN THE PAGE IS LOADED
 
-//adds brands to the drop down
-function addBrandOptions()
-{
-  var url = getBaseUrl() + "/api/brand/allBrands";
-  $.ajax({
-  	   url: url,
-  	   type: 'GET',
-  	   success: function(data) {
-  	   		addBrandsToDropDown(data);
-  	   },
-  	   error: handleAjaxError
-  	});
+function setDropDowns(){
+   var url = getBaseUrl() + "/api/brand";
+     $.ajax({
+     	   url: url,
+     	   type: 'GET',
+     	   success: function(data) {
+     	   		addBrandsToDropDown(data);
+     	   		addCategoriesToDropDown(data);
+     	   },
+     	   error: handleAjaxError
+     	});
 }
 
 
+//Adds brands to brand's dropdown
 
 function addBrandsToDropDown(data){
  var selectElement = document.getElementById('inputBrand');
+ selectElement.options.length = 0;
+ selectElement.add(new Option("ALL"));
   for(var i in data)
   {
    var e = data[i];
-   selectElement.add(new Option(e));
+   selectElement.add(new Option(e.brand));
   }
+  selectElement.value = "ALL";
 }
 
+// DROP DOWN METHODS
+function brandDropDownHandler(){
 
+console.log('brandDropDownHandler called');
+var brand = document.getElementById('inputBrand').value;
+console.log(brand);
 
-// adds all the categories to the drop down
-function addCategoryOptions(){
-var url = getBaseUrl() + "/api/brand/allCategories";
-  $.ajax({
-   	   url: url,
-   	   type: 'GET',
-   	   success: function(data) {
-   	   		addCategoriesToDropDown(data);
-   	   },
-   	   error: handleAjaxError
-   	});
+if(brand==="ALL"){
+setDropDowns();
+return true;
 }
-
-
-
-function addCategoriesToDropDown(data){
-var selectElement = document.getElementById('inputCategory');
-for(var i in data){
-var e = data[i];
-selectElement.add(new Option(e));
-}
-}
-
-
-
-function getReport(){
-var url = getBaseUrl();
-url = url + "/api/reportController/allSales";
+var url = getBaseUrl() + "/api/brand/" + brand;
 $.ajax({
    	   url: url,
    	   type: 'GET',
    	   success: function(data) {
-   	   report = data;
-   	   		displayReport(data);
+   	       addCategoriesToDropDown(data);
    	   },
    	   error: handleAjaxError
    	});
-}
 
-
-
-// DROP DOWN METHODS
-function brandDropDownHandler(){
 return true;
 }
 
 
+//Adds categories to category's dropdown
 
-function categoryDropDownHandler(){
-return true;
+function addCategoriesToDropDown(data){
+var selectElement = document.getElementById('inputCategory');
+selectElement.options.length = 0;
+selectElement.add(new Option("ALL"));
+for(var i in data){
+var e = data[i];
+selectElement.add(new Option(e.category));
+}
+selectElement.value = 'ALL';
 }
 
 
-
-//UI DISPLAY METHODS
-
-// GETS SALES REPORT BASED ON USER INPUT
-function getReportOnClick(event){
- var startDate = document.getElementById('inputStartDate');
- startDate = startDate.value;
- var endDate = document.getElementById('inputEndDate');
- endDate = endDate.value;
-
- if(startDate==="" && !(endDate==="")){
- throw "invalid date range";
- }else if(endDate==="" && !(startDate==="")){
- throw "invalid date range";
- }else if(startDate.localeCompare(endDate)>0){
- throw "invalid date range";
-}
-
-var brand = document.getElementById('inputBrand');
-var category = document.getElementById('inputCategory');
- console.log(startDate);
- console.log(endDate);
-if(brand==="" && category===""){
-return false;
-}
+function getReport(){
+var url = getBaseUrl();
+url = url + "/api/reports/salesReport";
 
 var $form = $("#sales-report-form");
-	var json = toJson($form);
-	var url = getBaseUrl() + "/api/reportsController/onUserInput";
+var json = toJson($form);
 
 	$.ajax({
 	   url: url,
@@ -127,13 +89,20 @@ var $form = $("#sales-report-form");
        },
 	   success: function(response) {
 	     report = response;
-	   		displayReport(response);
+	     displayReport(response);
 	   },
 	   error: handleAjaxError
 	});
 
-
 }
+
+
+
+
+
+
+
+//UI DISPLAY METHODS
 
 
 
@@ -141,9 +110,11 @@ function displayReport(data){
 	console.log('Printing user data');
 	var $tbody = $('#sales-report-table').find('tbody');
 	$tbody.empty();
+	var serialNo = 1;
 	for(var i in data){
 		var e = data[i];
 		var row = '<tr>'
+		+ '<td>' + (serialNo++) + '</td>'
 		+ '<td>' + e.brand + '</td>'
 		+ '<td>' + e.category + '</td>'
 		+ '<td>' + e.quantity + '</td>'
@@ -161,13 +132,11 @@ function downloadReport(){
 
 //INITIALIZATION CODE
 function init(){
-	$('#get-sales-report').click(getReportOnClick);
+	$('#get-sales-report').click(getReport);
 	$('#download-reports').click(downloadReport);
-//	$('#refresh-data').click(getUserList);
+	$('#inputBrand').change(brandDropDownHandler);
 }
 
 $(document).ready(init);
-$(document).ready(addBrandOptions);
-$(document).ready(addCategoryOptions);
-$(document).ready(getReport);
+$(document).ready(setDropDowns);
 

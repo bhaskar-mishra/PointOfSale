@@ -109,7 +109,7 @@ function deleteOrderItem(id){
 	   url: url,
 	   type: 'DELETE',
 	   success: function(data) {
-	        handleSuccess("an item deleted");
+	        handleSuccess("item deleted");
 	   		getOrderItemList();
 	   },
 	   error: handleAjaxError
