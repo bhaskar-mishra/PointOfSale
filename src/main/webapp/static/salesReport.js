@@ -97,11 +97,6 @@ var json = toJson($form);
 }
 
 
-
-
-
-
-
 //UI DISPLAY METHODS
 
 
