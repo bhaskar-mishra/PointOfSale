@@ -21,7 +21,6 @@ function setDropDowns(){
 
 
 //Adds brands to brand's dropdown
-
 function addBrandsToDropDown(data){
  var selectElement = document.getElementById('inputBrand');
  selectElement.options.length = 0;
@@ -36,7 +35,6 @@ function addBrandsToDropDown(data){
 
 // DROP DOWN METHODS
 function brandDropDownHandler(){
-
 console.log('brandDropDownHandler called');
 var brand = document.getElementById('inputBrand').value;
 console.log(brand);
