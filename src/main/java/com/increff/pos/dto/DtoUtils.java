@@ -3,7 +3,6 @@ package com.increff.pos.dto;
 import com.increff.pos.model.*;
 import com.increff.pos.pojo.*;
 import com.increff.pos.service.ApiException;
-import io.swagger.annotations.Api;
 
 public class DtoUtils {
 
@@ -171,7 +170,7 @@ public class DtoUtils {
 
     protected static InventoryPojo convertInventoryFormToPojo(InventoryForm inventoryForm,Integer id){
         InventoryPojo inventoryPojo = new InventoryPojo();
-        inventoryPojo.setId(id);
+        inventoryPojo.setProductId(id);
         inventoryPojo.setQuantity(inventoryForm.getQuantity());
         inventoryPojo.setBarcode("");
         inventoryPojo.setProduct("");
@@ -292,6 +291,21 @@ public class DtoUtils {
             throw new ApiException("quantity should be a positive numeric value");
         }
 
+    }
+
+    //METHODS INVOKED FROM REPORTS DTO
+    protected static void validateSalesReportForm(SalesReportForm salesReportForm) throws ApiException{
+        if(salesReportForm.getStartDate()==null || salesReportForm.getEndDate()==null){
+            throw new ApiException("please input valid start and end dates");
+        }
+
+        if(salesReportForm.getBrand()==null || salesReportForm.getBrand().trim().equals("")){
+            throw new ApiException("input a valid brand");
+        }
+
+        if(salesReportForm.getCategory()==null || salesReportForm.getCategory().trim().equals("")){
+            throw new ApiException("input a valid category");
+        }
     }
 
 

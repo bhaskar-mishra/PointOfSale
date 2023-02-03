@@ -14,7 +14,7 @@ public class InventoryPojo extends AbstractDatePojo {
 
 
     @Id
-    private Integer id;
+    private Integer productId;
 
     private String barcode;
 

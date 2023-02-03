@@ -1,17 +1,12 @@
 package com.increff.pos.dto;
 
-import com.increff.pos.model.SalesReportData;
-import com.increff.pos.model.SalesReportForm;
-import com.increff.pos.model.SchedulerData;
+import com.increff.pos.model.*;
 import com.increff.pos.pojo.*;
 import com.increff.pos.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -36,8 +31,11 @@ public class ReportsDto {
     @Autowired
     private BrandService brandService;
 
+    @Autowired
+    private InventoryService inventoryService;
+
     public List<SalesReportData> getSalesReport(SalesReportForm salesReportForm) throws ApiException{
-          validateSalesReportForm(salesReportForm);
+          DtoUtils.validateSalesReportForm(salesReportForm);
           salesReportForm.setBrand(salesReportForm.getBrand().toLowerCase().trim());
           salesReportForm.setCategory(salesReportForm.getCategory().toLowerCase().trim());
           salesReportForm.setStartDate(salesReportForm.getStartDate().trim());
@@ -64,7 +62,7 @@ public class ReportsDto {
           for(OrderPojo orderPojo : orderPojoList){
               List<OrderItemPojo> orderItemPojoList = orderItemService.getAllItemsById(orderPojo.getOrderId());
               for(OrderItemPojo orderItemPojo : orderItemPojoList){
-                  ProductPojo productPojo = productService.selectById(orderItemPojo.getProductId());
+                  ProductPojo productPojo = productService.selectByProductId(orderItemPojo.getProductId());
 
                   if((salesReportForm.getBrand().equals("all")
                           || salesReportForm.getBrand().equals(productPojo.getBrand()))
@@ -86,8 +84,41 @@ public class ReportsDto {
 
     }
 
-    private void validateDate(SalesReportForm salesReportForm) throws ApiException{
+    public List<InventoryReportData> getInventoryReport(BrandForm brandForm) throws ApiException{
+        DtoUtils.validateBrandForm(brandForm);
+        brandForm.setBrand(brandForm.getBrand().toLowerCase().trim());
+        brandForm.setCategory(brandForm.getCategory().toLowerCase().trim());
+        List<BrandPojo> brandPojoList = new ArrayList<>();
+        if(brandForm.getBrand().equals("all") || brandForm.getCategory().equals("all")){
+            brandPojoList.addAll(brandService.getAllBrandCategories());
+        }else{
+            brandPojoList.add(brandService.selectByBrandCategory(brandForm.getBrand(), brandForm.getCategory()));
+        }
 
+        List<InventoryReportData> inventoryReportDataList = new ArrayList<>();
+        for(BrandPojo brandPojo : brandPojoList){
+            if((brandForm.getBrand().equals("all")||brandForm.getBrand().equals(brandPojo.getBrand()))
+               && (brandForm.getCategory().equals("all")||brandForm.getCategory().equals(brandPojo.getCategory()))){
+                addToInventoryReport(inventoryReportDataList,brandPojo);
+            }
+        }
+
+        return inventoryReportDataList;
+    }
+
+
+    private void addToInventoryReport(List<InventoryReportData> inventoryReportDataList,BrandPojo brandPojo) throws ApiException {
+        Integer quantity = 0;
+        List<ProductPojo> productPojoList = productService.selectByBrandCategoryId(brandPojo.getId());
+        InventoryReportData inventoryReportData = new InventoryReportData();
+        for(ProductPojo productPojo : productPojoList){
+            InventoryPojo inventoryPojo = inventoryService.getInventoryByProductId(productPojo.getId());
+            quantity+= inventoryPojo.getQuantity();
+        }
+        inventoryReportData.setBrand(brandPojo.getBrand());
+        inventoryReportData.setCategory(brandPojo.getCategory());
+        inventoryReportData.setQuantity(quantity);
+        inventoryReportDataList.add(inventoryReportData);
     }
 
     private void addToSalesReport(Map<String,List<SalesReportData>> salesReportMap,OrderItemPojo orderItemPojo,String brand,String category){
@@ -183,18 +214,6 @@ public class ReportsDto {
         return schedulerDataList;
     }
 
-    private void validateSalesReportForm(SalesReportForm salesReportForm) throws ApiException{
-        if(salesReportForm.getStartDate()==null || salesReportForm.getEndDate()==null){
-            throw new ApiException("please input valid start and end dates");
-        }
 
-        if(salesReportForm.getBrand()==null || salesReportForm.getBrand().trim().equals("")){
-            throw new ApiException("input a valid brand");
-        }
-
-        if(salesReportForm.getCategory()==null || salesReportForm.getCategory().trim().equals("")){
-            throw new ApiException("input a valid category");
-        }
-    }
 
 }

@@ -2,9 +2,7 @@ package com.increff.pos.controller;
 
 
 import com.increff.pos.dto.ReportsDto;
-import com.increff.pos.model.SalesReportData;
-import com.increff.pos.model.SalesReportForm;
-import com.increff.pos.model.SchedulerData;
+import com.increff.pos.model.*;
 import com.increff.pos.service.ApiException;
 import com.increff.pos.service.SchedulerService;
 import io.swagger.annotations.Api;
@@ -22,8 +20,6 @@ import java.util.List;
 public class ReportsController {
 
     @Autowired
-    private SchedulerService schedulerService;
-    @Autowired
     private ReportsDto reportsDto;
 
 
@@ -33,10 +29,20 @@ public class ReportsController {
             return reportsDto.getSalesReport(salesReportForm);
     }
 
+
+
     @ApiOperation(value = "gets all schedules")
     @RequestMapping(path = "/api/scheduler/getAllSchedules",method = RequestMethod.GET)
     public List<SchedulerData> getAllDailyReport() throws ApiException{
          return reportsDto.getAllDailyReport();
+    }
+
+
+
+    @ApiOperation(value = "gets inventory report")
+    @RequestMapping(path = "/api/reports/inventoryReport",method = RequestMethod.POST)
+    public List<InventoryReportData> getInventoryReport(@RequestBody BrandForm brandForm) throws ApiException{
+        return reportsDto.getInventoryReport(brandForm);
     }
 
 }

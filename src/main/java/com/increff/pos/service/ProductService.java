@@ -22,7 +22,6 @@ public class ProductService {
             throw new ApiException("This product already exists");
         }
         productDao.insert(productPojo);
-
     }
 
     @Transactional(rollbackOn = ApiException.class)
@@ -31,13 +30,23 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductPojo selectById(Integer id) throws ApiException{
-        ProductPojo productPojo = productDao.selectById(id);
+    public ProductPojo selectByProductId(Integer productId) throws ApiException{
+        ProductPojo productPojo = productDao.selectById(productId);
         if(productPojo==null){
             throw new ApiException("product doesn't exist");
         }
 
         return productPojo;
+    }
+
+    @Transactional
+    public List<ProductPojo> selectByBrandCategoryId(Integer brandCategoryId) throws ApiException{
+        List<ProductPojo> productPojoList = productDao.selectByBrandCategoryId(brandCategoryId);
+        if(productPojoList==null || productPojoList.size()==0){
+            throw new ApiException("invalid brandCategoryId");
+        }
+
+        return productPojoList;
     }
 
     @Transactional

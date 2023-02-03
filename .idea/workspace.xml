@@ -4,7 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f38d5da-046b-46f0-90f5-09d274d64e0e" name="Changes" comment="" />
+    <list default="true" id="8f38d5da-046b-46f0-90f5-09d274d64e0e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/AppUiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/AppUiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/ReportsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/ReportsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dao/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/DtoUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/DtoUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/InventoryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/InventoryDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/InventoryReportDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/OrderItemDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/OrderItemDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/ReportsDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/ReportsDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/helper/InventoryReportHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/helper/SalesReportHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/model/InventoryReportData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/model/InventoryReportData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/model/InventoryReportForm.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/pojo/InventoryPojo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/pojo/InventoryPojo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/service/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/service/InventoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/brandsReport.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/brandsReport.js" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

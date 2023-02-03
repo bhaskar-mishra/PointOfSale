@@ -68,7 +68,11 @@ public class BrandService {
     }
 
     public BrandPojo selectByBrandCategory(String brand,String category) throws ApiException{
-        return brandDao.selectByBrandCategory(brand,category);
+        BrandPojo brandPojo =  brandDao.selectByBrandCategory(brand,category);
+        if(brandPojo==null){
+            throw new ApiException("brand category doesn't exist");
+        }
+        return  brandPojo;
     }
 
 

@@ -16,9 +16,6 @@ import java.util.List;
 public class InventoryController {
 
     @Autowired
-    private InventoryService inventoryService;
-
-    @Autowired
     private InventoryDto inventoryDto;
 
     @ApiOperation(value = "Adds a product to the inventory")
@@ -37,22 +34,6 @@ public class InventoryController {
     @RequestMapping(path = "/api/inventory/{barcode}")
     public InventoryData getInventory(@PathVariable String barcode) throws ApiException{
         return inventoryDto.getInventory(barcode);
-    }
-
-
-    // It prints inventory of all the products
-    @ApiOperation("Gets inventory details of all products")
-    @RequestMapping(path = "/api/inventory/getInventoryAll",method = RequestMethod.GET)
-    public List<InventoryReportData> getInventoryDetails() throws ApiException{
-        return inventoryDto.getInventoryDetailsOfAllProducts();
-    }
-
-
-    //prints inventory of products input by the user
-    @ApiOperation("Gets inventory report on userInput")
-    @RequestMapping(path = "/api/inventory/inventoryReport",method = RequestMethod.POST)
-    public List<InventoryReportData> getInventoryReport(@RequestBody InventoryReportForm inventoryReportForm) throws ApiException{
-        return inventoryDto.getInventoryReport(inventoryReportForm);
     }
 
     @ApiOperation("Updates inventory report")

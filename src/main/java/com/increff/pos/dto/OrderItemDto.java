@@ -40,7 +40,7 @@ public class OrderItemDto {
         ProductPojo productPojo = productService.selectByBarcode(orderItemForm.getBarcode());
         //normalizes barcode
         orderItemForm.setBarcode(orderItemForm.getBarcode().toLowerCase().trim());
-        InventoryPojo inventoryPojo = inventoryService.getInventoryById(productPojo.getId());
+        InventoryPojo inventoryPojo = inventoryService.getInventoryByProductId(productPojo.getId());
 
         //checks if input quantity is exceeding the available limit
         if(inventoryPojo.getQuantity()< orderItemForm.getQuantity()){
@@ -65,7 +65,7 @@ public class OrderItemDto {
         }
         ProductPojo productPojo = productService.selectByBarcode(editOrderItemForm.getBarcode());
         OrderItemPojo orderItemPojo = orderItemService.getByOrderAndProductId(orderPojo.getOrderId(),productPojo.getId());
-        InventoryPojo inventoryPojo = inventoryService.getInventoryById(orderItemPojo.getProductId());
+        InventoryPojo inventoryPojo = inventoryService.getInventoryByProductId(orderItemPojo.getProductId());
         Integer quantityAvailable = inventoryPojo.getQuantity()+orderItemPojo.getQuantity();
         if(quantityAvailable<editOrderItemForm.getQuantity()){
             throw new ApiException("Available samples : "+quantityAvailable);
@@ -82,7 +82,7 @@ public class OrderItemDto {
             throw new ApiException("invalid orderItemId");
         }
         OrderItemPojo orderItemPojo = orderItemService.getOrderItemById(id);
-        ProductPojo productPojo = productService.selectById(orderItemPojo.getProductId());
+        ProductPojo productPojo = productService.selectByProductId(orderItemPojo.getProductId());
         return DtoUtils.convertOrderItemPojoToData(orderItemPojo,productPojo.getProduct(),productPojo.getBarcode());
     }
 
@@ -93,7 +93,7 @@ public class OrderItemDto {
         List<OrderItemPojo> orderItemPojoList = orderItemService.getAllItemsById(orderPojo.getOrderId());
         List<OrderItemData> orderItemDataList = new ArrayList<>();
         for(OrderItemPojo orderItemPojo : orderItemPojoList){
-            ProductPojo productPojo = productService.selectById(orderItemPojo.getProductId());
+            ProductPojo productPojo = productService.selectByProductId(orderItemPojo.getProductId());
             orderItemDataList.add(DtoUtils.convertOrderItemPojoToData(orderItemPojo,productPojo.getProduct(),productPojo.getBarcode()));
         }
 
@@ -127,7 +127,7 @@ public class OrderItemDto {
             throw new ApiException("Order already placed! Item can't be deleted");
         }
 
-        InventoryPojo inventoryPojo = inventoryService.getInventoryById(orderItemPojo.getProductId());
+        InventoryPojo inventoryPojo = inventoryService.getInventoryByProductId(orderItemPojo.getProductId());
         inventoryPojo.setQuantity(inventoryPojo.getQuantity()+orderItemPojo.getQuantity());
         orderItemService.deleteOrderItemById(orderItemId);
     }
