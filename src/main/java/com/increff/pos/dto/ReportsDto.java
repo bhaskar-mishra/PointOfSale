@@ -10,13 +10,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ReportsDto {
@@ -40,20 +40,21 @@ public class ReportsDto {
           validateSalesReportForm(salesReportForm);
           salesReportForm.setBrand(salesReportForm.getBrand().toLowerCase().trim());
           salesReportForm.setCategory(salesReportForm.getCategory().toLowerCase().trim());
-          ZonedDateTimeConverter zonedDateTimeConverter = new ZonedDateTimeConverter();
-          ZonedDateTime startDateTime;
-          try{
-              startDateTime = zonedDateTimeConverter.convert(salesReportForm.getStartDate());
-          }catch (Exception exception){
-              throw new ApiException("input valid dates");
-          }
-          ZonedDateTime endDateTime;
-          zonedDateTimeConverter = new ZonedDateTimeConverter();
-          try{
-              endDateTime = zonedDateTimeConverter.convert(salesReportForm.getEndDate());
-          }catch (Exception exception){
-              throw new ApiException("input valid dates");
-          }
+          salesReportForm.setStartDate(salesReportForm.getStartDate().trim());
+          salesReportForm.setEndDate(salesReportForm.getEndDate().trim());
+
+
+        ZonedDateTime startDateTime;
+        ZonedDateTime endDateTime;
+        try{
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            startDateTime = LocalDate.parse(salesReportForm.getStartDate(), dtf).atStartOfDay(ZoneId.systemDefault());
+            endDateTime = LocalDate.parse(salesReportForm.getEndDate(), dtf).atStartOfDay(ZoneId.systemDefault()).withHour(23).withMinute(59).withSecond(59);
+
+        }catch (Exception exception){
+            throw new ApiException("enter valid dates");
+        }
+
 
 
           List<OrderPojo> orderPojoList = orderService.selectOrderWithDateFilter(startDateTime,endDateTime);
@@ -65,9 +66,9 @@ public class ReportsDto {
               for(OrderItemPojo orderItemPojo : orderItemPojoList){
                   ProductPojo productPojo = productService.selectById(orderItemPojo.getProductId());
 
-                  if((salesReportForm.getBrand().equals("ALL")
+                  if((salesReportForm.getBrand().equals("all")
                           || salesReportForm.getBrand().equals(productPojo.getBrand()))
-                  && (salesReportForm.getCategory().equals("ALL")
+                  && (salesReportForm.getCategory().equals("all")
                   || (salesReportForm.getCategory().equals(productPojo.getCategory())))){
                       addToSalesReport(salesReportMap,orderItemPojo,productPojo.getBrand(),productPojo.getCategory());
                   }
@@ -82,6 +83,10 @@ public class ReportsDto {
           }
 
           return salesReportDataList;
+
+    }
+
+    private void validateDate(SalesReportForm salesReportForm) throws ApiException{
 
     }
 
