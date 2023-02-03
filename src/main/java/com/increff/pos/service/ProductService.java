@@ -42,7 +42,7 @@ public class ProductService {
     @Transactional
     public List<ProductPojo> selectByBrandCategoryId(Integer brandCategoryId) throws ApiException{
         List<ProductPojo> productPojoList = productDao.selectByBrandCategoryId(brandCategoryId);
-        if(productPojoList==null || productPojoList.size()==0){
+        if(productPojoList==null){
             throw new ApiException("invalid brandCategoryId");
         }
 

@@ -172,8 +172,6 @@ public class DtoUtils {
         InventoryPojo inventoryPojo = new InventoryPojo();
         inventoryPojo.setProductId(id);
         inventoryPojo.setQuantity(inventoryForm.getQuantity());
-        inventoryPojo.setBarcode("");
-        inventoryPojo.setProduct("");
         return inventoryPojo;
     }
 

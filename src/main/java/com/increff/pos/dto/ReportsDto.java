@@ -112,8 +112,13 @@ public class ReportsDto {
         List<ProductPojo> productPojoList = productService.selectByBrandCategoryId(brandPojo.getId());
         InventoryReportData inventoryReportData = new InventoryReportData();
         for(ProductPojo productPojo : productPojoList){
-            InventoryPojo inventoryPojo = inventoryService.getInventoryByProductId(productPojo.getId());
-            quantity+= inventoryPojo.getQuantity();
+            try{
+                InventoryPojo inventoryPojo = inventoryService.getInventoryByProductId(productPojo.getId());
+                quantity+= inventoryPojo.getQuantity();
+            }catch (Exception exception){
+
+            }
+
         }
         inventoryReportData.setBrand(brandPojo.getBrand());
         inventoryReportData.setCategory(brandPojo.getCategory());

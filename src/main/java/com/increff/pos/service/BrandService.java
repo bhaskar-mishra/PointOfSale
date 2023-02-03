@@ -46,11 +46,13 @@ public class BrandService {
 
         BrandPojo pojo = brandDao.selectByBrandCategory(brand, category);
 
-        if(id.equals(pojo.getId())){
+        if(pojo!=null && !id.equals(pojo.getId()))
+            throw new ApiException("Brand category Combination already exists");
+
+
+        if(pojo!=null && id.equals(pojo.getId())){
             return ;
         }
-        if(pojo!=null)
-            throw new ApiException("Brand category Combination already exists");
 
         pojo = brandDao.selectById(id);
 

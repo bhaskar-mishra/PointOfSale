@@ -1,5 +1,8 @@
 var product_barcode;
+
 var quantity;
+
+
 function getInventoryUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/inventory";
@@ -224,7 +227,6 @@ function init(){
     $('#process-data').click(processData);
     $('#download-errors').click(downloadErrors);
     $('#inventoryFile').on('change', updateFileName)
-//	$('#refresh-data').click(getUserList);
 }
 
 $(document).ready(init);

@@ -13,8 +13,6 @@ import java.util.List;
 @Repository
 public class InventoryDao extends AbstractDao{
 
-    private static String SELECT_BY_BARCODE = "select p from InventoryPojo p where barcode=:barcode";
-    private static String UPDATE = "update InventoryPojo set quantity=:quantity where id=:id";
     private static String SELECT_ALL = "select p from InventoryPojo p";
 
     private static String SELECT_BY_ID = "select p from InventoryPojo p where id=:id";

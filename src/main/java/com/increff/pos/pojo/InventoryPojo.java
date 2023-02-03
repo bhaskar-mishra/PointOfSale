@@ -11,15 +11,9 @@ import javax.persistence.*;
 @Setter
 @Table(name = "inventory_table")
 public class InventoryPojo extends AbstractDatePojo {
-
-
     @Id
     private Integer productId;
-
-    private String barcode;
-
     @NotNull
     private Integer quantity;
 
-    private String product;
 }

@@ -78,7 +78,7 @@ console.log("Working fine till here");
 
 function addBrandOptions()
 {
-  var url = getProductUrl() + "/api/brand/allBrands";
+  var url = getProductUrl() + "/api/brand";
   $.ajax({
   	   url: url,
   	   type: 'GET',
@@ -95,7 +95,7 @@ function addBrandsToDropDown(data){
   for(var i in data)
   {
    var e = data[i];
-   selectElement.add(new Option(e));
+   selectElement.add(new Option(e.brand));
   }
 }
 
@@ -127,7 +127,7 @@ var selectElement = document.getElementById('inputCategory');
 for(var i in data)
 {
 var e = data[i];
-selectElement.add(new Option(e));
+selectElement.add(new Option(e.category));
 }
 
 }

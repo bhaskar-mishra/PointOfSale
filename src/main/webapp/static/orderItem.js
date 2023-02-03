@@ -67,6 +67,7 @@ function placeOrder(event){
  	   url: url,
  	   type: 'PUT',
  	   success: function() {
+ 	   status = "PLACED"
  	   var element = document.getElementById('place-order');
  	   element.style.display = "none";
  	   var form = document.getElementById('orderItem-form');

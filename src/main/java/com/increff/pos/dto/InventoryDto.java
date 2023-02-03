@@ -27,7 +27,6 @@ public class InventoryDto {
         normalize(inventoryForm);
         ProductPojo productPojo = productService.selectByBarcode(inventoryForm.getBarcode());
         InventoryPojo inventoryPojo = DtoUtils.convertInventoryFormToPojo(inventoryForm,productPojo.getId());
-        inventoryPojo.setProduct(productPojo.getProduct()); // delete product field from inventory and therefore this line
         inventoryService.add(inventoryPojo);
     }
 

@@ -15,7 +15,7 @@ public class InventoryService {
 
     @Transactional
     public void add(InventoryPojo inventoryPojo) throws ApiException{
-             InventoryPojo inventoryPojo1 = inventoryDao.selectByBarcode(inventoryPojo.getBarcode());
+             InventoryPojo inventoryPojo1 = inventoryDao.selectById(inventoryPojo.getProductId());
              if(inventoryPojo1!=null){
                  inventoryPojo1.setQuantity(inventoryPojo1.getQuantity()+ inventoryPojo.getQuantity());
              }else {
