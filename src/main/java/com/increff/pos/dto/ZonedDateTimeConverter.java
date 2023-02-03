@@ -11,7 +11,6 @@ public class ZonedDateTimeConverter implements Converter<String, ZonedDateTime> 
 
     @Override
     public ZonedDateTime convert(String source) {
-        System.out.println("ZonedDateTime converter called");
         try {
             if (source == null) {
                 return null;

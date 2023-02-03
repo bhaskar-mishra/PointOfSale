@@ -38,7 +38,6 @@ public class ReportsDto {
 
     public List<SalesReportData> getSalesReport(SalesReportForm salesReportForm) throws ApiException{
           validateSalesReportForm(salesReportForm);
-          System.out.println("salesReportForm validated");
           salesReportForm.setBrand(salesReportForm.getBrand().toLowerCase().trim());
           salesReportForm.setCategory(salesReportForm.getCategory().toLowerCase().trim());
           ZonedDateTimeConverter zonedDateTimeConverter = new ZonedDateTimeConverter();
@@ -56,13 +55,6 @@ public class ReportsDto {
               throw new ApiException("input valid dates");
           }
 
-        BrandPojo brandPojo = brandService.selectByBrandCategory(salesReportForm.getBrand(), salesReportForm.getCategory());
-          if(brandPojo==null){
-              throw new ApiException("invalid brand category");
-          }
-
-          System.out.println("startDateTime : "+startDateTime);
-          System.out.println("endDateTime : "+endDateTime);
 
           List<OrderPojo> orderPojoList = orderService.selectOrderWithDateFilter(startDateTime,endDateTime);
 

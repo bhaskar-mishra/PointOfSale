@@ -107,7 +107,7 @@ var json = toJson($form);
 
 
 function displayReport(data){
-	console.log('Printing user data');
+	console.log('Printing sales report');
 	var $tbody = $('#sales-report-table').find('tbody');
 	$tbody.empty();
 	var serialNo = 1;
