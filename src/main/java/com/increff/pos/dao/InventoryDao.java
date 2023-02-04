@@ -17,8 +17,6 @@ public class InventoryDao extends AbstractDao{
 
     private static String SELECT_BY_ID = "select p from InventoryPojo p where id=:id";
 
-    @Autowired
-    private ProductDao productDao;
 
     @Transactional
     public void insert(InventoryPojo inventoryPojo) {
@@ -31,10 +29,6 @@ public class InventoryDao extends AbstractDao{
         return getSingle(query);
     }
 
-    public InventoryPojo selectByBarcode(String barcode){
-        ProductPojo productPojo = productDao.selectByBarcode(barcode);
-        return selectById(productPojo.getId());
-    }
 
     public List<InventoryPojo> selectAll() {
         TypedQuery<InventoryPojo> query = getQuery(SELECT_ALL, InventoryPojo.class);

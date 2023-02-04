@@ -9,7 +9,7 @@ public class AboutAppServiceTest extends AbstractUnitTest {
 
 	@Autowired
 	private AboutAppService service;
-
+	
 	@Test
 	public void testServiceApis() {
 		assertEquals("Employee Application", service.getName());

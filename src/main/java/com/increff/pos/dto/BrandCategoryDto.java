@@ -46,15 +46,6 @@ public class BrandCategoryDto {
     }
 
 
-    public List<String> getAllBrands() throws ApiException{
-        return brandService.getAllBrands();
-    }
-
-    public List<String> getAllCategories() throws ApiException{
-        return  brandService.getAllCategories();
-    }
-
-
     public List<BrandCategoryData> getAllBrandCategories() throws ApiException{
         List<BrandPojo> brandPojoList = brandService.getAllBrandCategories();
         List<BrandCategoryData> brandCategoryDataList = new ArrayList<>();
@@ -79,8 +70,20 @@ public class BrandCategoryDto {
         return brandCategoryDataList;
     }
 
+    public BrandPojo getByBrandCategory(String brand,String category) throws ApiException {
+        if(brand==null || category==null){
+            throw new ApiException("Invalid brand category");
+        }
 
-    private void normalize(BrandForm brandForm) {
+        if(brand.toLowerCase().trim().equals("") || category.toLowerCase().trim().equals("")){
+            throw new ApiException("Invalid brand category");
+        }
+        brand = brand.toLowerCase().trim();
+        category = category.toLowerCase().trim();
+        return brandService.selectByBrandCategory(brand,category);
+    }
+
+    protected void normalize(BrandForm brandForm) {
         brandForm.setBrand(brandForm.getBrand().toLowerCase().trim());
         brandForm.setCategory(brandForm.getCategory().toLowerCase().trim());
     }
