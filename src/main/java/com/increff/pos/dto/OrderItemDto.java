@@ -89,6 +89,9 @@ public class OrderItemDto {
 
 
     public List<OrderItemData> getOrderItemsByCode(String orderCode) throws ApiException{
+        if(orderCode==null || orderCode.trim().equals("")){
+            throw new ApiException("unknown orderCode");
+        }
         OrderPojo orderPojo = orderService.getOrderByOrderCode(orderCode);//this is to check if orderCode is valid
         List<OrderItemPojo> orderItemPojoList = orderItemService.getAllItemsById(orderPojo.getOrderId());
         List<OrderItemData> orderItemDataList = new ArrayList<>();
