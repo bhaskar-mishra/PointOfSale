@@ -241,6 +241,9 @@
     <SUITE FILE_PATH="coverage/pos$ProductDtoTest.ic" NAME="ProductDtoTest Coverage Results" MODIFIED="1675605007372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.pos.dto.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/pos$OrderDtoTest.ic" NAME="OrderDtoTest Coverage Results" MODIFIED="1675618108053" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.increff.pos.dto.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/pos$OrderDtoTest_convertOrderPojoToDataTest.ic" NAME="OrderDtoTest.convertOrderPojoToDataTest Coverage Results" MODIFIED="1675617435489" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.pos.dto.*</FILTER>
     </SUITE>
