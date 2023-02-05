@@ -187,6 +187,10 @@ public class DtoUtils {
         return inventoryPojo;
     }
 
+    protected static void normalizeInventoryForm(InventoryForm inventoryForm){
+        inventoryForm.setBarcode(inventoryForm.getBarcode().toLowerCase().trim());
+    }
+
     //ORDER DTO INVOKES THESE METHODS
     protected static OrderData convertOrderPojoToData(OrderPojo orderPojo) throws ApiException{
         OrderData orderData = new OrderData();

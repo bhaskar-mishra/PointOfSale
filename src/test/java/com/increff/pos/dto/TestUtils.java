@@ -1,9 +1,15 @@
 package com.increff.pos.dto;
 
+import com.increff.pos.model.BrandForm;
 import com.increff.pos.model.ProductEditForm;
 import com.increff.pos.model.ProductForm;
 
 public class TestUtils {
+
+    protected static void setBrandForm(BrandForm brandForm,String brand,String category){
+        brandForm.setBrand(brand);
+        brandForm.setCategory(category);
+    }
 
     protected static void setProductForm(ProductForm productForm,String brand,String category,String barcode, String product, Double price){
         productForm.setProduct(product);

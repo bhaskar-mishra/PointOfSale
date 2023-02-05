@@ -156,6 +156,7 @@ public class ProductDtoTest extends AbstractUnitTest {
     public void validateProductFormBarcodeNullTest() throws ApiException{
         ProductForm productForm = new ProductForm();
         TestUtils.setProductForm(productForm,"puma","clothing",null,"jockey",Double.valueOf(25.2));
+        DtoUtils.validateProductForm(productForm);
     }
 
     @Test(expected = ApiException.class)

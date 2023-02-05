@@ -24,7 +24,7 @@ public class InventoryDto {
 
     public void addInventory(InventoryForm inventoryForm) throws ApiException{
         DtoUtils.validateInventoryForm(inventoryForm);
-        normalize(inventoryForm);
+        DtoUtils.normalizeInventoryForm(inventoryForm);
         ProductPojo productPojo = productService.selectByBarcode(inventoryForm.getBarcode());
         InventoryPojo inventoryPojo = DtoUtils.convertInventoryFormToPojo(inventoryForm,productPojo.getId());
         inventoryService.add(inventoryPojo);
@@ -45,7 +45,7 @@ public class InventoryDto {
     @Transactional
     public void updateInventory(InventoryForm inventoryForm) throws ApiException{
         DtoUtils.validateInventoryForm(inventoryForm);
-        normalize(inventoryForm);
+        DtoUtils.normalizeInventoryForm(inventoryForm);
         ProductPojo productPojo = productService.selectByBarcode(inventoryForm.getBarcode());
         inventoryService.updateInventory(productPojo.getId(),inventoryForm.getQuantity());
     }
@@ -59,42 +59,6 @@ public class InventoryDto {
         }
         return inventoryDataList;
     }
-
-    private void normalize(InventoryForm inventoryForm){
-        inventoryForm.setBarcode(inventoryForm.getBarcode().toLowerCase().trim());
-    }
-
-
-
-
-//    @Transactional
-//    public List<InventoryReportData> getInventoryDetailsOfAllProducts() throws ApiException{
-//        List<InventoryReportData> inventoryReportDataList = new ArrayList<>();
-//        List<ProductPojo> productPojoList = productDao.selectAll();
-//        for(ProductPojo productPojo : productPojoList){
-//            InventoryPojo inventoryPojo = inventoryDao.selectByBarcode(productPojo.getBarcode());
-//            Integer quantity;
-//            if(inventoryPojo==null){
-//                quantity = 0;
-//            }else {
-//                quantity = inventoryPojo.getQuantity();
-//            }
-//            inventoryReportDataList.add(convertProductToInventoryReportData(productPojo,quantity));
-//        }
-//        return inventoryReportDataList;
-//    }
-
-//    @Transactional
-//    public List<InventoryReportData> getInventoryReport(InventoryReportForm inventoryReportForm) throws ApiException{
-//            normalize(inventoryReportForm);
-//            List<InventoryReportHelper> inventoryReportHelperList = inventoryService.getInventoryReport(inventoryReportForm);
-//            List<InventoryReportData> inventoryReportDataList = new ArrayList<>();
-//            for(InventoryReportHelper inventoryReportHelper : inventoryReportHelperList){
-//                inventoryReportDataList.add(convertInventoryReportFormToData(inventoryReportHelper.getInventoryReportForm(), inventoryReportHelper.getQuantity()));
-//            }
-//
-//            return inventoryReportDataList;
-//    }
 
 
 
