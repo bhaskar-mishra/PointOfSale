@@ -89,19 +89,19 @@ public class DtoUtils {
         productPojo.setProduct(productForm.getProduct());
         productPojo.setBarcode(productForm.getBarcode());
         productPojo.setMrp(productForm.getMrp());
-        productPojo.setBrand(productForm.getBrand());
-        productPojo.setCategory(productForm.getCategory());
+        productPojo.setBrand("");
+        productPojo.setCategory("");
         productPojo.setBrandCategoryId(brandCategoryId);
         return productPojo;
     }
 
-    protected static ProductData convertProductPojoToData(ProductPojo productPojo){
+    protected static ProductData convertProductPojoToData(ProductPojo productPojo,String brand,String category){
         ProductData productData = new ProductData();
         productData.setProduct(productPojo.getProduct());
         productData.setMrp(productPojo.getMrp());
         productData.setBarcode(productPojo.getBarcode());
-        productData.setBrand(productPojo.getBrand());
-        productData.setCategory(productPojo.getCategory());
+        productData.setBrand(brand);
+        productData.setCategory(category);
         return productData;
     }
 
@@ -131,6 +131,18 @@ public class DtoUtils {
         if(productEditForm.getMRP().compareTo(0.0)<=0){
             throw new ApiException("invalid mrp : mrp should be a positive numeric value");
         }
+    }
+
+    protected static void normalizeProductForm(ProductForm productForm){
+        productForm.setProduct(productForm.getProduct().toLowerCase().trim());
+        productForm.setBrand(productForm.getBrand().toLowerCase().trim());
+        productForm.setCategory(productForm.getCategory().toLowerCase().trim());
+        productForm.setBarcode(productForm.getBarcode().toLowerCase().trim());
+    }
+
+    protected static void normalizeProductEditForm(ProductEditForm productEditForm){
+        productEditForm.setProduct(productEditForm.getProduct().toLowerCase().trim());
+        productEditForm.setBarcode(productEditForm.getBarcode().toLowerCase().trim());
     }
 
 
@@ -192,7 +204,7 @@ public class DtoUtils {
 
     //ORDER ITEM DTO INVOKES THESE METHODS
 
-    protected static void validate(OrderItemForm orderItemForm) throws ApiException{
+    protected static void validateOrderItemForm(OrderItemForm orderItemForm) throws ApiException{
         if(orderItemForm==null){
             throw new ApiException("invalid request : no input");
         }

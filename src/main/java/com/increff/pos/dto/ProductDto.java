@@ -25,7 +25,7 @@ public class ProductDto {
 
     public void addProduct(ProductForm productForm) throws ApiException{
         DtoUtils.validateProductForm(productForm);
-        normalize(productForm);
+        DtoUtils.normalizeProductForm(productForm);
         BrandPojo brandPojo = brandService.selectByBrandCategory(productForm.getBrand(),productForm.getCategory());
         if(brandPojo==null){
             throw new ApiException("incorrect brand category");
@@ -37,7 +37,9 @@ public class ProductDto {
         List<ProductPojo> productPojoList = productService.getAll();
         List<ProductData> productDataList = new ArrayList<>();
         for(ProductPojo productPojo : productPojoList){
-            productDataList.add(DtoUtils.convertProductPojoToData(productPojo));
+            BrandPojo brandPojo = brandService.getBrandCategoryById(productPojo.getBrandCategoryId());
+
+            productDataList.add(DtoUtils.convertProductPojoToData(productPojo,brandPojo.getBrand(),brandPojo.getCategory()));
         }
 
         return productDataList;
@@ -47,33 +49,22 @@ public class ProductDto {
         if(barcode==null || barcode.toLowerCase().trim().equals("")){
             throw new ApiException("invalid barcode");
         }
-
+        barcode = barcode.toLowerCase().trim();
         ProductPojo productPojo = productService.selectByBarcode(barcode);
         if(productPojo==null){
             throw new ApiException("invalid barcode");
         }
 
-       return DtoUtils.convertProductPojoToData(productPojo);
+        BrandPojo brandPojo = brandService.getBrandCategoryById(productPojo.getBrandCategoryId());
+
+
+       return DtoUtils.convertProductPojoToData(productPojo,brandPojo.getBrand(),brandPojo.getCategory());
     }
 
     public void updateProduct(ProductEditForm productEditForm) throws ApiException{
         DtoUtils.validateProductEditForm(productEditForm);
-        normalize(productEditForm);
+        DtoUtils.normalizeProductEditForm(productEditForm);
         productService.updateProduct(productEditForm);
     }
 
-
-
-
-
-    private void normalize(ProductForm productForm){
-        productForm.setProduct(productForm.getProduct().toLowerCase().trim());
-        productForm.setBrand(productForm.getBrand().toLowerCase().trim());
-        productForm.setCategory(productForm.getCategory().toLowerCase().trim());
-        productForm.setBarcode(productForm.getBarcode().toLowerCase().trim());
-    }
-
-    private void normalize(ProductEditForm productEditForm){
-        productEditForm.setProduct(productEditForm.getProduct().toLowerCase().trim());
-    }
 }

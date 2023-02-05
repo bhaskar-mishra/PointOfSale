@@ -5,12 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f38d5da-046b-46f0-90f5-09d274d64e0e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/increff/pos/dto/BrandCategoryDtoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/increff/pos/dto/ProductDtoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/increff/pos/dto/TestUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dao/InventoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dao/InventoryDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/BrandCategoryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/BrandCategoryDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/pos/service/AboutAppServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/pos/service/AboutAppServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/pos/service/QaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/pos/service/QaConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dao/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/DtoUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/DtoUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/OrderItemDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/OrderItemDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/ProductDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/ReportsDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/ReportsDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/pojo/ProductPojo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/pojo/ProductPojo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +47,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2JRcZMyraP5dGQJ84yD7kglRhUC" />
   <component name="ProjectViewState">
@@ -89,8 +92,8 @@
       <command value="mvn clean install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.BrandCategoryDtoTest.convertBrandPojoToData">
-    <configuration name="BrandCategoryDtoTest.convertBrandFormToPojoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ProductDtoTest.convertProductPojoToDataTest">
+    <configuration name="ProductDtoTest.convertProductFromToPojoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -99,14 +102,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.pos.dto" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.pos.dto.BrandCategoryDtoTest" />
-      <option name="METHOD_NAME" value="convertBrandFormToPojoTest" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.pos.dto.ProductDtoTest" />
+      <option name="METHOD_NAME" value="convertProductFromToPojoTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BrandCategoryDtoTest.convertBrandPojoToData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductDtoTest.convertProductPojoToDataTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -115,14 +118,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.pos.dto" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.pos.dto.BrandCategoryDtoTest" />
-      <option name="METHOD_NAME" value="convertBrandPojoToData" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.pos.dto.ProductDtoTest" />
+      <option name="METHOD_NAME" value="convertProductPojoToDataTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BrandCategoryDtoTest.getAllBrandCategoriesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductDtoTest.validateProductEditFormEmptyBarcodeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -131,14 +134,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.pos.dto" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.pos.dto.BrandCategoryDtoTest" />
-      <option name="METHOD_NAME" value="getAllBrandCategoriesTest" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.pos.dto.ProductDtoTest" />
+      <option name="METHOD_NAME" value="validateProductEditFormEmptyBarcodeTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BrandCategoryDtoTest.getBrandCategoryById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductDtoTest.validateProductEditFormNullBarcodeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -147,14 +150,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.pos.dto" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.pos.dto.BrandCategoryDtoTest" />
-      <option name="METHOD_NAME" value="getBrandCategoryById" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.pos.dto.ProductDtoTest" />
+      <option name="METHOD_NAME" value="validateProductEditFormNullBarcodeTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BrandCategoryDtoTest.updateBrandCategoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductDtoTest.validateProductEditFormNullMrp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -163,8 +166,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.pos.dto" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.pos.dto.BrandCategoryDtoTest" />
-      <option name="METHOD_NAME" value="updateBrandCategoryTest" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.pos.dto.ProductDtoTest" />
+      <option name="METHOD_NAME" value="validateProductEditFormNullMrp" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -196,20 +199,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.BrandCategoryDtoTest.convertBrandFormToPojoTest" />
-      <item itemvalue="JUnit.BrandCategoryDtoTest.convertBrandPojoToData" />
-      <item itemvalue="JUnit.BrandCategoryDtoTest.getAllBrandCategoriesTest" />
-      <item itemvalue="JUnit.BrandCategoryDtoTest.getBrandCategoryById" />
-      <item itemvalue="JUnit.BrandCategoryDtoTest.updateBrandCategoryTest" />
+      <item itemvalue="JUnit.ProductDtoTest.convertProductFromToPojoTest" />
+      <item itemvalue="JUnit.ProductDtoTest.convertProductPojoToDataTest" />
+      <item itemvalue="JUnit.ProductDtoTest.validateProductEditFormEmptyBarcodeTest" />
+      <item itemvalue="JUnit.ProductDtoTest.validateProductEditFormNullBarcodeTest" />
+      <item itemvalue="JUnit.ProductDtoTest.validateProductEditFormNullMrp" />
       <item itemvalue="Maven.employee-spring-full [jetty:run]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BrandCategoryDtoTest.convertBrandPojoToData" />
-        <item itemvalue="JUnit.BrandCategoryDtoTest.convertBrandFormToPojoTest" />
-        <item itemvalue="JUnit.BrandCategoryDtoTest.getBrandCategoryById" />
-        <item itemvalue="JUnit.BrandCategoryDtoTest.updateBrandCategoryTest" />
-        <item itemvalue="JUnit.BrandCategoryDtoTest.getAllBrandCategoriesTest" />
+        <item itemvalue="JUnit.ProductDtoTest.convertProductPojoToDataTest" />
+        <item itemvalue="JUnit.ProductDtoTest.convertProductFromToPojoTest" />
+        <item itemvalue="JUnit.ProductDtoTest.validateProductEditFormNullMrp" />
+        <item itemvalue="JUnit.ProductDtoTest.validateProductEditFormEmptyBarcodeTest" />
+        <item itemvalue="JUnit.ProductDtoTest.validateProductEditFormNullBarcodeTest" />
       </list>
     </recent_temporary>
   </component>

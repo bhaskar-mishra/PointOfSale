@@ -160,7 +160,7 @@ public class ReportsDto {
         return convertToSchedulerData(schedulerPojoList);
     }
 
-    @Scheduled(cron = "0 0 * * * *")
+    @Scheduled(cron = "0 * * * * *")
     public void createDailyReport() throws ApiException {
         SchedulerPojo schedulerPojo = new SchedulerPojo();
         LocalDate date = LocalDate.now();
@@ -168,19 +168,17 @@ public class ReportsDto {
         Integer totalItems = 0;
         Double totalRevenue = 0.0;
 
-        String startDate = null;
-        String endDate = null;
-
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-            startDate = LocalDate.parse(date.toString(), formatter).atStartOfDay().toString();
-            endDate = LocalDate.parse(date.toString(), formatter).atTime(23, 59, 59).toString();
-        } catch (Exception e) {
-            throw new ApiException(e.getMessage());
+        ZonedDateTime startDateTime;
+        ZonedDateTime endDateTime;
+        try{
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            startDateTime = LocalDate.parse(date.toString(), dtf).atStartOfDay(ZoneId.systemDefault());
+            endDateTime = LocalDate.parse(date.toString(), dtf).atStartOfDay(ZoneId.systemDefault()).withHour(23).withMinute(59).withSecond(59);
+        }catch (Exception exception){
+            throw new ApiException("enter valid dates");
         }
 
-        List<OrderPojo> orderPojoList = orderService.selectOrderWithDateFilter(startDate, endDate);
+        List<OrderPojo> orderPojoList = orderService.selectOrderWithDateFilter(startDateTime, endDateTime);
 
         Integer totalOrders = orderPojoList.size();
 
@@ -199,10 +197,12 @@ public class ReportsDto {
         schedulerPojo.setInvoicedOrdersCount(totalOrders);
 
         SchedulerPojo pojo = schedulerService.selectByDate(date.toString());
-        if (pojo == null)
+        if (pojo == null) {
             schedulerService.addSchedule(schedulerPojo);
-        else
+        }
+        else {
             schedulerService.update(schedulerPojo, pojo.getDate());
+        }
     }
 
     private List<SchedulerData> convertToSchedulerData(List<SchedulerPojo> schedulerPojoList) throws ApiException {
@@ -218,7 +218,5 @@ public class ReportsDto {
 
         return schedulerDataList;
     }
-
-
 
 }

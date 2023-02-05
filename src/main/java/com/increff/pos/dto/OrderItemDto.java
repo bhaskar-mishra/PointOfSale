@@ -32,7 +32,7 @@ public class OrderItemDto {
 
 
     public void addItem(OrderItemForm orderItemForm) throws ApiException {
-        DtoUtils.validate(orderItemForm);
+        DtoUtils.validateOrderItemForm(orderItemForm);
 
         //throws an exception if orderCode is incorrect
         OrderPojo orderPojo = orderService.getOrderByOrderCode(orderItemForm.getOrderCode());
