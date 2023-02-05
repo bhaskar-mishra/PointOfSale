@@ -53,26 +53,4 @@ public class OrderDto {
 
 
 
-
-
-
-//    public OrderData getOrderWtihGivenRandomKey(String randomKey) throws ApiException{
-//        OrderPojo orderPojo = orderService.getOrderByOrderCode(randomKey);
-//        return DtoUtils.convertOrderPojoToData(orderPojo);
-//    }
-//    public static OrderItemPojo convert(OrderItemForm orderItemForm,String product,Integer orderId) throws ApiException
-//    {
-//        OrderItemPojo orderItemPojo = new OrderItemPojo();
-//        orderItemPojo.setProduct(product);
-//        orderItemPojo.setQuantity(orderItemForm.getQuantity());
-//        orderItemPojo.setPrice(orderItemForm.getPrice());
-//        orderItemPojo.setOrderId(orderId);
-//        orderItemPojo.setBarcode(orderItemForm.getBarcode());
-//        orderItemPojo.setRandomKey(orderItemForm.getRandomKey());
-//        return orderItemPojo;
-//    }
-
-
-
-
 }
