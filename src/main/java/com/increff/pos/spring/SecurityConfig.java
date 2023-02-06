@@ -2,6 +2,7 @@ package com.increff.pos.spring;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -25,6 +26,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/ui/**")//
 				.and().authorizeRequests()//
 				.antMatchers("/api/admin/**").hasAuthority("admin")//
+				.antMatchers(HttpMethod.GET, "/api/brand/**").hasAnyAuthority("admin","standard")//
+				.antMatchers("/api/brand/**").hasAuthority("admin")//
+				.antMatchers(HttpMethod.GET, "/api/product/**").hasAnyAuthority("admin","standard")//
+				.antMatchers("/api/product/**").hasAuthority("admin")//
+				.antMatchers(HttpMethod.GET, "/api/inventory/**").hasAnyAuthority("admin","standard")//
+				.antMatchers("/api/inventory/**").hasAuthority("admin")//
+				.antMatchers("/api/reports/**").hasAuthority("admin")//
+				.antMatchers("api/scheduler/**").hasAuthority("admin")//
+				.antMatchers("/ui/reports/**").hasAuthority("admin")//
 		//		.antMatchers("/api/**").hasAnyAuthority("admin", "standard")//
 				.antMatchers("/ui/admin/**").hasAuthority("admin")//
 				.antMatchers("/ui/**").hasAnyAuthority("admin", "standard")//

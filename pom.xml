@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.increff.training</groupId>
-	<artifactId>employee-spring-full</artifactId>
+	<artifactId>pos-spring-full</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
@@ -33,7 +33,7 @@
 		<!-- Jetty configuration -->
 		<jetty.version>9.4.21.v20190926</jetty.version>
 		<jetty.http.port>9000</jetty.http.port>
-		<jetty.context>/employee</jetty.context>
+		<jetty.context>/pos</jetty.context>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
 

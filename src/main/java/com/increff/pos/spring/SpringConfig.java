@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAsync
 @EnableScheduling
 @PropertySources({ //
-		@PropertySource(value = "file:./employee.properties", ignoreResourceNotFound = true) //
+		@PropertySource(value = "file:./pos.properties", ignoreResourceNotFound = true) //
 })
 public class SpringConfig {
 

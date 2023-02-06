@@ -9,9 +9,6 @@ public class DtoUtils {
 
     //METHODS INVOKED FROM BRAND DTO
     protected static void validateBrandForm(BrandForm brandForm) throws ApiException {
-        if(brandForm==null){
-            throw new ApiException("Invalid form");
-        }
 
         if(brandForm.getBrand()==null && brandForm.getCategory()==null){
             throw new ApiException("Invalid brand category");
@@ -45,9 +42,6 @@ public class DtoUtils {
 
     //METHODS INVOKED FROM PRODUCT DTO
     protected static void validateProductForm(ProductForm productForm) throws ApiException{
-        if(productForm==null){
-            throw new ApiException("productForm is null");
-        }
 
         if(productForm.getBrand()==null || productForm.getBrand().toLowerCase().trim().equals("")){
             throw new ApiException("invalid brand category");
@@ -106,9 +100,6 @@ public class DtoUtils {
     }
 
     protected static void validateProductEditForm(ProductEditForm productEditForm) throws ApiException{
-        if(productEditForm==null){
-            throw new ApiException("invalid request");
-        }
 
         if(productEditForm.getBarcode()==null || productEditForm.getBarcode().toLowerCase().equals("")){
             throw new ApiException("invalid barcode");
@@ -149,9 +140,6 @@ public class DtoUtils {
     //METHODS INVOKED FROM INVENTORY DTO
 
     protected static void validateInventoryForm(InventoryForm inventoryForm) throws ApiException{
-        if(inventoryForm==null){
-            throw new ApiException("invalid request (form is null)");
-        }
 
         if(inventoryForm.getBarcode()==null || inventoryForm.getBarcode().trim().equals("")){
             throw new ApiException("invalid barcode");
@@ -209,9 +197,6 @@ public class DtoUtils {
     //ORDER ITEM DTO INVOKES THESE METHODS
 
     protected static void validateOrderItemForm(OrderItemForm orderItemForm) throws ApiException{
-        if(orderItemForm==null){
-            throw new ApiException("invalid request : no input");
-        }
 
         if(orderItemForm.getOrderCode()==null
                 || orderItemForm.getOrderCode().trim().equals("")
@@ -277,9 +262,6 @@ public class DtoUtils {
 
     protected static void validateEditOrderItemForm(EditOrderItemForm editOrderItemForm) throws ApiException{
 
-        if(editOrderItemForm==null){
-            throw new ApiException("invalid edit request(form null)");
-        }
 
         if(editOrderItemForm.getOrderCode()==null
                 || editOrderItemForm.getOrderCode().trim().equals("")
