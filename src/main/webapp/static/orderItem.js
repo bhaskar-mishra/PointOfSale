@@ -122,7 +122,7 @@ function deleteOrderItem(id){
 // DownloadPDF METHODS
 function getInvoiceDetails(){
      var url = getOrderItemUrl();
-     url = url + "/api/getInvoice";
+     url = url + "/api/generateInvoice";
      url = url + "/" + orderCode;
 
      	$.ajax({

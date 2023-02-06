@@ -5,21 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f38d5da-046b-46f0-90f5-09d274d64e0e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/client/InvoiceClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/DownloadPdfController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/DownloadPdfDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee.properties" beforeDir="false" afterPath="$PROJECT_DIR$/pos.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/AbstractUiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/AbstractUiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/AppUiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/AppUiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/SiteUiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/SiteUiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/DtoUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/DtoUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/model/InfoData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/model/InfoData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/spring/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/spring/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/spring/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/spring/SpringConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/util/UserPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/util/UserPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/reports.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pos.properties" beforeDir="false" afterPath="$PROJECT_DIR$/pos.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/orderItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/orderItem.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,19 +51,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "/home/samarthprajapati/Increff_training/invoice",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/samarthprajapati/Increff_training/invoice&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/com/increff/employee/dao" />
