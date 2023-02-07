@@ -1,8 +1,7 @@
 package com.increff.pos.dto;
 
-import com.increff.pos.model.ProductData;
-import com.increff.pos.model.ProductEditForm;
-import com.increff.pos.model.ProductForm;
+import com.increff.pos.model.form.*;
+import com.increff.pos.model.data.*;
 import com.increff.pos.pojo.BrandPojo;
 import com.increff.pos.pojo.ProductPojo;
 import com.increff.pos.service.ApiException;
@@ -61,10 +60,10 @@ public class ProductDto {
        return DtoUtils.convertProductPojoToData(productPojo,brandPojo.getBrand(),brandPojo.getCategory());
     }
 
-    public void updateProduct(ProductEditForm productEditForm) throws ApiException{
-        DtoUtils.validateProductEditForm(productEditForm);
-        DtoUtils.normalizeProductEditForm(productEditForm);
-        productService.updateProduct(productEditForm);
+    public void updateProduct(ProductUpdateForm productUpdateForm) throws ApiException{
+        DtoUtils.validateProductEditForm(productUpdateForm);
+        DtoUtils.normalizeProductEditForm(productUpdateForm);
+        productService.updateProduct(productUpdateForm);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.increff.pos.dto;
 
-import com.increff.pos.model.*;
+import com.increff.pos.model.data.*;
+import com.increff.pos.model.form.*;
 import com.increff.pos.pojo.*;
 import com.increff.pos.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.*;
 public class ReportsDto {
 
     @Autowired
-    private SchedulerService schedulerService;
+    private DailySalesReportService dailySalesReportService;
 
     @Autowired
     private OrderService orderService;
@@ -156,13 +157,12 @@ public class ReportsDto {
     }
 
     public List<SchedulerData> getAllDailyReport() throws ApiException {
-        List<SchedulerPojo> schedulerPojoList = schedulerService.getAllSchedules();
-        return convertToSchedulerData(schedulerPojoList);
+        List<DailySalesReportPojo> dailySalesReportPojoList = dailySalesReportService.getAllSchedules();
+        return convertToSchedulerData(dailySalesReportPojoList);
     }
 
-    @Scheduled(cron = "0 * * * * *")
     public void createDailyReport() throws ApiException {
-        SchedulerPojo schedulerPojo = new SchedulerPojo();
+        DailySalesReportPojo dailySalesReportPojo = new DailySalesReportPojo();
         LocalDate date = LocalDate.now();
 
         Integer totalItems = 0;
@@ -191,28 +191,28 @@ public class ReportsDto {
             }
         }
 
-        schedulerPojo.setDate(date.toString());
-        schedulerPojo.setRevenue(totalRevenue);
-        schedulerPojo.setInvoicedItemsCount(totalItems);
-        schedulerPojo.setInvoicedOrdersCount(totalOrders);
+        dailySalesReportPojo.setDate(date.toString());
+        dailySalesReportPojo.setRevenue(totalRevenue);
+        dailySalesReportPojo.setInvoicedItemsCount(totalItems);
+        dailySalesReportPojo.setInvoicedOrdersCount(totalOrders);
 
-        SchedulerPojo pojo = schedulerService.selectByDate(date.toString());
+        DailySalesReportPojo pojo = dailySalesReportService.selectByDate(date.toString());
         if (pojo == null) {
-            schedulerService.addSchedule(schedulerPojo);
+            dailySalesReportService.addSchedule(dailySalesReportPojo);
         }
         else {
-            schedulerService.update(schedulerPojo, pojo.getDate());
+            dailySalesReportService.update(dailySalesReportPojo, pojo.getDate());
         }
     }
 
-    private List<SchedulerData> convertToSchedulerData(List<SchedulerPojo> schedulerPojoList) throws ApiException {
+    private List<SchedulerData> convertToSchedulerData(List<DailySalesReportPojo> dailySalesReportPojoList) throws ApiException {
         List<SchedulerData> schedulerDataList = new ArrayList<>();
-        for (SchedulerPojo schedulerPojo : schedulerPojoList) {
+        for (DailySalesReportPojo dailySalesReportPojo : dailySalesReportPojoList) {
             SchedulerData schedulerData = new SchedulerData();
-            schedulerData.setDate(schedulerPojo.getDate());
-            schedulerData.setTotal_revenue(schedulerPojo.getRevenue());
-            schedulerData.setInvoiced_items_count(schedulerPojo.getInvoicedItemsCount());
-            schedulerData.setInvoiced_orders_count(schedulerPojo.getInvoicedOrdersCount());
+            schedulerData.setDate(dailySalesReportPojo.getDate());
+            schedulerData.setTotal_revenue(dailySalesReportPojo.getRevenue());
+            schedulerData.setInvoiced_items_count(dailySalesReportPojo.getInvoicedItemsCount());
+            schedulerData.setInvoiced_orders_count(dailySalesReportPojo.getInvoicedOrdersCount());
             schedulerDataList.add(schedulerData);
         }
 

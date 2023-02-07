@@ -1,6 +1,6 @@
 package com.increff.pos.dto;
 
-import com.increff.pos.model.*;
+import com.increff.pos.model.form.*;
 import com.increff.pos.pojo.OrderItemPojo;
 
 public class TestUtils {
@@ -18,10 +18,10 @@ public class TestUtils {
         productForm.setCategory(category);
     }
 
-    protected  static void setProductEditForm(ProductEditForm productEditForm,String product,String barcode,Double mrp){
-        productEditForm.setBarcode(barcode);
-        productEditForm.setProduct(product);
-        productEditForm.setMRP(mrp);
+    protected  static void setProductUpdateForm(ProductUpdateForm productUpdateForm, String product, String barcode, Double mrp){
+        productUpdateForm.setBarcode(barcode);
+        productUpdateForm.setProduct(product);
+        productUpdateForm.setMRP(mrp);
     }
 
     protected static void setInventoryForm(InventoryForm inventoryForm,Integer quantity,String barcode){
@@ -36,10 +36,10 @@ public class TestUtils {
         orderItemForm.setPrice(price);
     }
 
-    protected static void setEditOrderItemForm(EditOrderItemForm editOrderItemForm,String orderCode,String barcode,Integer quantity){
-        editOrderItemForm.setOrderCode(orderCode);
-        editOrderItemForm.setBarcode(barcode);
-        editOrderItemForm.setQuantity(quantity);
+    protected static void setUpdateOrderItemForm(UpdateOrderItemForm updateOrderItemForm, String orderCode, String barcode, Integer quantity){
+        updateOrderItemForm.setOrderCode(orderCode);
+        updateOrderItemForm.setBarcode(barcode);
+        updateOrderItemForm.setQuantity(quantity);
     }
 
     protected static void setOrderItemPojo(OrderItemPojo orderItemPojo,Integer orderItemId,Integer productId,Integer orderId,Integer quantity,Double sellingPrice){

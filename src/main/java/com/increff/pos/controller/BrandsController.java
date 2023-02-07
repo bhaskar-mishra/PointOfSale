@@ -2,9 +2,8 @@ package com.increff.pos.controller;
 
 
 import com.increff.pos.dto.BrandCategoryDto;
-import com.increff.pos.model.BrandCategoryData;
-import com.increff.pos.model.BrandForm;
-import com.increff.pos.model.BrandsReportForm;
+import com.increff.pos.model.form.*;
+import com.increff.pos.model.data.*;
 import com.increff.pos.service.ApiException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

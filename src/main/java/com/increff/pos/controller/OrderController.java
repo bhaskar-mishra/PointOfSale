@@ -1,7 +1,8 @@
 package com.increff.pos.controller;
 
 import com.increff.pos.dto.OrderDto;
-import com.increff.pos.model.OrderData;
+import com.increff.pos.model.data.*;
+import com.increff.pos.model.form.*;
 import com.increff.pos.service.ApiException;
 import com.increff.pos.service.OrderService;
 import io.swagger.annotations.Api;
@@ -44,10 +45,5 @@ public OrderData getOrderById(@PathVariable Integer orderId) throws ApiException
      return orderDto.getOrderById(orderId);
 }
 
-//@ApiOperation(value = "gets an order with given random key")
-//@RequestMapping(path = "/api/order/useRandomKey/{randomKey}",method = RequestMethod.GET)
-//public OrderData getOrderWithGivenRandomKey(@PathVariable String randomKey) throws ApiException{
-//     return orderDto.getOrderWtihGivenRandomKey(randomKey);
-//}
 
 }

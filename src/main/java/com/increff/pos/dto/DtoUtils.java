@@ -1,6 +1,8 @@
 package com.increff.pos.dto;
 
-import com.increff.pos.model.*;
+import com.increff.pos.model.form.*;
+import com.increff.pos.model.data.*;
+import com.increff.pos.model.data.OrderItemData;
 import com.increff.pos.pojo.*;
 import com.increff.pos.service.ApiException;
 
@@ -99,27 +101,27 @@ public class DtoUtils {
         return productData;
     }
 
-    protected static void validateProductEditForm(ProductEditForm productEditForm) throws ApiException{
+    protected static void validateProductEditForm(ProductUpdateForm productUpdateForm) throws ApiException{
 
-        if(productEditForm.getBarcode()==null || productEditForm.getBarcode().toLowerCase().equals("")){
+        if(productUpdateForm.getBarcode()==null || productUpdateForm.getBarcode().toLowerCase().equals("")){
             throw new ApiException("invalid barcode");
         }
 
-        if(productEditForm.getProduct()==null || productEditForm.getProduct().toLowerCase().trim().equals("")){
+        if(productUpdateForm.getProduct()==null || productUpdateForm.getProduct().toLowerCase().trim().equals("")){
             throw new ApiException("product invalid");
         }
 
-        if(productEditForm.getMRP()==null){
+        if(productUpdateForm.getMRP()==null){
             throw new ApiException("mrp should be a positive numeric value");
         }
 
         try{
-            Double mrp = Double.parseDouble(""+productEditForm.getMRP());
+            Double mrp = Double.parseDouble(""+ productUpdateForm.getMRP());
         }catch (Exception exception){
             throw new ApiException("invalid mrp : mrp should be a positive numeric value");
         }
 
-        if(productEditForm.getMRP().compareTo(0.0)<=0){
+        if(productUpdateForm.getMRP().compareTo(0.0)<=0){
             throw new ApiException("invalid mrp : mrp should be a positive numeric value");
         }
     }
@@ -131,9 +133,9 @@ public class DtoUtils {
         productForm.setBarcode(productForm.getBarcode().toLowerCase().trim());
     }
 
-    protected static void normalizeProductEditForm(ProductEditForm productEditForm){
-        productEditForm.setProduct(productEditForm.getProduct().toLowerCase().trim());
-        productEditForm.setBarcode(productEditForm.getBarcode().toLowerCase().trim());
+    protected static void normalizeProductEditForm(ProductUpdateForm productUpdateForm){
+        productUpdateForm.setProduct(productUpdateForm.getProduct().toLowerCase().trim());
+        productUpdateForm.setBarcode(productUpdateForm.getBarcode().toLowerCase().trim());
     }
 
 
@@ -260,30 +262,30 @@ public class DtoUtils {
         return orderItemData;
     }
 
-    protected static void validateEditOrderItemForm(EditOrderItemForm editOrderItemForm) throws ApiException{
+    protected static void validateEditOrderItemForm(UpdateOrderItemForm updateOrderItemForm) throws ApiException{
 
 
-        if(editOrderItemForm.getOrderCode()==null
-                || editOrderItemForm.getOrderCode().trim().equals("")
-        || editOrderItemForm.getOrderCode().trim().split(" ").length!=1){
+        if(updateOrderItemForm.getOrderCode()==null
+                || updateOrderItemForm.getOrderCode().trim().equals("")
+        || updateOrderItemForm.getOrderCode().trim().split(" ").length!=1){
             throw new ApiException("invalid order code");
         }
 
-        if(editOrderItemForm.getBarcode()==null || editOrderItemForm.getBarcode().trim().equals("")){
+        if(updateOrderItemForm.getBarcode()==null || updateOrderItemForm.getBarcode().trim().equals("")){
             throw new ApiException("invalid barcode");
         }
 
-        if(editOrderItemForm.getQuantity()==null){
+        if(updateOrderItemForm.getQuantity()==null){
             throw new ApiException("quantity unknown");
         }
 
         try {
-            Integer quantity = Integer.parseInt(""+editOrderItemForm.getQuantity());
+            Integer quantity = Integer.parseInt(""+updateOrderItemForm.getQuantity());
         }catch (Exception exception){
             throw new ApiException("quantity should be a positive numeric value");
         }
 
-        if(editOrderItemForm.getQuantity()<0){
+        if(updateOrderItemForm.getQuantity()<0){
             throw new ApiException("quantity should be a positive numeric value");
         }
 

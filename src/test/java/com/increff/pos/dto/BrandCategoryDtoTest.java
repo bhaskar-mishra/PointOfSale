@@ -2,8 +2,8 @@ package com.increff.pos.dto;
 
 import static org.junit.Assert.assertEquals;
 
-import com.increff.pos.model.BrandCategoryData;
-import com.increff.pos.model.BrandForm;
+import com.increff.pos.model.form.*;
+import com.increff.pos.model.data.*;
 import com.increff.pos.pojo.BrandPojo;
 import com.increff.pos.service.AbstractUnitTest;
 import com.increff.pos.service.ApiException;

@@ -10,13 +10,13 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional(rollbackOn = ApiException.class)
 public class OrderItemService {
 
     @Autowired
     private OrderItemDao orderItemDao;
 
 
-    @Transactional
     public void addItem(OrderItemPojo orderItemPojo)
     {
         OrderItemPojo orderItemPojo1 = orderItemDao.selectByOrderAndProductId(orderItemPojo.getOrderId(),orderItemPojo.getProductId());
@@ -50,7 +50,7 @@ public class OrderItemService {
         return orderItemPojo;
     }
 
-    @Transactional
+
     public List<OrderItemPojo> getAllItemsById(Integer orderId)throws ApiException {
         List<OrderItemPojo> orderItemPojoList =  orderItemDao.selectAllById(orderId);
         if(orderItemPojoList==null){
@@ -60,7 +60,7 @@ public class OrderItemService {
         return orderItemPojoList;
     }
 
-    @Transactional
+
     public void updateOrderItem(Integer orderItemId,Integer quantity) throws ApiException{
         OrderItemPojo orderItemPojo = orderItemDao.selectById(orderItemId);
         if(orderItemPojo==null) {
@@ -73,7 +73,7 @@ public class OrderItemService {
         }
     }
 
-    @Transactional
+
     public void deleteOrderItemById(Integer orderItemId) throws ApiException{
         OrderItemPojo orderItemPojo = orderItemDao.selectById(orderItemId);
         if(orderItemPojo==null){

@@ -2,7 +2,8 @@ package com.increff.pos.dto;
 
 import static org.junit.Assert.assertEquals;
 
-import com.increff.pos.model.*;
+import com.increff.pos.model.data.*;
+import com.increff.pos.model.form.*;
 import com.increff.pos.pojo.ProductPojo;
 import com.increff.pos.service.AbstractUnitTest;
 import com.increff.pos.service.ApiException;
@@ -106,12 +107,12 @@ public class ProductDtoTest extends AbstractUnitTest {
         TestUtils.setProductForm(productForm,"puma","clothing","abc","jockey",Double.valueOf(25.4));
         productDto.addProduct(productForm);
 
-        ProductEditForm productEditForm = new ProductEditForm();
-        productEditForm.setProduct("shirt");
-        productEditForm.setBarcode("abc");
-        productEditForm.setMRP(Double.valueOf(22));
+        ProductUpdateForm productUpdateForm = new ProductUpdateForm();
+        productUpdateForm.setProduct("shirt");
+        productUpdateForm.setBarcode("abc");
+        productUpdateForm.setMRP(Double.valueOf(22));
 
-        productDto.updateProduct(productEditForm);
+        productDto.updateProduct(productUpdateForm);
 
         ProductData productData = productDto.getProductByBarcode("abc");
         assertEquals("puma",productData.getBrand());
@@ -141,15 +142,15 @@ public class ProductDtoTest extends AbstractUnitTest {
 
     @Test
     public void normalizeProductEditFormTest() throws ApiException{
-        ProductEditForm productEditForm = new ProductEditForm();
-        productEditForm.setProduct(" j oCk Ey   ");
-        productEditForm.setBarcode("     ac@bA2B  ");
-        productEditForm.setMRP(Double.valueOf(25.20));
+        ProductUpdateForm productUpdateForm = new ProductUpdateForm();
+        productUpdateForm.setProduct(" j oCk Ey   ");
+        productUpdateForm.setBarcode("     ac@bA2B  ");
+        productUpdateForm.setMRP(Double.valueOf(25.20));
 
-        DtoUtils.normalizeProductEditForm(productEditForm);
+        DtoUtils.normalizeProductEditForm(productUpdateForm);
 
-        assertEquals("j ock ey",productEditForm.getProduct());
-        assertEquals("ac@ba2b",productEditForm.getBarcode());
+        assertEquals("j ock ey", productUpdateForm.getProduct());
+        assertEquals("ac@ba2b", productUpdateForm.getBarcode());
     }
 
     @Test(expected = ApiException.class)
@@ -210,44 +211,44 @@ public class ProductDtoTest extends AbstractUnitTest {
 
     @Test(expected = ApiException.class)
     public void validateProductEditFormNullProductTest() throws ApiException{
-        ProductEditForm productEditForm = new ProductEditForm();
-        TestUtils.setProductEditForm(productEditForm,null,"abc",Double.valueOf(25.4));
-        DtoUtils.validateProductEditForm(productEditForm);
+        ProductUpdateForm productUpdateForm = new ProductUpdateForm();
+        TestUtils.setProductUpdateForm(productUpdateForm,null,"abc",Double.valueOf(25.4));
+        DtoUtils.validateProductEditForm(productUpdateForm);
     }
 
     @Test(expected = ApiException.class)
     public void validateProductEditFormEmptyProductTest() throws ApiException{
-        ProductEditForm productEditForm = new ProductEditForm();
-        TestUtils.setProductEditForm(productEditForm,"  ","abc",Double.valueOf(25.4));
-        DtoUtils.validateProductEditForm(productEditForm);
+        ProductUpdateForm productUpdateForm = new ProductUpdateForm();
+        TestUtils.setProductUpdateForm(productUpdateForm,"  ","abc",Double.valueOf(25.4));
+        DtoUtils.validateProductEditForm(productUpdateForm);
     }
 
     @Test(expected = ApiException.class)
     public void validateProductEditFormNullBarcodeTest() throws ApiException{
-        ProductEditForm productEditForm = new ProductEditForm();
-        TestUtils.setProductEditForm(productEditForm,"jockey",null,Double.valueOf(25.4));
-        DtoUtils.validateProductEditForm(productEditForm);
+        ProductUpdateForm productUpdateForm = new ProductUpdateForm();
+        TestUtils.setProductUpdateForm(productUpdateForm,"jockey",null,Double.valueOf(25.4));
+        DtoUtils.validateProductEditForm(productUpdateForm);
     }
 
     @Test(expected = ApiException.class)
     public void validateProductEditFormEmptyBarcodeTest() throws ApiException{
-        ProductEditForm productEditForm = new ProductEditForm();
-        TestUtils.setProductEditForm(productEditForm,"jockey","",Double.valueOf(25.4));
-        DtoUtils.validateProductEditForm(productEditForm);
+        ProductUpdateForm productUpdateForm = new ProductUpdateForm();
+        TestUtils.setProductUpdateForm(productUpdateForm,"jockey","",Double.valueOf(25.4));
+        DtoUtils.validateProductEditForm(productUpdateForm);
     }
 
     @Test(expected = ApiException.class)
     public void validateProductEditFormNullMrp() throws ApiException{
-        ProductEditForm productEditForm = new ProductEditForm();
-        TestUtils.setProductEditForm(productEditForm,"jockey","abc",null);
-        DtoUtils.validateProductEditForm(productEditForm);
+        ProductUpdateForm productUpdateForm = new ProductUpdateForm();
+        TestUtils.setProductUpdateForm(productUpdateForm,"jockey","abc",null);
+        DtoUtils.validateProductEditForm(productUpdateForm);
     }
 
     @Test(expected = ApiException.class)
     public void validateProductEditFormNegativeMrp() throws ApiException{
-        ProductEditForm productEditForm = new ProductEditForm();
-        TestUtils.setProductEditForm(productEditForm,"jockey","abc",Double.valueOf(-25.4));
-        DtoUtils.validateProductEditForm(productEditForm);
+        ProductUpdateForm productUpdateForm = new ProductUpdateForm();
+        TestUtils.setProductUpdateForm(productUpdateForm,"jockey","abc",Double.valueOf(-25.4));
+        DtoUtils.validateProductEditForm(productUpdateForm);
     }
 
     @Test

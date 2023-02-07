@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional(rollbackOn = ApiException.class)
 public class OrderService {
 
     @Autowired
     private OrderDao orderDao;
 
-    @Transactional
     public OrderPojo createOrder() throws ApiException{
         OrderPojo orderPojo = new OrderPojo();
         String orderCode = UUID.randomUUID().toString();

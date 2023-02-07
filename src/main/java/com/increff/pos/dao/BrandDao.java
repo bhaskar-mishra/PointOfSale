@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class BrandDao extends AbstractDao{
 
     private static String SELECT_BY_ID = "select p from BrandPojo p where id=:id";
@@ -16,7 +17,6 @@ public class BrandDao extends AbstractDao{
     private static String SELECT_BY_BRAND = "select p from BrandPojo p where brand=:brand";
     private static String SELECT_BY_CATEGORY = "select p from BrandPojo p where category=:category";
 
-    @Transactional
     public void insert(BrandPojo brandPojo) {
         em().persist(brandPojo);
     }

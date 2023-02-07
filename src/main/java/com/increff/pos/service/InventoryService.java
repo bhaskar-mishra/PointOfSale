@@ -8,12 +8,12 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional(rollbackOn = ApiException.class)
 public class InventoryService {
 
     @Autowired
     private InventoryDao inventoryDao;
 
-    @Transactional
     public void add(InventoryPojo inventoryPojo) throws ApiException{
              InventoryPojo inventoryPojo1 = inventoryDao.selectById(inventoryPojo.getProductId());
              if(inventoryPojo1!=null){
@@ -23,7 +23,6 @@ public class InventoryService {
              }
     }
 
-    @Transactional(rollbackOn = ApiException.class)
     public InventoryPojo getInventoryByProductId(Integer productId) throws ApiException{
         InventoryPojo inventoryPojo = inventoryDao.selectById(productId);
         if(inventoryPojo==null){
@@ -33,7 +32,6 @@ public class InventoryService {
         return inventoryPojo;
     }
 
-    @Transactional
     public void updateInventory(Integer productId,Integer quantity) throws ApiException{
         InventoryPojo inventoryPojo = inventoryDao.selectById(productId);
         if(inventoryPojo==null){
@@ -42,7 +40,7 @@ public class InventoryService {
         inventoryPojo.setQuantity(quantity);
     }
 
-    @Transactional(rollbackOn = ApiException.class)
+
     public List<InventoryPojo> getAllInventory() throws ApiException{
         return inventoryDao.selectAll();
     }

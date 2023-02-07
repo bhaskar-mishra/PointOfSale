@@ -1,9 +1,8 @@
 package com.increff.pos.controller;
 
 import com.increff.pos.dto.OrderItemDto;
-import com.increff.pos.model.EditOrderItemForm;
-import com.increff.pos.model.OrderItemData;
-import com.increff.pos.model.OrderItemForm;
+import com.increff.pos.model.form.*;
+import com.increff.pos.model.data.*;
 import com.increff.pos.service.ApiException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -46,8 +45,8 @@ public class OrderItemController {
 
     @ApiOperation(value = "edits and orderItem")
     @RequestMapping(path = "api/orderItem/editOrderItem",method = RequestMethod.PUT)
-    public void editOrderItemId(@RequestBody EditOrderItemForm editOrderItemForm) throws ApiException{
-        orderItemDto.editOrderItem(editOrderItemForm);
+    public void editOrderItemId(@RequestBody UpdateOrderItemForm updateOrderItemForm) throws ApiException{
+        orderItemDto.editOrderItem(updateOrderItemForm);
     }
 
     @ApiOperation(value = "deletes order item by id")

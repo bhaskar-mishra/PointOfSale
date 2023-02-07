@@ -20,16 +20,16 @@ public class BrandService {
     private BrandDao brandDao;
 
     public void add(BrandPojo brandPojo) throws ApiException {
-        if(!checkUnique(brandPojo.getBrand(),brandPojo.getCategory())){
+        if (!checkUnique(brandPojo.getBrand(), brandPojo.getCategory())) {
             throw new ApiException("this brand category already exists");
         }
         brandDao.insert(brandPojo);
     }
 
 
-    public BrandPojo getBrandCategoryById(Integer id) throws ApiException{
-        BrandPojo brandPojo =  brandDao.selectById(id);
-        if(brandPojo==null){
+    public BrandPojo getBrandCategoryById(Integer id) throws ApiException {
+        BrandPojo brandPojo = brandDao.selectById(id);
+        if (brandPojo == null) {
             throw new ApiException("no such brand exists");
         }
         return brandPojo;
@@ -46,12 +46,12 @@ public class BrandService {
 
         BrandPojo pojo = brandDao.selectByBrandCategory(brand, category);
 
-        if(pojo!=null && !id.equals(pojo.getId()))
+        if (pojo != null && !id.equals(pojo.getId()))
             throw new ApiException("Brand category Combination already exists");
 
 
-        if(pojo!=null && id.equals(pojo.getId())){
-            return ;
+        if (pojo != null && id.equals(pojo.getId())) {
+            return;
         }
 
         pojo = brandDao.selectById(id);
@@ -61,33 +61,33 @@ public class BrandService {
     }
 
 
-    private boolean checkUnique(String brand,String category) throws ApiException{
-        BrandPojo brandPojo = brandDao.selectByBrandCategory(brand,category);
-        if(brandPojo==null){
+    private boolean checkUnique(String brand, String category) throws ApiException {
+        BrandPojo brandPojo = brandDao.selectByBrandCategory(brand, category);
+        //return brandPojo==null;
+        if (brandPojo == null) {
             return true;
         }
         return false;
     }
 
-    public BrandPojo selectByBrandCategory(String brand,String category) throws ApiException{
-        BrandPojo brandPojo =  brandDao.selectByBrandCategory(brand,category);
-        if(brandPojo==null){
+    public BrandPojo selectByBrandCategory(String brand, String category) throws ApiException {
+        BrandPojo brandPojo = brandDao.selectByBrandCategory(brand, category);
+        if (brandPojo == null) {
             throw new ApiException("brand category doesn't exist");
         }
-        return  brandPojo;
+        return brandPojo;
     }
 
 
-
-    public List<String> getAllBrands() throws ApiException{
+    public List<String> getAllBrands() throws ApiException {
         List<BrandPojo> brandPojoList = brandDao.selectAll();
         Set<String> brandSet = new HashSet<>();
         List<String> brandsList = new ArrayList<>();
-        for(BrandPojo brandPojo : brandPojoList){
+        for (BrandPojo brandPojo : brandPojoList) {
             brandSet.add(brandPojo.getBrand());
         }
 
-        for(String brand : brandSet){
+        for (String brand : brandSet) {
             brandsList.add(brand);
         }
 
@@ -95,15 +95,15 @@ public class BrandService {
     }
 
 
-    public List<String> getAllCategories() throws ApiException{
+    public List<String> getAllCategories() throws ApiException {
         List<BrandPojo> brandPojoList = brandDao.selectAll();
         Set<String> categorySet = new HashSet<>();
         List<String> categoryList = new ArrayList<>();
-        for(BrandPojo brandPojo : brandPojoList){
+        for (BrandPojo brandPojo : brandPojoList) {
             categorySet.add(brandPojo.getCategory());
         }
 
-        for(String brand : categorySet){
+        for (String brand : categorySet) {
             categoryList.add(brand);
         }
 
@@ -111,13 +111,10 @@ public class BrandService {
     }
 
 
-    public List<BrandPojo> getCategoriesForBrand(String brand) throws ApiException{
+    public List<BrandPojo> getCategoriesForBrand(String brand) throws ApiException {
         List<BrandPojo> brandPojoList = brandDao.selectByBrand(brand);
         return brandPojoList;
     }
-
-
-
 
 
 }

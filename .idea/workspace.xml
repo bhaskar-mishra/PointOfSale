@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f38d5da-046b-46f0-90f5-09d274d64e0e" name="Changes" comment="" />
+    <list default="true" id="8f38d5da-046b-46f0-90f5-09d274d64e0e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/client/InvoiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/client/InvoiceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/DownloadPdfController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/controller/DownloadPdfController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/DownloadPdfDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/pos/dto/DownloadPdfDto.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

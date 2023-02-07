@@ -12,20 +12,19 @@ import java.util.List;
 @Repository
 public class OrderDao extends AbstractDao{
 
-    private static String SELECTALL = "select p from OrderPojo p";
-    private static String SELECTBYID = "select p from OrderPojo p where id=:id";
+    private static String SELECT_ALL = "select p from OrderPojo p";
+    private static String SELECT_BY_ID = "select p from OrderPojo p where id=:id";
     private static String SELECT_BY_ORDER_CODE = "select p from OrderPojo p where orderCode=:orderCode";
     private static  String SELECT_WITH_DATE_FILTER = "select p from OrderPojo p where placedTime >= :start and placedTime<=:end";
     private static  String SELECT_WITH_ZONED_DATE_FILTER = "select p from OrderPojo p where status=:status and placedTime>=:start and placedTime<=:end";
-    @Transactional
     public void insert(OrderPojo orderPojo){em().persist(orderPojo);}
     public List<OrderPojo> selectAll(){
-        TypedQuery<OrderPojo> query = getQuery(SELECTALL, OrderPojo.class);
+        TypedQuery<OrderPojo> query = getQuery(SELECT_ALL, OrderPojo.class);
         return query.getResultList();
     }
 
     public OrderPojo selectById(int orderId){
-        TypedQuery<OrderPojo> query = getQuery(SELECTBYID, OrderPojo.class);
+        TypedQuery<OrderPojo> query = getQuery(SELECT_BY_ID, OrderPojo.class);
         query.setParameter("id",orderId);
         return getSingle(query);
     }

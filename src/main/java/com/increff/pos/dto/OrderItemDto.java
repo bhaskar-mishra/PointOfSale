@@ -1,8 +1,7 @@
 package com.increff.pos.dto;
 
-import com.increff.pos.model.EditOrderItemForm;
-import com.increff.pos.model.OrderItemData;
-import com.increff.pos.model.OrderItemForm;
+import com.increff.pos.model.form.*;
+import com.increff.pos.model.data.*;
 import com.increff.pos.pojo.InventoryPojo;
 import com.increff.pos.pojo.OrderItemPojo;
 import com.increff.pos.pojo.OrderPojo;
@@ -56,25 +55,25 @@ public class OrderItemDto {
 
 
     @Transactional
-    public void editOrderItem(EditOrderItemForm editOrderItemForm) throws ApiException {
-        DtoUtils.validateEditOrderItemForm(editOrderItemForm);
-        editOrderItemForm.setBarcode(editOrderItemForm.getBarcode().toLowerCase().trim());
-        OrderPojo orderPojo = orderService.getOrderByOrderCode(editOrderItemForm.getOrderCode());
+    public void editOrderItem(UpdateOrderItemForm updateOrderItemForm) throws ApiException {
+        DtoUtils.validateEditOrderItemForm(updateOrderItemForm);
+        updateOrderItemForm.setBarcode(updateOrderItemForm.getBarcode().toLowerCase().trim());
+        OrderPojo orderPojo = orderService.getOrderByOrderCode(updateOrderItemForm.getOrderCode());
         if(orderPojo.getStatus().equals("PLACED")){
             throw new ApiException("Order is already placed! Can't be edited");
         }
-        ProductPojo productPojo = productService.selectByBarcode(editOrderItemForm.getBarcode());
+        ProductPojo productPojo = productService.selectByBarcode(updateOrderItemForm.getBarcode());
         OrderItemPojo orderItemPojo = orderItemService.getByOrderAndProductId(orderPojo.getOrderId(),productPojo.getId());
         InventoryPojo inventoryPojo = inventoryService.getInventoryByProductId(orderItemPojo.getProductId());
         Integer quantityAvailable = inventoryPojo.getQuantity()+orderItemPojo.getQuantity();
-        if(quantityAvailable<editOrderItemForm.getQuantity()){
+        if(quantityAvailable< updateOrderItemForm.getQuantity()){
             throw new ApiException("Available samples : "+quantityAvailable);
         }
         inventoryService.updateInventory(orderItemPojo.getProductId(),inventoryPojo.getQuantity()
                 + orderItemPojo.getQuantity()
-                - editOrderItemForm.getQuantity()
+                - updateOrderItemForm.getQuantity()
         );
-        orderItemService.updateOrderItem(orderItemPojo.getOrderItemId(), editOrderItemForm.getQuantity());
+        orderItemService.updateOrderItem(orderItemPojo.getOrderItemId(), updateOrderItemForm.getQuantity());
     }
 
     public OrderItemData getOrderItemById(Integer id) throws ApiException{

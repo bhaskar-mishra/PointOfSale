@@ -1,7 +1,8 @@
 package com.increff.pos.controller;
 
+import com.increff.pos.model.data.*;
+import com.increff.pos.model.form.*;
 import com.increff.pos.dto.InventoryDto;
-import com.increff.pos.model.*;
 import com.increff.pos.service.ApiException;
 import com.increff.pos.service.InventoryService;
 import io.swagger.annotations.Api;

@@ -1,8 +1,9 @@
 package com.increff.pos.dto;
 
-import com.increff.pos.model.*;
 import static org.junit.Assert.assertEquals;
 
+import com.increff.pos.model.form.*;
+import com.increff.pos.model.data.*;
 import com.increff.pos.pojo.OrderItemPojo;
 import com.increff.pos.service.AbstractUnitTest;
 import com.increff.pos.service.ApiException;
@@ -24,7 +25,6 @@ public class OrderItemDtoTest extends AbstractUnitTest {
     @Autowired
     private InventoryDto inventoryDto;
 
-    private OrderData orderData;
 
 
 
@@ -75,10 +75,10 @@ public class OrderItemDtoTest extends AbstractUnitTest {
         TestUtils.setOrderItemForm(orderItemForm,orderData.getOrderCode(),"abc",20,Double.valueOf(10.5));
         orderItemDto.addItem(orderItemForm);
 
-        EditOrderItemForm editOrderItemForm = new EditOrderItemForm();
-        TestUtils.setEditOrderItemForm(editOrderItemForm,orderData.getOrderCode(),"abc",Integer.valueOf(10));
+        UpdateOrderItemForm updateOrderItemForm = new UpdateOrderItemForm();
+        TestUtils.setUpdateOrderItemForm(updateOrderItemForm,orderData.getOrderCode(),"abc",Integer.valueOf(10));
 
-        orderItemDto.editOrderItem(editOrderItemForm);
+        orderItemDto.editOrderItem(updateOrderItemForm);
 
         List<OrderItemData> orderItemDataList = orderItemDto.getOrderItemsByCode(orderData.getOrderCode());
 
@@ -107,10 +107,10 @@ public class OrderItemDtoTest extends AbstractUnitTest {
         TestUtils.setOrderItemForm(orderItemForm,orderData.getOrderCode(),"abc",20,Double.valueOf(10.5));
         orderItemDto.addItem(orderItemForm);
 
-        EditOrderItemForm editOrderItemForm = new EditOrderItemForm();
-        TestUtils.setEditOrderItemForm(editOrderItemForm,orderData.getOrderCode(),"abc",Integer.valueOf(30));
+        UpdateOrderItemForm updateOrderItemForm = new UpdateOrderItemForm();
+        TestUtils.setUpdateOrderItemForm(updateOrderItemForm,orderData.getOrderCode(),"abc",Integer.valueOf(30));
 
-        orderItemDto.editOrderItem(editOrderItemForm);
+        orderItemDto.editOrderItem(updateOrderItemForm);
     }
 
     @Test
@@ -347,44 +347,44 @@ public class OrderItemDtoTest extends AbstractUnitTest {
 
     @Test(expected = ApiException.class)
     public void validateEditOrderItemFormNullCodeTest() throws ApiException{
-        EditOrderItemForm editOrderItemForm = new EditOrderItemForm();
-        TestUtils.setEditOrderItemForm(editOrderItemForm,null,"abc",10);
-        DtoUtils.validateEditOrderItemForm(editOrderItemForm);
+        UpdateOrderItemForm updateOrderItemForm = new UpdateOrderItemForm();
+        TestUtils.setUpdateOrderItemForm(updateOrderItemForm,null,"abc",10);
+        DtoUtils.validateEditOrderItemForm(updateOrderItemForm);
     }
 
     @Test(expected = ApiException.class)
     public void validateEditOrderItemFormEmptyCodeTest() throws ApiException{
-        EditOrderItemForm editOrderItemForm = new EditOrderItemForm();
-        TestUtils.setEditOrderItemForm(editOrderItemForm,"  ","abc",10);
-        DtoUtils.validateEditOrderItemForm(editOrderItemForm);
+        UpdateOrderItemForm updateOrderItemForm = new UpdateOrderItemForm();
+        TestUtils.setUpdateOrderItemForm(updateOrderItemForm,"  ","abc",10);
+        DtoUtils.validateEditOrderItemForm(updateOrderItemForm);
     }
 
     @Test(expected = ApiException.class)
     public void validateEditOrderItemFormNullBarcodeTest() throws ApiException{
-        EditOrderItemForm editOrderItemForm = new EditOrderItemForm();
-        TestUtils.setEditOrderItemForm(editOrderItemForm,"ordercode",null,10);
-        DtoUtils.validateEditOrderItemForm(editOrderItemForm);
+        UpdateOrderItemForm updateOrderItemForm = new UpdateOrderItemForm();
+        TestUtils.setUpdateOrderItemForm(updateOrderItemForm,"ordercode",null,10);
+        DtoUtils.validateEditOrderItemForm(updateOrderItemForm);
     }
 
     @Test(expected = ApiException.class)
     public void validateEditOrderItemFormEmptyBarcodeTest() throws ApiException{
-        EditOrderItemForm editOrderItemForm = new EditOrderItemForm();
-        TestUtils.setEditOrderItemForm(editOrderItemForm,"ordercode","  ",10);
-        DtoUtils.validateEditOrderItemForm(editOrderItemForm);
+        UpdateOrderItemForm updateOrderItemForm = new UpdateOrderItemForm();
+        TestUtils.setUpdateOrderItemForm(updateOrderItemForm,"ordercode","  ",10);
+        DtoUtils.validateEditOrderItemForm(updateOrderItemForm);
     }
 
     @Test(expected = ApiException.class)
     public void validateEditOrderItemFormQuantityNullTest() throws ApiException{
-        EditOrderItemForm editOrderItemForm = new EditOrderItemForm();
-        TestUtils.setEditOrderItemForm(editOrderItemForm,"ordercode","abc",null);
-        DtoUtils.validateEditOrderItemForm(editOrderItemForm);
+        UpdateOrderItemForm updateOrderItemForm = new UpdateOrderItemForm();
+        TestUtils.setUpdateOrderItemForm(updateOrderItemForm,"ordercode","abc",null);
+        DtoUtils.validateEditOrderItemForm(updateOrderItemForm);
     }
 
     @Test(expected = ApiException.class)
     public void validateEditOrderItemFormNegativeQuantityTest() throws ApiException{
-        EditOrderItemForm editOrderItemForm = new EditOrderItemForm();
-        TestUtils.setEditOrderItemForm(editOrderItemForm,"ordercode","abc",Integer.valueOf(-10));
-        DtoUtils.validateEditOrderItemForm(editOrderItemForm);
+        UpdateOrderItemForm updateOrderItemForm = new UpdateOrderItemForm();
+        TestUtils.setUpdateOrderItemForm(updateOrderItemForm,"ordercode","abc",Integer.valueOf(-10));
+        DtoUtils.validateEditOrderItemForm(updateOrderItemForm);
     }
 
     @Test(expected = ApiException.class)

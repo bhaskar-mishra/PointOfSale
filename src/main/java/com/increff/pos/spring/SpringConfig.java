@@ -9,8 +9,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
 @ComponentScan("com.increff.pos")
-@EnableAsync
-@EnableScheduling
 @PropertySources({ //
 		@PropertySource(value = "file:./pos.properties", ignoreResourceNotFound = true) //
 })

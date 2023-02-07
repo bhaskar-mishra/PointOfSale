@@ -20,6 +20,7 @@ public class OrderPojo extends AbstractDatePojo{
     @Column(name = "order_id")
     private Integer orderId;
 
+//    @Enumerated
     private String status = "PENDING";
 
     @NotNull

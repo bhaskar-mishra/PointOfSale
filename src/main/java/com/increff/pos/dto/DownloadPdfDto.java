@@ -1,8 +1,8 @@
 package com.increff.pos.dto;
 
 import com.increff.pos.client.InvoiceClient;
-import com.increff.pos.model.InvoiceDetails;
-import com.increff.pos.model.InvoiceItem;
+import com.increff.pos.model.form.InvoiceDetails;
+import com.increff.pos.model.form.InvoiceItem;
 import com.increff.pos.pojo.OrderItemPojo;
 import com.increff.pos.pojo.OrderPojo;
 import com.increff.pos.pojo.ProductPojo;
@@ -32,7 +32,6 @@ public class DownloadPdfDto {
     private InvoiceClient invoiceClient;
 
     public String generateInvoice(String orderCode) throws ApiException{
-        System.out.println("inside generateInvoice in Dto");
         if(orderCode==null){
             throw new ApiException("orderCode unknown");
         }
