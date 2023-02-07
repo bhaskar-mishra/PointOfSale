@@ -37,6 +37,10 @@ public class OrderItemDto {
         OrderPojo orderPojo = orderService.getOrderByOrderCode(orderItemForm.getOrderCode());
         //throws an exception if barcode is incorrect
         ProductPojo productPojo = productService.selectByBarcode(orderItemForm.getBarcode());
+
+        if(orderPojo.getStatus().equals("PLACED")){
+            throw new ApiException("order already placed! no more items can be added");
+        }
         //normalizes barcode
         orderItemForm.setBarcode(orderItemForm.getBarcode().toLowerCase().trim());
         InventoryPojo inventoryPojo = inventoryService.getInventoryByProductId(productPojo.getId());
@@ -112,6 +116,11 @@ public class OrderItemDto {
         if(orderItemPojoList.size()==0){
             throw new ApiException("no items in order");
         }
+
+        if(orderPojo.getStatus().equals("PLACED")){
+            throw new ApiException("Order already placed");
+        }
+
         orderPojo.setStatus("PLACED");
         orderPojo.setPlacedTime(ZonedDateTime.now());
     }

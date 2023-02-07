@@ -303,6 +303,7 @@ function pagination(){
 //INITIALIZATION CODE
 
 function setPage(){
+  $('#addProductModal').modal('hide');
   var role = $("meta[name=role]").attr("content");
   if(role==="standard"){
   var form = document.getElementById('product-form');
@@ -314,9 +315,14 @@ function setPage(){
   }
 }
 
+function displayAddProductModal(){
+$('#addProductModal').modal('toggle');
+}
+
 
 function init(){
 console.log('product page loading');
+    $('#add-product-modal').click(displayAddProductModal);
 	$('#add-product').click(addProduct);
 	$('#update-product').click(updateProduct);
 	$('#upload-data').click(displayUploadData);

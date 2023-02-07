@@ -38,10 +38,6 @@ public class OrderItemService {
     }
 
 
-    public List<OrderItemPojo> getAllItems(String randomKey) throws ApiException{
-        return orderItemDao.selectAllByRandomKey(randomKey);
-    }
-
     public OrderItemPojo getOrderItemById(Integer orderItemId) throws ApiException{
         OrderItemPojo orderItemPojo = orderItemDao.selectById(orderItemId);
         if(orderItemPojo==null){

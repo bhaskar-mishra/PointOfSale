@@ -32,7 +32,7 @@ public class ReportsController {
 
 
     @ApiOperation(value = "gets all schedules")
-    @RequestMapping(path = "/api/scheduler/getAllSchedules",method = RequestMethod.GET)
+    @RequestMapping(path = "/api/reports/getDailySalesReport",method = RequestMethod.GET)
     public List<SchedulerData> getAllDailyReport() throws ApiException{
          return reportsDto.getAllDailyReport();
     }

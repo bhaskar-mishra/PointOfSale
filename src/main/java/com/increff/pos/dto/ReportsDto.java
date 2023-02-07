@@ -182,9 +182,9 @@ public class ReportsDto {
 
         Integer totalOrders = orderPojoList.size();
 
-        for (OrderPojo o : orderPojoList) {
-            String id = o.getOrderCode();
-            List<OrderItemPojo> orderItemPojoList = orderItemService.getAllItems(id);
+        for (OrderPojo orderPojo : orderPojoList) {
+            Integer  orderId = orderPojo.getOrderId();
+            List<OrderItemPojo> orderItemPojoList = orderItemService.getAllItemsById(orderId);
             for (OrderItemPojo i : orderItemPojoList) {
                 totalItems += i.getQuantity();
                 totalRevenue += i.getQuantity() * i.getSellingPrice();

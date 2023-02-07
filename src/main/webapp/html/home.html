@@ -1,34 +1,105 @@
+<!--<!doctype html>-->
+
+<!--<html lang="en">-->
+
+<!--<head th:replace="snippets.html :: name_head"></head>-->
+
+<!--<body>-->
+
+<!--<nav th:replace="snippets.html :: name_app_navbar"></nav>-->
+
+<!--<div class="container">-->
+
+<!--<h3>Home</h3>-->
+
+<!-- &lt;!&ndash; Top row with form&ndash;&gt;-->
+<!--<div class="row">-->
+<!--	 <div class="col-2">-->
+<!--	 	<a th:href="@{/ui/employee}" title="Employees"> <i class="fas fa-users"></i> </a>-->
+<!--	 </div>	-->
+<!--	 <div class="col-2">-->
+<!--	 	<a th:href="@{/ui/admin}" title="Admin"> <i class="fas fa-cog"></i> </a>-->
+<!--	 </div>	-->
+<!--</div> -->
+
+
+
+<!--</div> &lt;!&ndash; Container end&ndash;&gt;-->
+
+<!--<footer th:replace="snippets.html :: name_footer"></footer>-->
+<!--<script th:src="@{/static/home.js}"/></script>-->
+
+<!--</body>	-->
+
+<!--</html>-->
+
+
+
 <!doctype html>
 
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head th:replace="snippets.html :: name_head"></head>
 
 <body>
 
+
 <nav th:replace="snippets.html :: name_app_navbar"></nav>
 
-<div class="container">
+<div style="background-color:powderblue;">
+	<div class="container d-flex flex-row" style="padding: 2rem;">
+		<div class="card" style="width: 18rem; margin-left :2rem;">
+			<img class="card-img-top" src="https://justcreative.com/wp-content/uploads/2018/09/build-your-brand.jpg"
+				 alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Brand-category</h5>
+				<p class="card-text">Multiple brands with their unique brand-category combination can be added and
+					modified
+					here</p>
+				<a th:href="@{/ui/brands}" class="btn btn-primary">Visit Brand</a>
+			</div>
+		</div>
+		<div class="card" style="width: 18rem; margin-left :2rem">
+			<img class="card-img-top"
+				 src="https://thumbs.dreamstime.com/b/product-text-made-wooden-cube-white-background-181800372.jpg"
+				 alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Product</h5>
+				<p class="card-text">Multiple products of any brand-category combination can be created and edited
+					specifying all the details</p>
+				<a th:href="@{/ui/products}" class="btn btn-primary">Products available</a>
+			</div>
+		</div>
+		<div class="card" style="width: 18rem; margin-left :2rem">
+			<img class="card-img-top" src="https://authorstream.s3.amazonaws.com/content/1393641_634703425670340000.jpg"
+				 alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Inventory</h5>
+				<p class="card-text">Manual as well as auto updation of inventory on the basis of present product count
+					in
+					the store</p>
+				<a th:href="@{/ui/inventory}" class="btn btn-primary">Look into inventory</a>
+			</div>
+		</div>
+		<div class="card" style="width: 18rem; margin-left :2rem;">
+			<img class="card-img-top"
+				 src="https://media.istockphoto.com/id/1206806317/vector/shopping-cart-icon-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=1RRQJs5NDhcB67necQn1WCpJX2YMfWZ4rYi1DFKlkNA="
+				 alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Orders</h5>
+				<p class="card-text">Orders can be created and edited here from specified products until they are
+					invoiced</p>
+				<a th:href="@{/ui/orders}" class="btn btn-primary">Orders here</a>
+			</div>
+		</div>
 
-<h3>Home</h3>
 
- <!-- Top row with form-->
-<div class="row">
-	 <div class="col-2">
-	 	<a th:href="@{/ui/employee}" title="Employees"> <i class="fas fa-users"></i> </a>
-	 </div>	
-	 <div class="col-2">
-	 	<a th:href="@{/ui/admin}" title="Admin"> <i class="fas fa-cog"></i> </a>
-	 </div>	
-</div> 
+	</div> <!-- Container end-->
 
-
-
-</div> <!-- Container end-->
+</div>
 
 <footer th:replace="snippets.html :: name_footer"></footer>
-<script th:src="@{/static/home.js}"/></script>
 
-</body>	
+</body>
 
 </html>

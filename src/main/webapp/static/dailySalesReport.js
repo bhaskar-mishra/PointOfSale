@@ -6,7 +6,7 @@ function getBaseUrl(){
 
 function getSchedulerList(){
 	var url = getBaseUrl();
-	url = url + "/api/scheduler/getAllSchedules";
+	url = url + "/api/reports/getDailySalesReport";
 	$.ajax({
 	   url: url,
 	   type: 'GET',

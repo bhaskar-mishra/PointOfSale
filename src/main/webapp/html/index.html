@@ -1,31 +1,69 @@
 <!doctype html>
-
 <html lang="en">
-
 <head th:replace="snippets.html :: name_head"></head>
 
-<body>
+<title>Jumbotron Template · Bootstrap</title>
 
+<meta name="theme-color" content="#563d7c">
+
+
+<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+</head>
+<body>
 <nav th:replace="snippets.html :: name_site_navbar"></nav>
 
-<div class="container">
-<div class="row">
-<div class="col-6">
- 
-<div class="jumbotron">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">Welcome to point of sale application</p>
-  <hr class="my-4">
-  <p>You can view different products and place orders through this application</p>
-  <a class="btn btn-primary btn-lg" th:href="@{/site/login}" role="button">Get Started</a>
-</div>
 
-</div>
-</div>
-</div> <!--Container-->
+<main role="main">
 
-<footer th:replace="snippets.html :: name_footer"></footer>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Welcome to Store Checkout Point</h1>
+            <p>Say goodbye to long lines and slow checkout processes with our cutting-edge store checkout app. With its intuitive interface, you can quickly scan and purchase items, making
+                shopping a breeze. No more waiting in line, no more hassle. This application can streamline the shopping experience for customers and help retailers manage their inventory and sales efficiently</p>
+            <p>Login to explore</p>
+            <a class="btn btn-primary btn-lg" th:href="@{/site/login}" role="button" style="margin:auto;">Get Started</a>
+        </div>
+    </div>
 
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Brand and Category Management</h2>
+                <p>The app allows the retailers to add and manage brands and categories of products.</p>
+            </div>
+            <div class="col-md-4">
+                <h2>Inventory Management</h2>
+                <p> Our application allows the retailer to keep track of stock levels and update them in real-time as products are sold. It is the one stop destination for everything Inventory.</p>
+            </div>
+            <div class="col-md-4">
+                <h2>Order System</h2>
+                <p>It has a built-in ordering systems which can be used by the checkout counters to order directly through the app and manage the orders.</p>
+            </div>
+        </div>
+
+        <hr>
+
+    </div> <!-- /container -->
+
+</main>
 </body>
 
+<footer th:replace="snippets.html :: name_footer"></footer>
 </html>
