@@ -76,11 +76,15 @@ function displayOrderList(data){
 	for(var i in data){
 		var e = data[i];
 		console.log(e.orderId);
-        var buttonHtml  = ' <button onclick="editOrder(' + e.orderId + ')">Edit</button>'
+		var time = e.time;
+		if(e.time===null){
+		time = 'NA';
+		}
+        var buttonHtml  = ' <button onclick="editOrder(' + e.orderId + ')">View</button>'
 		var row = '<tr>'
 		+ '<td>' + e.orderCode + '</td>'
 		+ '<td>' + e.status + '</td>'
-		+ '<td>' + e.time + '</td>'
+		+ '<td>' + time + '</td>'
 		+ '<td>' + buttonHtml + '</td>'
 		+ '</tr>';
         $tbody.append(row);

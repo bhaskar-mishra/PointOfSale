@@ -106,6 +106,7 @@ console.log("reaching getReport");
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
+	   console.log('printing report response : ' + response);
 	        report = response;
 	   		displayInventoryList(response);
 	   },
@@ -117,7 +118,9 @@ console.log("reaching getReport");
 
 //Download method
 function downloadReport(){
+console.log('download Report function being called');
        writeFileData(report);
+       console.log('after writefiledata');
 }
 
 

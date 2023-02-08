@@ -67,14 +67,17 @@ function placeOrder(event){
  	   url: url,
  	   type: 'PUT',
  	   success: function() {
- 	   status = "PLACED"
- 	   var element = document.getElementById('place-order');
- 	   element.style.display = "none";
- 	   var form = document.getElementById('orderItem-form');
- 	   form.style.display = "none";
- 	     var downloadInvoice = document.getElementById('download-invoice');
-         downloadInvoice.style.display = "block";
+ 	     status = "PLACED";
+ 	     document.getElementById('place-order').style.display = "none";
+ 	     document.getElementById('orderItem-form').style.display = "none";
+ 	     document.getElementById('download-invoice').style.display="block";
+
          handleSuccess("Order Placed");
+
+         document.getElementById('orderItem-table').style.display = "none";
+         document.getElementById('placed-order-item-table').style.display = "block";
+
+         getOrderItemList();
  	   },
  	   error: handleAjaxError
  	});
@@ -83,21 +86,6 @@ function placeOrder(event){
 
 
 //UPDATES SCHEDULER WHEN AN ORDER IS PLACED
-function updateScheduler(){
- var url = getOrderItemUrl();
- url = url + "/api/scheduler/addSchedule/";
- console.log('printing randomKey in update scheduler : '+randomKey);
- url = url + randomKey;
-
- $.ajax({
- 	   url: url,
- 	   type: 'POST',
- 	   success: function() {
- 	   		console.log('scheduler updated successfully');
- 	   },
- 	   error: handleAjaxError
- 	});
-}
 
 
 
@@ -161,7 +149,7 @@ console.log('inside downloadPdf');
 
 function updateOrderItem()
 {
-    var $form = $("#editOrderItemForm");
+    var $form = $("#updateOrderItemForm");
     var json = toJson($form);
     var url = getOrderItemUrl();
     url = url +"/api/orderItem/editOrderItem";
@@ -212,6 +200,10 @@ var url = getOrderItemUrl();
 
 //UI DISPLAY METHODS
 function displayOrderItemList(data){
+if(status==="PLACED"){
+displayPlacedOrderItemList(data);
+return ;
+}
     orderItemListLength = data.length;
 	console.log('Printing user data');
 	console.log('data length in display orderItemList ' + data.length);
@@ -219,10 +211,12 @@ function displayOrderItemList(data){
 	var $tbody = $('#orderItem-table').find('tbody');
     console.log($tbody.length);
 	$tbody.empty();
+	var grandTotal = 0;
 	for(var i in data){
 		var e = data[i];
+		grandTotal+=e.total;
 		var buttonHtml = '<button onclick="deleteOrderItem(' + e.orderItemId+')">Delete</button>'
-		buttonHtml += ' <button onclick="displayEditOrderItem(' + e.orderItemId + ')">Edit</button>'
+		buttonHtml += ' <button type="button" class="btn btn-primary" onclick="displayEditOrderItem(' + e.orderItemId + ')">Edit</button>'
 		var row = '<tr>'
 		+ '<td>' + e.barcode + '</td>'
 		+ '<td>' + e.product + '</td>'
@@ -234,8 +228,50 @@ function displayOrderItemList(data){
         $tbody.append(row);
 	}
 
+	var space = ' ';
+	var row = '<tr>'
+    		+ '<td>' + "Grand Total" + '</td>'
+    		+ '<td>' + space + '</td>'
+    		+ '<td>' + space + '</td>'
+    		+ '<td>' + space + '</td>'
+    		+ '<td>' + grandTotal + '</td>'
+    		+ '<td>' + space + '</td>'
+    		+ '</tr>';
+            $tbody.append(row);
+
 	console.log('inside displayOrderItemList in orderItem.js');
 	console.log('printing table length '+$tbody.length);
+}
+
+function displayPlacedOrderItemList(data){
+    var $tbody = $('#placed-order-item-table').find('tbody');
+    $tbody.empty();
+
+    var grandTotal = 0;
+    for(var i in data){
+    		var e = data[i];
+    		grandTotal+=e.total;
+    		var row = '<tr>'
+    		+ '<td>' + e.barcode + '</td>'
+    		+ '<td>' + e.product + '</td>'
+    		+ '<td>' + e.quantity + '</td>'
+    		+ '<td>' + e.price + '</td>'
+    		+ '<td>' + e.total + '</td>'
+    		+ '</tr>';
+            $tbody.append(row);
+    	}
+
+    	var space = ' ';
+    	var row = '<tr>'
+        		+ '<td>' + "Grand Total" + '</td>'
+        		+ '<td>' + space + '</td>'
+        		+ '<td>' + space + '</td>'
+        		+ '<td>' + space + '</td>'
+        		+ '<td>' + grandTotal + '</td>'
+        		+ '<td>' + space + '</td>'
+        		+ '</tr>';
+                $tbody.append(row);
+
 }
 
 
@@ -248,6 +284,8 @@ if(status==="PLACED"){
   document.getElementById('download-invoice').style.display = "block";
 
   document.getElementById('orderItem-form').style.display = "none";
+  document.getElementById('placed-order-item-table').style.display = "block";
+  document.getElementById('orderItem-table').style.display = "none";
 }
 }
 
@@ -284,6 +322,6 @@ function init(){
 
 
 $(document).ready(init);
-$(document).ready(getOrderItemList);
 $(document).ready(resetData);
+$(document).ready(getOrderItemList);
 

@@ -6,6 +6,7 @@
 
 <body>
 
+<nav th:replace="snippets.html :: name_app_navbar"></nav>
 <div th:replace="snippets.html :: name_status_popup"></div>
 
 
@@ -14,7 +15,7 @@
     <h3>Order Items</h3>
 
 
-    <!--Edit Inventory Modal -->
+    <!--Edit OrderItem Modal -->
     <div class="modal fade" id="editOrderItemModal" tabindex="-1" role="dialog" aria-labelledby="editOrderItemModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -46,7 +47,7 @@
                                 <div class="form-group">
                                     <label for="editModalQuantity" class="col-sm-2 col-form-label">Quantity</label>
                                     <div class="col-sm-10">
-                                        <input type="number" min=0 oninput="validity.valid||(value='');" class="form-control" name="quantity" id="editModalQuantity" placeholder="Enter Quantity">
+                                        <input type="number" min=0 step=".01" oninput="validity.valid||(value='');" class="form-control" name="quantity" id="editModalQuantity" placeholder="Enter Quantity">
                                     </div>
                                 </div>
                                 &nbsp;
@@ -96,7 +97,7 @@
                 <div class="form-group">
                     <label for="inputQuantity" class="col-sm-2 col-form-label">Price</label>
                     <div class="col-sm-10">
-                        <input type="number" min=0 oninput="validity.valid||(value='');" class="form-control" name="price" id="inputSellingPrice" placeholder="Enter Selling Price" required><span class="errors" id="priceError"></span>
+                        <input type="number" min=0 step=".01" oninput="validity.valid||(value='');" class="form-control" name="price" id="inputSellingPrice" placeholder="Enter Selling Price" required><span class="errors" id="priceError"></span>
                     </div>
                 </div>
 
@@ -133,6 +134,27 @@
 
         </div>
     </div>
+
+
+    <!-- Table -->
+    <div class="col-12" >
+        <table class="table table-striped" id="placed-order-item-table" style="display:none;">
+            <thead>
+            <tr>
+                <th scope="col">BARCODE</th>
+                <th scope="col">PRODUCT</th>
+                <th scope="col">QUANTITY</th>
+                <th scope="col">PRICE</th>
+                <th scope="col">TOTAL</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
 
 
 

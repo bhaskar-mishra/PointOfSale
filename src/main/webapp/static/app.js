@@ -41,6 +41,7 @@ function readFileData(file, callback){
 
 
 function writeFileData(arr){
+console.log('printing from inside writeFileData method' + arr);
 	var config = {
 		quoteChar: '',
 		escapeChar: '',
