@@ -80,6 +80,11 @@ function displayOrderList(data){
 		if(e.time===null){
 		time = 'NA';
 		}
+		else
+		{
+		   time = dateToISOLikeButLocal(new Date(e.time*1000));
+		}
+
         var buttonHtml  = ' <button onclick="editOrder(' + e.orderId + ')">View</button>'
 		var row = '<tr>'
 		+ '<td>' + e.orderCode + '</td>'
@@ -90,6 +95,17 @@ function displayOrderList(data){
         $tbody.append(row);
 	}
 
+}
+
+function dateToISOLikeButLocal(date){
+//date = date.toFixed(0);
+console.log(date);
+ const offsetMs = date.getTimezoneOffset()*60*1000;
+ const msLocal = date.getTime()-offsetMs;
+ const dateLocal = new Date(msLocal);
+ const iso = dateLocal.toISOString();
+ const isoLocal = iso.slice(0,10)+" "+iso.slice(11,19);
+ return isoLocal;
 }
 
 //INITIALIZATION CODE

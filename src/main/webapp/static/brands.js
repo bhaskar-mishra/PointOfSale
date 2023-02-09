@@ -183,7 +183,7 @@ function displayBrandCategoryList(data){
 	for(var i in data){
 		var e = data[i];
 		var buttonHtml = ''; //buttonHtml = '<button onclick="deleteBrandCategory(' + e.id + ')">Delete</button>'
-		buttonHtml += ' <button  onclick="displayEditBrandCategory(' + e.id + ')">Edit</button>'
+		buttonHtml += ' <button type="button" class="btn btn-primary" onclick="displayEditBrandCategory(' + e.id + ')">Edit</button>'
 		var row = '<tr>'
 		+ '<td>' + (serialNo++)+ '</td>'
 		+ '<td>' + e.brand + '</td>'
