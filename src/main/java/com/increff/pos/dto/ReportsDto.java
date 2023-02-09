@@ -5,7 +5,6 @@ import com.increff.pos.model.form.*;
 import com.increff.pos.pojo.*;
 import com.increff.pos.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -64,12 +63,13 @@ public class ReportsDto {
               List<OrderItemPojo> orderItemPojoList = orderItemService.getAllItemsById(orderPojo.getOrderId());
               for(OrderItemPojo orderItemPojo : orderItemPojoList){
                   ProductPojo productPojo = productService.selectByProductId(orderItemPojo.getProductId());
+                  BrandPojo brandPojo = brandService.getBrandCategoryById(productPojo.getBrandCategoryId());
 
                   if((salesReportForm.getBrand().equals("all")
-                          || salesReportForm.getBrand().equals(productPojo.getBrand()))
+                          || salesReportForm.getBrand().equals(brandPojo.getBrand()))
                   && (salesReportForm.getCategory().equals("all")
-                  || (salesReportForm.getCategory().equals(productPojo.getCategory())))){
-                      addToSalesReport(salesReportMap,orderItemPojo,productPojo.getBrand(),productPojo.getCategory());
+                  || (salesReportForm.getCategory().equals(brandPojo.getCategory())))){
+                      addToSalesReport(salesReportMap,orderItemPojo,brandPojo.getBrand(),brandPojo.getCategory());
                   }
               }
 

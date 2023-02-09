@@ -215,7 +215,7 @@ return ;
 	for(var i in data){
 		var e = data[i];
 		grandTotal+=e.total;
-		var buttonHtml = '<button onclick="deleteOrderItem(' + e.orderItemId+')">Delete</button>'
+		var buttonHtml = '<button type="button" class="btn btn-danger" onclick="deleteOrderItem(' + e.orderItemId+')">Delete</button>'
 		buttonHtml += ' <button type="button" class="btn btn-primary" onclick="displayEditOrderItem(' + e.orderItemId + ')">Edit</button>'
 		var row = '<tr>'
 		+ '<td>' + e.barcode + '</td>'
