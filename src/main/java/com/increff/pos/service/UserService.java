@@ -11,39 +11,45 @@ import com.increff.pos.dao.UserDao;
 import com.increff.pos.pojo.UserPojo;
 
 @Service
+@Transactional(rollbackOn = ApiException.class)
 public class UserService {
 
 	@Autowired
-	private UserDao dao;
+	private UserDao userDao;
 
-	@Transactional
-	public void add(UserPojo p) throws ApiException {
-		normalize(p);
-		UserPojo existing = dao.select(p.getEmail());
+	public void add(UserPojo userPojo) throws ApiException {
+		UserPojo existing = userDao.select(userPojo.getEmail());
 		if (existing != null) {
 			throw new ApiException("User with given email already exists");
 		}
-		dao.insert(p);
+		userDao.insert(userPojo);
 	}
 
-	@Transactional(rollbackOn = ApiException.class)
+
 	public UserPojo get(String email) throws ApiException {
-		return dao.select(email);
+		return userDao.select(email);
 	}
 
-	@Transactional
 	public List<UserPojo> getAll() {
-		return dao.selectAll();
+		return userDao.selectAll();
 	}
 
-	@Transactional
+
 	public void delete(int id) {
+		UserPojo userPojo = userDao.selectById(id);
+		if(userPojo==null){
 
-		dao.delete(id);
+		}
+		userDao.delete(id);
 	}
 
-	protected static void normalize(UserPojo p) {
-		p.setEmail(p.getEmail().toLowerCase().trim());
-		p.setRole(p.getRole().toLowerCase().trim());
+	public UserPojo getById(int id) throws ApiException{
+		UserPojo userPojo = userDao.selectById(id);
+		if(userPojo==null){
+			throw new ApiException("invalid id");
+		}
+
+		return userPojo;
 	}
+
 }

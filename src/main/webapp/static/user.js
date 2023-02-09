@@ -19,6 +19,8 @@ function addUser(event){
        	'Content-Type': 'application/json'
        },	   
 	   success: function(response) {
+	        handleSuccess("user added");
+	        document.getElementById('user-form').reset();
 	   		getUserList();    
 	   },
 	   error: handleAjaxError
@@ -46,6 +48,7 @@ function deleteUser(id){
 	   url: url,
 	   type: 'DELETE',
 	   success: function(data) {
+	        handleSuccess("user deleted");
 	   		getUserList();    
 	   },
 	   error: handleAjaxError
@@ -60,8 +63,7 @@ function displayUserList(data){
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
-		var buttonHtml = '<button onclick="deleteUser(' + e.id + ')">delete</button>'
-		buttonHtml += ' <button onclick="displayEditUser(' + e.id + ')">edit</button>'
+		var buttonHtml = '<button type="button" class="btn btn-danger" onclick="deleteUser(' + e.id + ')">Delete</button>'
 		var row = '<tr>'
 		+ '<td>' + e.id + '</td>'
 		+ '<td>' + e.email + '</td>'

@@ -157,8 +157,8 @@ public class DtoUtils {
             throw new ApiException("quantity should be a positive numeric value");
         }
 
-        if(inventoryForm.getQuantity()<=0){
-            throw new ApiException("quantity should be a positive numeric value");
+        if(inventoryForm.getQuantity()<0){
+            throw new ApiException("quantity can't be negative");
         }
     }
 

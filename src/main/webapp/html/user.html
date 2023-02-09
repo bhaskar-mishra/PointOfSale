@@ -7,6 +7,7 @@
 <body>
 
 <nav th:replace="snippets.html :: name_app_navbar"></nav>
+<div th:replace="snippets.html :: name_status_popup"></div>
 
 <div class="container">
 
@@ -35,9 +36,7 @@
 			      <input type="text" class="form-control" name="role" id="inputRole" placeholder="enter role">
 			    </div>
 			  </div>
-			  <button type="button" class="btn btn-primary" id="add-user">Add</button>
-			  &nbsp;
-			  <button type="button" class="btn btn-primary" id="refresh-data">Refresh</button>
+			  <button type="button" class="btn btn-success" id="add-user">Add</button>
 			</form>
 	 </div>	
 </div> 
