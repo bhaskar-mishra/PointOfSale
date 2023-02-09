@@ -249,8 +249,8 @@ function displayProductList(data){
 	var serialNo = 1;
 	for(var i in data){
 		var e = data[i];
-        var buttonHtml = ''; //'<button onclick="deleteProduct(' + ')">Delete</button>'
-        		buttonHtml += ' <button onclick="displayEditProduct(\'' + e.barcode + '\')">Edit</button>'
+        var buttonHtml = '';
+        		buttonHtml += ' <button type="button" class="btn btn-primary" onclick="displayEditProduct(\'' + e.barcode + '\')">Edit</button>'
 		var row = '<tr>'
 		+ '<td>' + (serialNo++) + '</td>'
 		+ '<td>' + e.barcode + '</td>'

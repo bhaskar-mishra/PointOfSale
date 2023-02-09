@@ -32,7 +32,7 @@ public class InventoryController {
     }
 
     @ApiOperation("Gets inventory for a particular product")
-    @RequestMapping(path = "/api/inventory/{barcode}")
+    @RequestMapping(path = "/api/inventory/{barcode}",method = RequestMethod.GET)
     public InventoryData getInventory(@PathVariable String barcode) throws ApiException{
         return inventoryDto.getInventory(barcode);
     }

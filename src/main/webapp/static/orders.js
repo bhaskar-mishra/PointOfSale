@@ -85,7 +85,7 @@ function displayOrderList(data){
 		   time = dateToISOLikeButLocal(new Date(e.time*1000));
 		}
 
-        var buttonHtml  = ' <button onclick="editOrder(' + e.orderId + ')">View</button>'
+        var buttonHtml  = ' <button type="button" class="btn btn-primary" onclick="editOrder(' + e.orderId + ')">View</button>'
 		var row = '<tr>'
 		+ '<td>' + e.orderCode + '</td>'
 		+ '<td>' + e.status + '</td>'
