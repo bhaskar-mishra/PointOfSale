@@ -3,6 +3,7 @@ package com.increff.pos.dto;
 import com.increff.pos.model.form.*;
 import com.increff.pos.model.data.*;
 import com.increff.pos.pojo.OrderPojo;
+import com.increff.pos.pojo.Status;
 import com.increff.pos.service.AbstractUnitTest;
 import com.increff.pos.service.ApiException;
 import org.hibernate.criterion.Order;
@@ -95,13 +96,13 @@ public class OrderDtoTest extends AbstractUnitTest {
         orderPojo.setOrderCode("orderCode");
         orderPojo.setOrderId(Integer.valueOf(1));
         orderPojo.setPlacedTime(ZonedDateTime.now());
-        orderPojo.setStatus("PENDING");
+        orderPojo.setStatus(Status.PENDING);
 
         OrderData orderData = DtoUtils.convertOrderPojoToData(orderPojo);
 
         assertEquals(orderPojo.getOrderId(),orderData.getOrderId());
         assertEquals(orderPojo.getOrderCode(),orderData.getOrderCode());
-        assertEquals(orderPojo.getStatus(),orderData.getStatus());
+        assertEquals(orderPojo.getStatus().name(),orderData.getStatus());
         assertEquals(orderPojo.getPlacedTime(),orderData.getTime());
     }
 

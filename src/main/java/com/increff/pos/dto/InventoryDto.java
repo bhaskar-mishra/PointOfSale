@@ -26,6 +26,9 @@ public class InventoryDto {
     public void addInventory(InventoryForm inventoryForm) throws ApiException{
         DtoUtils.validateInventoryForm(inventoryForm);
         DtoUtils.normalizeInventoryForm(inventoryForm);
+        if(inventoryForm.getQuantity().equals(0)){
+            throw new ApiException("quantity can't be 0");
+        }
         ProductPojo productPojo = productService.selectByBarcode(inventoryForm.getBarcode());
         InventoryPojo inventoryPojo = DtoUtils.convertInventoryFormToPojo(inventoryForm,productPojo.getId());
         inventoryService.add(inventoryPojo);

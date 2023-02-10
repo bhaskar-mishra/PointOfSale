@@ -1,6 +1,6 @@
 package com.increff.pos.pojo;
 
-import com.sun.istack.NotNull;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,16 +16,15 @@ public class DailySalesReportPojo extends AbstractDatePojo{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @NotNull
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     String date;
 
-    @NotNull
+    @Column(name = "invoiced_orders_count",nullable = false)
     Integer invoicedOrdersCount;
 
-    @NotNull
+    @Column(name = "invoiced_items_count",nullable = false)
     Integer invoicedItemsCount;
 
-    @NotNull
+    @Column(nullable = false)
     Double revenue;
 }

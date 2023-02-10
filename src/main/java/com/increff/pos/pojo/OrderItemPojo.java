@@ -16,19 +16,19 @@ public class OrderItemPojo extends AbstractDatePojo{
     @Column(name = "order_item_id")
     private Integer orderItemId;
 
-    @NotNull
-    @Column(name = "product_id")
+
+    @Column(name = "product_id",nullable = false)
     private Integer productId;
 
-    @NotNull
-    @Column(name = "order_id")
+
+    @Column(name = "order_id",nullable = false)
     private Integer orderId;
 
-    @NotNull
+    @Column(nullable = false)
     private Integer quantity;
 
-    @NotNull
-    @Column(name = "selling_price")
+
+    @Column(name = "selling_price",nullable = false)
     private Double sellingPrice;
 
 }

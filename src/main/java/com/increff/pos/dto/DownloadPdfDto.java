@@ -6,6 +6,7 @@ import com.increff.pos.model.form.InvoiceItem;
 import com.increff.pos.pojo.OrderItemPojo;
 import com.increff.pos.pojo.OrderPojo;
 import com.increff.pos.pojo.ProductPojo;
+import com.increff.pos.pojo.Status;
 import com.increff.pos.service.ApiException;
 import com.increff.pos.service.OrderItemService;
 import com.increff.pos.service.OrderService;
@@ -37,7 +38,7 @@ public class DownloadPdfDto {
         }
 
         OrderPojo orderPojo = orderService.getOrderByOrderCode(orderCode);
-        if(!orderPojo.getStatus().equals("PLACED")){
+        if(!orderPojo.getStatus().equals(Status.PLACED)){
             throw new ApiException("order unplaced! invoice can't be generated");
         }
 

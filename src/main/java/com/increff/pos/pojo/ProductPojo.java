@@ -14,24 +14,19 @@ public class ProductPojo extends AbstractDatePojo{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private String barcode;
 
-    @NotNull
-    @Column(name = "brand_category_id")
+
+    @Column(name = "brand_category_id",nullable = false)
     private Integer brandCategoryId;
 
-    @NotNull
+    @Column(nullable = false)
     private String product;
 
 
-    @NotNull
+    @Column(nullable = false)
     private Double mrp;
-
-    private String brand;
-
-    private String category;
 
 
 }

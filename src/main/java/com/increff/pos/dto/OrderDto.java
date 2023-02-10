@@ -5,6 +5,7 @@ import com.increff.pos.model.data.*;
 import com.increff.pos.pojo.*;
 import com.increff.pos.service.ApiException;
 import com.increff.pos.service.OrderService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class OrderDto {
     @Autowired
     private OrderService orderService;
 
+    Logger logger = Logger.getLogger(OrderDto.class);
     public OrderData createOrder() throws ApiException{
         OrderPojo orderPojo = orderService.createOrder();
         OrderData orderData = DtoUtils.convertOrderPojoToData(orderPojo);
@@ -43,8 +45,10 @@ public class OrderDto {
     }
 
     public List<OrderData> getAll() throws ApiException{
+       logger.info("inside getAll in OrderDto");
         List<OrderPojo> orderPojoList = orderService.getAll();
         List<OrderData> orderDataList = new ArrayList<>();
+        logger.info("orders received");
         for(OrderPojo orderPojo : orderPojoList){
             orderDataList.add(DtoUtils.convertOrderPojoToData(orderPojo));
         }

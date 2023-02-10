@@ -12,8 +12,9 @@ import javax.persistence.*;
 @Table(name = "inventory_table")
 public class InventoryPojo extends AbstractDatePojo {
     @Id
+    @Column(name = "product_id",nullable = false,unique = true)
     private Integer productId;
-    @NotNull
+    @Column(nullable = false)
     private Integer quantity;
 
 }

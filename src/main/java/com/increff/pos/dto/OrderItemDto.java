@@ -2,10 +2,7 @@ package com.increff.pos.dto;
 
 import com.increff.pos.model.form.*;
 import com.increff.pos.model.data.*;
-import com.increff.pos.pojo.InventoryPojo;
-import com.increff.pos.pojo.OrderItemPojo;
-import com.increff.pos.pojo.OrderPojo;
-import com.increff.pos.pojo.ProductPojo;
+import com.increff.pos.pojo.*;
 import com.increff.pos.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +35,7 @@ public class OrderItemDto {
         //throws an exception if barcode is incorrect
         ProductPojo productPojo = productService.selectByBarcode(orderItemForm.getBarcode());
 
-        if(orderPojo.getStatus().equals("PLACED")){
+        if(orderPojo.getStatus().equals(Status.PLACED)){
             throw new ApiException("order already placed! no more items can be added");
         }
         //normalizes barcode
@@ -63,7 +60,7 @@ public class OrderItemDto {
         DtoUtils.validateEditOrderItemForm(updateOrderItemForm);
         updateOrderItemForm.setBarcode(updateOrderItemForm.getBarcode().toLowerCase().trim());
         OrderPojo orderPojo = orderService.getOrderByOrderCode(updateOrderItemForm.getOrderCode());
-        if(orderPojo.getStatus().equals("PLACED")){
+        if(orderPojo.getStatus().equals(Status.PLACED)){
             throw new ApiException("Order is already placed! Can't be edited");
         }
         ProductPojo productPojo = productService.selectByBarcode(updateOrderItemForm.getBarcode());
@@ -71,7 +68,7 @@ public class OrderItemDto {
         InventoryPojo inventoryPojo = inventoryService.getInventoryByProductId(orderItemPojo.getProductId());
         Integer quantityAvailable = inventoryPojo.getQuantity()+orderItemPojo.getQuantity();
         if(quantityAvailable< updateOrderItemForm.getQuantity()){
-            throw new ApiException("Available samples : "+quantityAvailable);
+            throw new ApiException("Quantity Available : "+quantityAvailable);
         }
         inventoryService.updateInventory(orderItemPojo.getProductId(),inventoryPojo.getQuantity()
                 + orderItemPojo.getQuantity()
@@ -93,7 +90,7 @@ public class OrderItemDto {
 
     public List<OrderItemData> getOrderItemsByCode(String orderCode) throws ApiException{
         if(orderCode==null || orderCode.trim().equals("")){
-            throw new ApiException("unknown orderCode");
+            throw new ApiException("invalid orderCode");
         }
         OrderPojo orderPojo = orderService.getOrderByOrderCode(orderCode);//this is to check if orderCode is valid
         List<OrderItemPojo> orderItemPojoList = orderItemService.getAllItemsById(orderPojo.getOrderId());
@@ -117,11 +114,11 @@ public class OrderItemDto {
             throw new ApiException("no items in order");
         }
 
-        if(orderPojo.getStatus().equals("PLACED")){
+        if(orderPojo.getStatus().equals(Status.PLACED)){
             throw new ApiException("Order already placed");
         }
 
-        orderPojo.setStatus("PLACED");
+        orderPojo.setStatus(Status.PLACED);
         orderPojo.setPlacedTime(ZonedDateTime.now());
     }
 
@@ -134,7 +131,7 @@ public class OrderItemDto {
         OrderItemPojo orderItemPojo = orderItemService.getOrderItemById(orderItemId);
         OrderPojo orderPojo = orderService.getOrderById(orderItemPojo.getOrderId());
 
-        if(orderPojo.getStatus().equals("PLACED")){
+        if(orderPojo.getStatus().equals(Status.PLACED)){
             throw new ApiException("Order already placed! Item can't be deleted");
         }
 

@@ -113,9 +113,9 @@ public class BrandCategoryDtoTest extends AbstractUnitTest {
         brandCategoryDto.addBrandCategory(brandForms.get(1));
         List<BrandCategoryData> brandCategoryDataList = brandCategoryDto.getCategoriesForBrand("nestle");
         assertEquals(brandForms.get(0).getBrand(),brandCategoryDataList.get(0).getBrand());
-        assertEquals(brandForms.get(0).getCategory(),brandCategoryDataList.get(0).getCategory());
+        assertEquals(brandForms.get(1).getCategory(),brandCategoryDataList.get(0).getCategory());
         assertEquals(brandForms.get(1).getBrand(),brandCategoryDataList.get(1).getBrand());
-        assertEquals(brandForms.get(1).getCategory(),brandCategoryDataList.get(1).getCategory());
+        assertEquals(brandForms.get(0).getCategory(),brandCategoryDataList.get(1).getCategory());
     }
 
     @Test

@@ -20,15 +20,14 @@ public class OrderPojo extends AbstractDatePojo{
     @Column(name = "order_id")
     private Integer orderId;
 
-//    @Enumerated
-    private String status = "PENDING";
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.PENDING;
 
-    @NotNull
     @Column(name = "placed_time")
     private ZonedDateTime placedTime;
 
-    @NotNull
-    @Column(unique = true, name = "order_code")
+
+    @Column(unique = true, name = "order_code",nullable = false)
     private String orderCode;
 
 

@@ -85,8 +85,6 @@ public class DtoUtils {
         productPojo.setProduct(productForm.getProduct());
         productPojo.setBarcode(productForm.getBarcode());
         productPojo.setMrp(productForm.getMrp());
-        productPojo.setBrand("");
-        productPojo.setCategory("");
         productPojo.setBrandCategoryId(brandCategoryId);
         return productPojo;
     }
@@ -187,7 +185,7 @@ public class DtoUtils {
         orderData.setOrderId(orderPojo.getOrderId());
         orderData.setOrderCode(orderPojo.getOrderCode());
         orderData.setTime(orderPojo.getPlacedTime());
-        if(orderPojo.getStatus().equals("PENDING")){
+        if(orderPojo.getStatus().equals(Status.PENDING)){
             orderData.setStatus("PENDING");
         }else {
             orderData.setStatus("PLACED");

@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-@Table(name = "brand_table")
+@Table(name = "brand_table",uniqueConstraints = { @UniqueConstraint(columnNames = { "brand", "category" }) })
 public class BrandPojo extends AbstractDatePojo{
 
     @Id
