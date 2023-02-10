@@ -49,4 +49,10 @@ public class TestUtils {
         orderItemPojo.setSellingPrice(sellingPrice);
         orderItemPojo.setProductId(productId);
     }
+
+    protected static void setUserForm(UserForm userForm,String email,String password,String role){
+        userForm.setRole(role);
+        userForm.setEmail(email);
+        userForm.setPassword(password);
+    }
 }

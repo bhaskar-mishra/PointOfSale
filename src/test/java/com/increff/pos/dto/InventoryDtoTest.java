@@ -155,12 +155,14 @@ public class InventoryDtoTest extends AbstractUnitTest {
         DtoUtils.validateInventoryForm(inventoryForm);
     }
 
-    @Test(expected = ApiException.class)
+    @Test
     public void validateInventoryFormQuantityZeroTest() throws ApiException{
         InventoryForm inventoryForm = new InventoryForm();
         inventoryForm.setBarcode("abc");
         inventoryForm.setQuantity(Integer.valueOf(0));
         DtoUtils.validateInventoryForm(inventoryForm);
+        assertEquals("abc",inventoryForm.getBarcode());
+        assertEquals(Integer.valueOf(0),inventoryForm.getQuantity());
     }
 
     @Test

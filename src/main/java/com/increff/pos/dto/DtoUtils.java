@@ -307,4 +307,41 @@ public class DtoUtils {
     }
 
 
+    //METHODS INVOKED FROM AdminApiController
+    protected static UserData convertUserPojoToData(UserPojo userPojo){
+        UserData userData = new UserData();
+        userData.setEmail(userPojo.getEmail());
+        userData.setRole(userPojo.getRole());
+        userData.setId(userPojo.getId());
+        return userData;
+    }
+
+    protected static UserPojo convertUserFormToPojo(UserForm userForm){
+        UserPojo userPojo = new UserPojo();
+        userPojo.setEmail(userForm.getEmail());
+        userPojo.setRole(userForm.getRole());
+        userPojo.setPassword(userForm.getPassword());
+        return userPojo;
+    }
+
+    protected static void normalizeUserForm(UserForm userForm) {
+        userForm.setEmail(userForm.getEmail().toLowerCase().trim());
+        userForm.setRole(userForm.getRole().toLowerCase().trim());
+    }
+
+    protected static void validateUserForm(UserForm userForm) throws ApiException{
+        if(userForm.getEmail()==null || userForm.getEmail().trim().equals("")){
+            throw new ApiException("invalid email");
+        }
+
+        if(userForm.getPassword()==null || userForm.getPassword().trim().equals("")){
+            throw new ApiException("invalid password");
+        }
+
+        if(userForm.getRole()==null || userForm.getRole().trim().equals("")){
+            throw new ApiException("invalid role");
+        }
+    }
+
+
 }

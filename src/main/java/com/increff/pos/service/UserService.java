@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +27,13 @@ public class UserService {
 	}
 
 
-	public UserPojo get(String email) throws ApiException {
-		return userDao.select(email);
+	public UserPojo getByEmail(String email) throws ApiException {
+		UserPojo userPojo =  userDao.select(email);
+		if(userPojo==null){
+			throw new ApiException("invalid email");
+		}
+
+		return userPojo;
 	}
 
 	public List<UserPojo> getAll() {
@@ -35,10 +41,10 @@ public class UserService {
 	}
 
 
-	public void delete(int id) {
+	public void delete(int id) throws ApiException {
 		UserPojo userPojo = userDao.selectById(id);
 		if(userPojo==null){
-
+               throw new ApiException("invalid id");
 		}
 		userDao.delete(id);
 	}
