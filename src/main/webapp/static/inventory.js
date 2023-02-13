@@ -219,7 +219,7 @@ function setPage(){
   if(role==="standard"){
   var form = document.getElementById('inventory-form');
   form.style.display = "none";
-
+   document.getElementById('reportsDropDown').style.display = 'none';
   }
 }
 

@@ -312,6 +312,7 @@ function setPage(){
   if(role==="standard"){
   document.getElementById('add-product-modal').style.visibility = 'hidden';
   document.getElementById('upload-data').style.visibility = 'hidden';
+   document.getElementById('reportsDropDown').style.display = 'none';
 
   }
 }

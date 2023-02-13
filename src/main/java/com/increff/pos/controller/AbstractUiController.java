@@ -34,7 +34,7 @@ public abstract class AbstractUiController {
 		return mav;
 	}
 
-	protected ModelAndView mav(String page,String orderCode) {
+	protected ModelAndView mav(String page,String orderCode,String role) {
 
 		UserPrincipal principal = SecurityUtil.getPrincipal();
 
@@ -47,6 +47,7 @@ public abstract class AbstractUiController {
 		mav.addObject("info", info);
 		mav.addObject("baseUrl", baseUrl);
 		mav.addObject("orderCode", orderCode);
+		mav.addObject("role",role);
 		return mav;
 	}
 

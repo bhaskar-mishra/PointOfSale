@@ -310,6 +310,11 @@ var url = getOrderItemUrl() + "/api/order/"+orderCode;
 //INITIALIZATION CODE
 function init(){
     orderCode =  $("meta[name=orderCode]").attr("content");
+    var role = $("meta[name=role]").attr("content");
+    console.log(role);
+    if(role==="standard"){
+     document.getElementById('reportsDropDown').style.display = 'none';
+    }
     console.log(orderCode);
     console.log("inside init method in orderItem page");
     var inputItem = document.getElementById("inputOrderId");

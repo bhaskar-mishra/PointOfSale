@@ -237,7 +237,7 @@ function setPage(){
   if(role==="standard"){
   var form = document.getElementById('brand-category-form');
   form.style.display = "none";
-
+     document.getElementById('reportsDropDown').style.display = 'none';
   }
 }
 
