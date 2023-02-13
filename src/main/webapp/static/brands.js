@@ -81,6 +81,11 @@ $.ajax({
 }
 
 function displayEditBrandCategory(id){
+var role = $("meta[name=role]").attr("content");
+if(role==="standard"){
+return ;
+}
+
 $('#editBrandCategoryModal').modal();
 brandCategoryId = id;
 
@@ -232,10 +237,7 @@ function setPage(){
   if(role==="standard"){
   var form = document.getElementById('brand-category-form');
   form.style.display = "none";
-  var admin = document.getElementById('admin-nav-link');
-  admin.style.display = "none";
-  var reports = document.getElementById('reports-nav-link');
-  reports.style.display = "none";
+
   }
 }
 

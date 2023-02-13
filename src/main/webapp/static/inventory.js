@@ -72,6 +72,13 @@ function updateInventory(){
 }
 
 function displayEditInventory(barcode){
+
+var role = $("meta[name=role]").attr("content");
+
+if(role==="standard"){
+return ;
+}
+
 $('#editInventoryModal').modal();
 document.getElementById('inputBarcodeEdit').value = barcode;
 var url = getInventoryUrl() + "/" + barcode;
@@ -212,10 +219,7 @@ function setPage(){
   if(role==="standard"){
   var form = document.getElementById('inventory-form');
   form.style.display = "none";
-  var admin = document.getElementById('admin-nav-link');
-  admin.style.display = "none";
-  var reports = document.getElementById('reports-nav-link');
-  reports.style.display = "none";
+
   }
 }
 

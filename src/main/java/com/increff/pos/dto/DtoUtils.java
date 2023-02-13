@@ -278,7 +278,7 @@ public class DtoUtils {
         }
 
         try {
-            Integer quantity = Integer.parseInt(""+updateOrderItemForm.getQuantity());
+            Integer quantity = Integer.parseInt(updateOrderItemForm.getQuantity().toString());
         }catch (Exception exception){
             throw new ApiException("quantity should be a positive numeric value");
         }
@@ -338,6 +338,10 @@ public class DtoUtils {
 
         if(userForm.getRole()==null || userForm.getRole().trim().equals("")){
             throw new ApiException("invalid role");
+        }
+
+        if(!userForm.getRole().equals("standard") && !userForm.getRole().equals("admin")){
+            throw new ApiException("role has to be either admin or standard");
         }
     }
 

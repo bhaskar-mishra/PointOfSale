@@ -133,6 +133,10 @@ selectElement.add(new Option(e.category));
 }
 
 function displayEditProduct(barcode){
+var role = $("meta[name=role]").attr("content");
+if(role==="standard"){
+return ;
+}
 $('#editProductsModal').modal();
 document.getElementById('inputBarcodeEdit').value = barcode;
 var url = getProductUrl()+"/api/product/"+barcode;
@@ -306,12 +310,9 @@ function setPage(){
   $('#addProductModal').modal('hide');
   var role = $("meta[name=role]").attr("content");
   if(role==="standard"){
-  var form = document.getElementById('product-form');
-  form.style.display = "none";
-  var admin = document.getElementById('admin-nav-link');
-  admin.style.display = "none";
-  var reports = document.getElementById('reports-nav-link');
-  reports.style.display = "none";
+  document.getElementById('add-product-modal').style.visibility = 'hidden';
+  document.getElementById('upload-data').style.visibility = 'hidden';
+
   }
 }
 
