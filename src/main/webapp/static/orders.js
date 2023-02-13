@@ -113,6 +113,7 @@ function setPage(){
   var role = $("meta[name=role]").attr("content");
   if(role==="standard"){
   document.getElementById('reportsDropDown').style.display = 'none';
+   document.getElementById('userDropDownOption').style.display = 'none';
   }
 }
 

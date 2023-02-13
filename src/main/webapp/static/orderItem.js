@@ -305,16 +305,19 @@ var url = getOrderItemUrl() + "/api/order/"+orderCode;
 
 //resets buttons and hides form if the order is already placed
 
-
+function setPage(){
+var role = $("meta[name=role]").attr("content");
+    console.log(role);
+    if(role==="standard"){
+     document.getElementById('reportsDropDown').style.display = 'none';
+      document.getElementById('userDropDownOption').style.display = 'none';
+    }
+}
 
 //INITIALIZATION CODE
 function init(){
     orderCode =  $("meta[name=orderCode]").attr("content");
-    var role = $("meta[name=role]").attr("content");
-    console.log(role);
-    if(role==="standard"){
-     document.getElementById('reportsDropDown').style.display = 'none';
-    }
+
     console.log(orderCode);
     console.log("inside init method in orderItem page");
     var inputItem = document.getElementById("inputOrderId");
@@ -327,6 +330,7 @@ function init(){
 
 
 $(document).ready(init);
+$(document).ready(setPage);
 $(document).ready(resetData);
 $(document).ready(getOrderItemList);
 

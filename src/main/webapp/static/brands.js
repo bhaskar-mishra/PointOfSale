@@ -238,6 +238,7 @@ function setPage(){
   var form = document.getElementById('brand-category-form');
   form.style.display = "none";
      document.getElementById('reportsDropDown').style.display = 'none';
+      document.getElementById('userDropDownOption').style.display = 'none';
   }
 }
 
